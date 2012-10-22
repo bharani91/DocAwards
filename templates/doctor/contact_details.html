@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="twelve columns">
+      <form class="contact_details" method="post">
+
+        <input type="hidden" value="<%= id %>" name="data[DoctorContact][doctor_id]">
+
+
+        <div class="field">
+          <div class="row">
+            <div class="four columns">
+              <label>Phone Number</label>
+              <input name="data[DoctorContact][phone]" maxlength="45" type="text" id="DoctorContactPhone">
+            </div>
+
+            <div class="four columns">
+              <label>Email</label>
+              <input name="data[DoctorContact][email]" maxlength="150" type="text" id="DoctorContactEmail">
+            </div>
+
+            <div class="four columns">
+              <label>Type</label>
+              <input name="data[DoctorContact][type]" maxlength="45" type="text" id="DoctorContactType">
+            </div>
+
+
+          </div>
+         
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="five columns centered button_list">
+      <a href="#create_profile/consultation" class="button large secondary prev">Previous</a>
+      <a href="#" class="button large success next save">Create Profile</a>
+    </div>
+  </div>

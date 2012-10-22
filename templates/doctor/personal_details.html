@@ -1,0 +1,112 @@
+<div class="row">
+        <div class="twelve columns">
+          <form class="personal_details" method="post">
+
+            <input type="hidden" value="<%= id %>" name="data[Doctor][user_id]">
+
+            <div class="field">
+              <div class="row">
+                <div class="nine columns">
+                  <div class="four columns">
+                    <label>First Name</label>
+                    <input type="text" name="data[Doctor][first_name]" placeholder="First Name">
+                  </div>
+                  <div class="four columns">
+                    <label>Middle Name</label>
+                    <input type="text" name="data[Doctor][middle_name]" placeholder="Middle Name">
+                  </div>
+                  <div class="four columns">
+                    <label>Last Name</label>
+                    <input type="text" name="data[Doctor][last_name]" placeholder="Last Name">
+                  </div>
+                </div>
+                <div class="two columns offset-by-one">
+                  <label>Date of Birth</label>
+                  <input type="text" class="datepicker">
+               </div>
+
+              </div>
+            </div>
+
+            
+
+            <div class="field">
+              <div class="row"> 
+                <div class="nine columns">
+                  <label>Profile Photo</label>
+                  <input type="text" name="data[Doctor][image]" id="DoctorImage">
+                </div><!--seven_columns-->
+
+                <div class="three columns">
+                  <label>First Year Of Practice</label>
+                  <select class="chosen_simple" name="data[Doctor][first_yr_of_practice]" id="ExperienceFromYear">
+                    <option value="2032">2032</option>
+                    <option value="2031">2031</option>
+                    <option value="2030">2030</option>
+                    <option value="2029">2029</option>
+                    <option value="2028">2028</option>
+                    <option value="2027">2027</option>
+                    <option value="2026">2026</option>
+                    <option value="2025">2025</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>
+                    <option value="2013">2013</option>
+                    <option value="2012" selected="selected">2012</option>
+                    <option value="2011">2011</option>
+                    <option value="2010">2010</option>
+                    <option value="2009">2009</option>
+                    <option value="2008">2008</option>
+                    <option value="2007">2007</option>
+                    <option value="2006">2006</option>
+                    <option value="2005">2005</option>
+                    <option value="2004">2004</option>
+                    <option value="2003">2003</option>
+                    <option value="2002">2002</option>
+                    <option value="2001">2001</option>
+                    <option value="2000">2000</option>
+                    <option value="1999">1999</option>
+                    <option value="1998">1998</option>
+                    <option value="1997">1997</option>
+                    <option value="1996">1996</option>
+                    <option value="1995">1995</option>
+                    <option value="1994">1994</option>
+                    <option value="1993">1993</option>
+                    <option value="1992">1992</option>
+                  </select>
+                </div><!--five columns-->
+
+
+              </div>
+            </div>
+
+            <div class="field">
+              
+            </div>
+
+            <div class="field">
+              <label>One-line Bio</label>
+              <input type="text" name="data[Doctor][one_line_intro]" placeholder="Your One-line Introduction">
+            </div>
+
+            
+          </form>      
+
+
+        </div>
+      </div><!--row-->
+
+      <div class="row">
+        <div class="right button_list">
+          <a href="#" class="button tiny secondary prev disabled">Previous</a>
+          <a href="#create_profile/specializations" class="button tiny primary next">Next</a>
+        </div>
+      </div>

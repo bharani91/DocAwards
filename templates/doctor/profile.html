@@ -1,0 +1,117 @@
+<section class="row doctor_profile_headshot">
+      <div class="image_wrapper two columns">
+        <span href="#" class="th"><img src="http://docawards.com/<%= headshot.image %>" /></span>
+      </div>
+
+      <div class="ten columns">  
+        <h2><%= headshot.first_name %>  <%= headshot.last_name %></h2>
+        <h4 class="subheader"><%= headshot.one_line_intro %></h4>
+      </div>
+    </section> 
+
+    <hr />
+
+    <section class="row doctor_achievements">
+    
+      <div class="six columns">
+        <!-- Feed Entry -->
+        <div class="row about_doc feed_entry doctor_list">
+          <h5>Specializations</h5>
+          <% _.each(specializations, function(specialization) { %>
+            <p class="subheader"><%= specialization["Specialty"]["name"] %></p>
+          <% }); %>
+
+          <hr>
+          
+          <h5>Education and Training</h5>
+          <% _.each(qualifications, function(qualification) { %>
+            <p class="subheader"><%= qualification["Degree"]["name"] %>, <%= qualification["Location"]["name"] %></p>
+          <% }); %>
+
+        </div><!-- End Feed Entry -->
+      </div><!--six columns-->
+    
+
+      <div class="six columns">
+        <!-- Feed Entry -->
+        <div class="row about_doc feed_entry doctor_list">
+          <h5>Experience</h5>
+          <% _.each(experiences, function(experience) { %>
+            <div class="exp">
+              <p><strong><%= experience["Location"]["name"] %></strong></p>
+              <% if (experience["dept"]) { %>
+                <p class="subheader">Department: <strong><%= experience["dept"] %></strong></p>
+              <% } %>
+              <p class="subheader">From: <strong><%= experience["from"] %></strong> to <strong><%= experience["to"] %></strong></p>
+            </div><!--exp-->
+          <% }); %>
+
+        </div><!-- End Feed Entry -->
+      </div><!--six columns-->
+    </section>
+
+     <section class="doctor_timings row">
+      <div class="seven columns">
+        <div class="row feed_entry doctor_list">
+           <div class="row">   
+            <div class="twelve columns">
+              <h5>Contact</h5>
+
+              <table class="twelve">
+                <tbody>
+                  <% _.each(contacts, function(contact) { %>
+                    <tr>
+                      <td>Direct</td>
+                      <td><i class="foundicon-phone"></i><%= contact["phone"] %></td>
+                      <td><i class="foundicon-mail"></i><%= contact["email"] %></td>
+                    </tr>
+                  <% }); %>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div><!--row-->
+          
+          <hr>
+
+          <div class="row">   
+            <div class="twelve columns">
+              <h5>Location and Timings</h5>
+
+              <table class="twelve">
+                <tbody>
+                  <% console.log(consultations) %>
+                  <% _.each(consultations, function(consultation) { %>
+                    <tr>
+                      <% if(consultation["ConsultTiming"][0]) { %>
+                        <td>Mon, Wed, Thursday</td>
+                        <td><%= consultation["ConsultTiming"][0]["start"] %> to <%= consultation["ConsultTiming"][0]["end"] %></td>
+                        <td><%= consultation["ConsultTiming"][0]["ConsultType"]["name"] %></td>
+                        <td><strong><%= consultation["Location"]["name"] %></strong>
+                          <p><%= consultation["Location"]["address"] %>, <%= consultation["Location"]["City"]["name"] %> - <%= consultation["Location"]["PinCode"]["pin_code"] %></p>
+                        </td>
+                      <% } %>
+                      
+                    </tr>
+                  <% }); %>
+
+          
+                  
+                </tbody>
+              </table>
+            </div>
+          </div><!--row-->
+
+
+        </div><!--feed_entry-->
+      </div><!--seven columns-->
+
+     <aside class="five columns">
+      <div class="panel maps">
+        <div class="flex-video">
+          <div id="map"></div>
+        </div>
+      </div><!--panel-->
+
+    </aside>
+    </section>

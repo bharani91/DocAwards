@@ -1,0 +1,46 @@
+  <div class="row">
+        <div class="twelve columns">
+          <form class="consultation" method="post">
+
+            <input type="hidden" value="<%= id %>" name="data[Docconsultlocation][doctor_id]">
+
+
+            <div class="field">
+              <div class="row">
+                <div class="six columns">
+                  <label>Location</label>
+                  <select class="chosen_simple" name="data[Docconsultlocation][location_id]">
+                    <option value="2">Sama Chest Center</option>
+                    <option value="3">Sir Ganga Ram Hospital</option>
+                    <option value="4">St Lukes Rosevelt Hospital</option>
+                  </select>
+                </div>
+
+                <div class="six columns">
+                  <label>Location Type</label>
+                  <select class="chosen_simple" name="data[Docconsultlocation][consultlocationtype_id]">
+                    <option value="1">HOSPITAL</option>
+                    <option value="2">HOME_CLINIC</option>
+                    <option value="3">OPD CLINIC</option>
+                  </select>
+                </div>
+              </div><!--row-->
+              
+            </div><!--field-->
+
+           <hr>
+
+            <div class="field">
+              <label>Additional Information</label>
+              <input name="data[Docconsultlocation][addl]" maxlength="45" type="text" id="DocconsultlocationAddl">
+            </div>
+          </form>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="right button_list">
+          <a href="#create_profile/experiences" class="button tiny secondary prev">Previous</a>
+          <a href="#create_profile/contact_details" class="button tiny primary next">Next</a>
+        </div>
+      </div>

@@ -1,0 +1,41 @@
+<div class="row inner">
+        <div class="three columns">
+          <a href="#" class="th"><img src="http://docawards.com/<%= Doctor.image %>" /></a>
+        </div>
+
+        <div class="nine columns">
+          <a href="#"><h3 class="doctor_name">Dr. <%= Doctor.first_name %> <%= Doctor.last_name %></h3></a>
+          <p class="bui"><%= Doctor.one_line_intro %></p>
+        </div>
+      </div><!--row-->
+
+      
+
+      <div class="row meta bottom">
+        <div class="seven columns">
+          <div href="#" class="tiny button dropdown up">
+            <span class="foundicon-graph icon"></span>Specialization
+            <span></span>
+            <ul>
+              <% _.each(Docspeclink, function(specialization) { %>
+                <li><%= specialization["Specialty"]["name"] %></li>
+              <% }); %>
+            </ul>
+          </div><!--button-->
+
+
+          <div href="#" class="tiny button dropdown up">
+            <span class="foundicon-location icon"></span>Location
+            <span></span>
+            <ul>
+              <% _.each(Docconsultlocation, function(location) { %>
+                <li><%= location["Location"]["name"] %></li>
+              <% }); %>
+            </ul>
+          </div><!--button-->
+        </div>
+
+        <div class="thank_container five columns">
+          <a href="#doctor/<%= Doctor.id %>" class="button tiny">View Profile</a>
+        </div>
+      </div>

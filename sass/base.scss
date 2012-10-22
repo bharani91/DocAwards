@@ -1,0 +1,600 @@
+// -------------------------------------------------------------
+// Template : DocAwards v1.0
+// Author : Bharani Muthukumaraswamy <bharani@abhayam.co.in>
+// Date : 08-10-2012
+// Tags : Minimal, friendly, responsive, clean, light
+// ------------------------------------------------------------- 
+
+// Table of Content
+//-----------------------------------------
+// - Variables and Mixins
+// - Shared Styles
+// - Dashboard Page
+
+
+
+// ---------------------------------------
+// Variables and Mixins
+// ---------------------------------------
+
+$light_gray: #e1e1e1;
+$medium_gray: #f1f1f1;
+$dark_gray: #5B5B5C;
+$light_blue: #73AEF7;
+$dark_blue: #0382F7;
+
+@mixin rounded($radius: 3px) {
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin transition($time: 0.3s) {
+  -moz-transition: all $time ease-in;
+  -webkit-transition: all $time ease-in;
+  -o-transition: all $time ease-in;
+  -ms-transition: all $time ease-in;
+  transition: all $time ease-in;
+}
+
+@mixin box-shadow($x, $y, $blur, $color) {
+  -moz-box-shadow: $x $y $blur $color;
+  -webkit-box-shadow: $x $y $blur $color;
+  -ms-box-shadow: $x $y $blur $color;
+  -o-box-shadow: $x $y $blur $color;
+  box-shadow: $x $y $blur $color;
+}
+
+@mixin box-sizing() {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.reveal-modal-bg  {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.dropdown ul form {
+  width: 180px;
+}
+
+.button_list {
+  margin-right: 20px;
+}
+
+// ---------------------------------------
+// Shared styles
+// ---------------------------------------
+
+body {
+  overflow-x: hidden;
+}
+a:hover {
+  color: lighten($dark_blue, 10%);
+}
+
+a:active {
+  color: darken($dark_blue, 10%);
+}
+
+header#header {
+  span.foundicon-plus {
+    padding-right: 10px;
+    font-size: 15px;
+  } 
+}
+
+section.jumbotron {
+  margin-top: 60px;
+  padding: 10px 0;
+  div.ask_main, div.find_main {
+    h2 {
+      font-size: 30px;
+      span.foundicon-search {
+        padding-right: 10px;
+        position: relative;
+        top: 8px;
+      }
+      color: $dark_gray;
+    }
+
+    .row.collapse {
+      margin-top: 15px;
+      input.ask, a.button {
+        padding-top: 25px;
+        padding-bottom: 25px;
+        font-size: 22px;
+      }
+
+      a.button {
+        line-height: 0;
+      }
+    }
+  }
+
+  div.find_main {
+    h2 {
+      position: relative;
+      top: -5px;
+      span.foundicon-location {
+        position: relative;
+        top: 5px;
+      }
+    }
+  }
+
+  .find_doctor_field {
+    margin-top: 15px;
+
+    .button.radius {
+      padding: 8px 20px 9px;
+    }
+  }
+}
+
+#header {
+  z-index: 9999;
+}
+
+.top-bar ul li .round.progress.success {
+  width: 80%;
+  margin-left: 10%;
+  height: 12px;
+}
+
+.top-bar ul > li.search form {
+  margin-top: 10px;
+}
+
+.top-bar ul > li.search form input[type="text"] {
+  width: 64%;
+  padding: 0 5px;
+}
+.top-bar ul > li.search form input[type="text"] + .button {
+  padding: 7px 12px 7px;
+}
+
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea {
+  height: 42px;
+  font-size: 18px;
+}
+
+
+
+
+// ---------------------------------------
+// Dashboard content
+// ---------------------------------------
+
+#content {
+  margin-top: 30px;
+  
+  .feed_entry:hover {
+            color: darken($dark_gray, 20%);
+
+  }
+
+  .feed_entry {
+    padding: 20px;
+    border: 1px solid $medium_gray;
+    border-top: 4px solid $light_blue;
+    
+  
+    &:hover {
+      border-top: 4px solid $dark_blue;
+      .meta.bottom {
+        background: $dark_blue;
+      }
+      .question.h3 {
+        color: darken($dark_gray, 50%);
+      }
+    }
+
+    p.bio {
+      font-size: 13px;
+    }
+    overflow: hidden;
+    margin-bottom: 30px;
+    .meta {
+      background: $light_gray;
+      margin-left: -20px;
+      width: 110%;
+      padding-top: 10px;
+      height: 45px;
+      &.top {
+        margin-top: -20px;
+      }
+
+      &.bottom {
+        position: relative;
+        bottom: -20px;
+        height: 52px;
+        background: $light_blue;
+        a.button {
+          margin-right: 30px;
+          padding: 5px 18px 6px;
+          font-size: 14px;
+          span.foundicon-checkmark {
+            padding-right: 10px;
+            position: relative;
+            top: 2px;
+          } 
+        }
+      }
+      img {
+        padding-right: 10px;
+        padding-top: 0;
+        display: block;
+        float: left;
+        margin-top: 4px;
+      }
+
+      p.time {
+        color: darken($dark_gray, 20%);
+        font-style: italic;
+        font-size: 12px;
+        text-align: right;
+        padding-right: 10px;
+        margin-top: 4px;
+      }
+    }
+    .question {
+      margin-top: 0px;
+      h3 {
+        margin: 0;
+      }
+      a:hover h3 {
+        color: darken($dark_gray, 20%);
+      }
+      a:active h3 {
+        color: darken($dark_blue, 10%);
+      }
+    }
+
+    .answer {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    &.doctor_list {
+      h3.doctor_name {
+        margin-top: 0;
+      }
+      .icon {
+        position: relative;
+        left: -2px;
+        top: 2px;
+      }
+      .meta.bottom {
+        width: 120%;
+        height: 55px;
+      }
+
+      .about_doctor li {
+        font-size: 14px;
+        padding-top: 5px;
+      }
+    }
+  }
+
+  .row.inner {
+    height: 160px;
+  }
+
+
+  .nav_sidebar {
+    .health_profile_header {
+      font-size: 14px;
+      color: lighten(#323232, 15%);
+      strong {
+        color: #323232;
+      }
+    }
+
+    dl.tabs.vertical dd.active a {
+      background: #3772AC;
+      text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+    }
+
+    dl.tabs.vertical dd a:hover {
+      background: darken(#F2F2F2, 10%);
+    }
+
+    dl.tabs.vertical dd.active a:hover {
+      background: #3772AC;
+    }
+
+    dl.tabs.vertical dd.active {
+      border-left-color: #2B5885;
+      border-top-color: #2B5885;
+    }
+
+    .profile_image_holder {
+      margin-bottom: 20px;
+      position: relative;
+
+      .button.edit_link {
+        position: absolute;
+        top: 85px;
+        left: 70px;
+        display: none;
+      }
+
+      &:hover .edit_link {
+        display: block;
+      }
+    }
+  }
+
+  .recommended_topics {
+    overflow: hidden;
+    h3 {
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-top: -20px;
+      margin-left: -20px;
+      width: 124%;
+      padding: 10px;
+      background: $light_blue;
+    }
+    &:hover {
+      h3 {
+        background: $dark_blue;
+        color: #FFF;
+      }
+      background: #FFF;
+    }
+
+    ul {
+      padding: 5px;
+      li {
+        padding: 10px  0px !important;
+        border-top: 1px solid darken($medium_gray, 5%);
+        &:hover  {
+          border-color: darken($medium_gray, 10%);
+        }
+      }
+    }
+  }
+}
+
+
+
+// ---------------------------------------
+// Doctor Profile
+// ---------------------------------------
+
+.doctor_profile {
+  margin-top: 80px !important;
+
+  .feed_entry {
+    padding-top: 5px !important;
+  }
+
+  table tr i {
+    position: relative;
+    top: 3px;
+    left: -5px;
+  }
+
+  .exp {
+    padding-top: 10px;
+    border-bottom: 1px solid #ddd;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+}
+
+
+
+// ---------------------------------------
+// Doctor Profile
+// ---------------------------------------
+
+.doctor_profile_headshot {
+  .subheader {
+    font-size: 20px;
+  }
+}
+
+.healthline {
+  .dates {
+    border-right: 5px solid $medium_gray;
+  }
+
+  .dates_wrap:hover {
+    .dates {
+      border-color: darken($medium_gray, 10%);
+    }
+  }
+
+  fieldset {
+    padding-bottom: 15px;
+  }
+
+  .health_timeline_header {
+    font-weight: bold !important;
+  }
+}
+
+.flex-video {
+  padding-top: 0 !important;
+}
+
+#map {
+  min-height: 400px !important;
+  .infobubble {
+    .text {
+      color: #fff;
+      font-size: 10px;
+      line-height: 10px;
+      padding: 0;
+    }
+  }
+}
+
+
+// ---------------------------------------
+// Landing Page
+// ---------------------------------------
+
+.landing_page {
+  #logo {
+    h1 {
+      color: lighten($dark_gray, 20%);
+      font-size: 12px;  
+      i {
+        font-size: 10px;
+        position: relative;
+        top: 1px;
+        left: -2px;
+      }
+    }
+    
+  }
+  border-top: 3px solid $dark_blue;
+  header#top {
+    padding: 10px 0;
+
+    .btn {
+      margin-top: 8px;
+    }
+
+  }
+
+  .main {
+    background: url("../images/docs2.jpg") left top no-repeat;
+    min-height: 400px;
+    .ask_container {
+      padding-top: 220px;
+      .container_inner {
+        background: rgba(white, 0.55);
+        padding-bottom: 10px;
+      }
+    }
+    .slogan {
+      margin-top: 0px !important;
+      text-align: center;
+      color: #000;
+      font-weight: bold;
+      padding-top: 15px;
+    }
+    input, .select_input {
+      padding: 20px 10px;
+      border-color: #025AAB;
+    }
+
+    .select_input {
+      padding: 10px !important;
+      padding-bottom: 8px !important;
+      background: lighten($medium_gray, 3%) !important;
+      outline: none;
+      &:focus {
+        background: #fff !important;
+      }
+    }
+
+    a.button.postfix {
+      padding-top: 12px !important;
+      padding-bottom: 28px;
+    }
+  }
+
+  .es-carousel-wrapper {
+    h1 {
+      color: lighten($dark_gray, 20%);
+      font-size: 18px; 
+      text-align: center;
+      margin-bottom: 30px;
+      background: lighten($light_gray, 8%);
+      padding: 10px 0;
+    }
+  }
+}
+
+
+.ui-state-error {
+  min-width: 390px;
+}
+
+.ui-autocomplete.ui-menu.ui-widget {
+  width: 390px !important;
+  height: 200px;
+  overflow-y: auto;
+}
+
+.button.dropdown {
+  cursor: default;
+}
+
+.button.dropdown > ul li {
+  display: block;
+  color: #555;
+  font-size: 15px;
+  font-weight: normal;
+  padding: 6px 14px;
+  text-align: left;  
+  cursor: default !important;
+}
+
+.chzn-container-single .chzn-single {
+  height: 42px;
+  line-height: 42px;
+  font-size: 19px;
+}
+
+
+// ---------------------------------------
+// Create Profile
+// ---------------------------------------
+
+.create_profile {
+  margin-top: 80px !important;
+  textarea {
+    height: 120px;
+  }
+  .row.select_row {
+    margin-left: 0; 
+  }
+}
+
+.field {
+  margin-top: 20px;
+}
+
+.field:first-child {
+  margin-top: 0;
+}
+
+.button_list {
+  margin-top: 20px;
+}
+
+.new_speciality {
+  margin-top: 40px;
+}
+
+.location_modal_link {
+  margin-top: 30px;
+}
+
+
+.reveal-modal .chzn-container-single, .reveal-modal .chzn-drop, .reveal-modal .chzn-results {
+  width: 100% !important;
+}
+
+.reveal-modal .chzn-search input {
+  width: 94% !important;
+  height: 30px;
+}
+
+
+
+
+

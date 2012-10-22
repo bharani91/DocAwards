@@ -1,0 +1,115 @@
+ <div id="add_specialization" class="reveal-modal">
+  <h3>Add your specialization</h3>
+  <div class="field">
+  <form>
+    <label>Name of speciality</label>
+      <input name="data[Specialty][name]" maxlength="100" type="text">
+    </div>
+
+    <div class="field">
+      <label>Description</label>
+      <input name="data[Specialty][description]" type="text">
+    </div>
+
+    <div class="field">
+      <input type="submit" value="Add Speciality" class="button success tiny right">
+    </div>
+  </form>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+
+ <div class="row">
+        <div class="twelve columns">
+          <form class="specializations" method="post">
+            <input type="hidden" value="<%= id %>" name="data[Docspeclink][doctor_id]">
+
+            <div class="field">
+              <label>Speciality</label>
+              <select class="chosen_simple" name="data[Docspeclink][specialty_id]" id="DocspeclinkSpecialtyId">
+                  <option value="2">Allergy</option>
+                  <option value="1">Allergy and Immunology</option>
+                  <option value="3">Anesthesiology (Anesthesia)</option>
+                  <option value="4">Audiology (Hearing, Ear)</option>
+                  <option value="5">Cardiac Electrophysiology</option>
+                  <option value="6">Cardiology (Heart)</option>
+                  <option value="7">Cardiovascular (Heart) Surgery</option>
+                  <option value="8">Carniofacial Surgery (Facial Plastic Surgery)</option>
+                  <option value="9">Certified Nurse Midwife</option>
+                  <option value="10">Certified Registered Nurse Anesthetist</option>
+                  <option value="11">Chemical Pathology</option>
+                  <option value="12">Clinical and Laboratory Immunology</option>
+                  <option value="13">Dentistry,A dental practitioner specializes in the care and treatment of the teeth and gums.
+                  </option>
+                  <option value="14">Dermatology (Skin, hair, nails)</option>
+                  <option value="15">Diagnostic Radiology</option>
+                  <option value="16">Ear Nose and Throat - Otorhinolaryngology</option>
+                  <option value="17">Emergency Medicine (ER)</option>
+                  <option value="18">Endocrinology (Thyroid, Adrenal, Diabetes etc.)</option>
+                  <option value="19">Family Practice</option>
+                  <option value="20">Gastroenterology (Stomach &amp; Digestive Disorders)</option>
+                  <option value="21">General and Vascular Surgery</option>
+                  <option value="22">General Surgery</option>
+                  <option value="23">General Vascular Surgery</option>
+                  <option value="24">Hand and Plastic Surgery</option>
+                  <option value="25">Hematology / Oncology (Blood and Cancer)</option>
+                  <option value="26">Infectious Disease</option>
+                  <option value="27">Internal Medicine</option>
+                  <option value="28">Nephrology (Kidney, Blood Pressure)</option>
+                  <option value="29">Neuro-Oncology (Cancer &amp; Tumors)</option>
+                  <option value="30">Neurological Surgery (Nerves)</option>
+                  <option value="31">Neurology (Nerves, Spinal Cord, Nerves)</option>
+                  <option value="32">Nurse Practitioner</option>
+                  <option value="33">Obstetrics / Gynecology / Pregnancy</option>
+                  <option value="34">Occupational Medicine</option>
+                  <option value="35">Oncology (Cancer)</option>
+                  <option value="36">Ophthalmology (Eye, Vision)</option>
+                  <option value="37">Oral and Maxillofacial Surgery</option>
+                  <option value="38">Orthodontics (Tooth Braces)</option>
+                  <option value="39">Orthopedic Surgery (Fracture, Tear, Joint Dislocation)</option>
+                  <option value="40">Otolaryngology (Tonsil, thyroid, neck etc)</option>
+                  <option value="41">Pain Management</option>
+                  <option value="42">Pain Medicine</option>
+                  <option value="43">Pathology (Laboratories)</option>
+                  <option value="44">Pediatric Nurse Practitioner</option>
+                  <option value="45">Pediatrics (Infants and Children)</option>
+                  <option value="46">Perinatology (Infants before birth)</option>
+                  <option value="47">Plastic and Reconstructive Surgery</option>
+                  <option value="48">Podiatry (Foot, Lower leg)</option>
+                  <option value="49">Proctology (Anus, Rectum, Colon)</option>
+                  <option value="50">Prosthetics/Orthotics (Artificial Limbs)</option>
+                  <option value="51">Psychiatry (Mental Disorders)</option>
+                  <option value="52">Psychology - Clinical</option>
+                  <option value="53">Pulmonary Medicine (Chest Medicine, Lung Specialist)</option>
+                  <option value="54">Radiation Oncology</option>
+                  <option value="55">Radiology (X-RAY, MRI, Ultrasound Imaging etc)</option>
+                  <option value="56">Rheumatology (Bone, Joints)</option>
+                  <option value="57">Sleep Medicine</option>
+                  <option value="58">Spine Surgery</option>
+                  <option value="59">Sports Medicine</option>
+                  <option value="60">Thoracic Surgery</option>
+                  <option value="61">Urology</option>
+                  <option value="62">Vascular Medicine</option>
+                  </select>
+            </div>
+
+            
+
+            <div class="new_speciality panel">
+              <div class="row">
+                <div class="field">
+                  Couldnt find your speciality in this list? 
+                  <a href="#" class="open_modal button tiny right" data-modal="add_specialization">Add New</a>
+                </div>
+              </div>
+            </div><!--new_speciality-->
+
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="right button_list">
+          <a href="#create_profile/personal_details" class="button tiny secondary prev">Previous</a>
+          <a href="#create_profile/qualifications" class="button tiny primary next">Next</a>
+        </div>
+      </div>
