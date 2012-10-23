@@ -545,3 +545,13 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   width: 94% !important;
   height: 30px;
 }
+
+/* line 598, ../sass/base.scss */
+.multiple_select {
+  height: 100px !important;
+}
+
+/* line 602, ../sass/base.scss */
+.chzn-container-multi .chzn-choices li.search-field, .chzn-container-multi .chzn-choices li.search-field input {
+  height: 30px !important;
+}

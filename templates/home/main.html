@@ -1,6 +1,6 @@
-<div id="signup_modal" class="reveal-modal">
+<div id="signup_modal"  class="reveal-modal">
         <h3>Signup for DocAwards</h3>
-        <form method="post" id="signup_form">
+        <form method="post" action="http://docawards.com/users/backbone_add" id="signup_form">
           <div class="field">
             <label>Username</label>
             <input name="data[User][username]" maxlength="45" type="text" placeholder="nikhil_sama">
@@ -15,6 +15,8 @@
             <label>Role</label>
             <input name="data[User][role]" maxlength="45" type="text" placeholder="doctor" value="Doctor">
           </div>
+          
+          <input type="hidden" value="http://localhost:9000/docawards" name="success_redirect">
 
           <div class="field">
             <input type="submit" id="signup_btn" class="button primary right" value="Signup!">
@@ -25,9 +27,30 @@
       </div>
 
       <div id="login_modal" class="reveal-modal">
-        <h2>Awesome. I have it.</h2>
-        <p class="lead">Your couch.  I its mine.</p>
-        <p>Im a cool paragraph that lives inside of an even cooler modal. Wins</p>
+        <h3>Log in</h3>
+        <form method="post" action="http://docawards.com/users/backbone_login" id="login_form">
+          <div class="field">
+            <label>Username</label>
+            <input name="data[User][username]" maxlength="45" type="text" placeholder="nikhil_sama">
+          </div>
+
+          <div class="field">
+            <label>Password</label>
+            <input name="data[User][password]" maxlength="45" type="password" placeholder="Secret Password">
+          </div>
+
+          <input type="hidden" value="http://localhost:9000/docawards/" name="success_redirect">
+
+          <div class="field">
+            <input type="submit" id="login_btn" class="button primary right" value="Login!">
+          </div>
+
+
+        </form>
+
+        <!-- <iframe src="http:/docawards.com/users/login" id="login_frame"></iframe> -->
+
+
         <a class="close-reveal-modal">&#215;</a>
       </div>
 

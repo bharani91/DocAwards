@@ -1298,14 +1298,11 @@
         <div class="twelve columns">
           <form class="qualifications" method="post">
 
-            <input type="hidden" value="<%= id %>" name="data[Qualification][doctor_id]">
-
-
             <div class="field">
               <div class="row">
                 <div class="four columns">
                   <label>Degree</label>
-                  <select class="chosen_simple" name="data[Qualification][degree_id]" id="QualificationDegreeId">
+                  <select class="chosen_simple" name="data[Qualification][0][degree_id]" id="QualificationDegreeId">
                     <option value="4">Fellowship - Pulmonology</option>
                     <option value="1">MBBS</option>
                     <option value="2">MD</option>
@@ -1315,12 +1312,12 @@
 
                 <div class="four columns">
                   <label>Department</label>
-                  <input name="data[Qualification][dept]" maxlength="45" type="text" id="QualificationDept">
+                  <input name="data[Qualification][0][dept]" maxlength="45" type="text" id="QualificationDept">
                 </div>
 
                 <div class="four columns">
                   <label>Year</label>
-                  <select name="data[Qualification][year]" class="chosen_simple">
+                  <select name="data[Qualification][0][year]" class="chosen_simple">
                     <option value="2032">2032</option>
                     <option value="2031">2031</option>
                     <option value="2030">2030</option>
@@ -1373,7 +1370,7 @@
               <div class="row">
                 <div class="five columns">
                   <label>Location</label>
-                  <select class="chosen_simple" name="data[Qualification][location_id]" id="QualificationLocationId">
+                  <select class="chosen_simple" name="data[Qualification][0][location_id]" id="QualificationLocationId">
                     <option value="2">Sama Chest Center</option>
                     <option value="3">Sir Ganga Ram Hospital</option>
                     <option value="4">St Lukes Rosevelt Hospital</option>

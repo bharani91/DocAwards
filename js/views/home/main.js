@@ -4,8 +4,9 @@ define([
   'underscore',
   'backbone',
   'text!templates/home/main.html',
-  'views/shared/footer'
-], function($, _, Backbone, mainHomeTemplate, FooterView ){
+  'views/shared/footer',
+  'models/user'
+], function($, _, Backbone, mainHomeTemplate, FooterView, User ){
 
   var mainHomeView = Backbone.View.extend({
     template: _.template(mainHomeTemplate),
@@ -14,7 +15,8 @@ define([
     },
 
     events: {
-      "submit #signup_form": "signup"
+      
+      "submit #login_form": "login"
     },
 
     render: function()  {
@@ -74,8 +76,8 @@ define([
 
       console.log(JSON.stringify(form_data));
 
+      
       // UNCOMMENT AFTER TESTING
-
       // $.ajax({
       //   type: 'POST',
       //   url: "http://docawards.com/users/add",
@@ -92,10 +94,27 @@ define([
       //   }
       // });
 
-      // COMMENT OUT AFTER TESTING
+      //COMMENT OUT AFTER TESTING
       window.app.navigate("#create_profile", true);
       
-      return false;
+      
+    },
+
+    login: function() {
+      var $form = this.$("#login_modal").find("form"),
+          form_data = $form.serializeFormJSON();
+
+      console.log(JSON.stringify(form_data));
+
+      $.ajax({
+        type: 'POST',
+        url: "http://docawards.com/users/ajax_login.json",
+        data: form_data,
+        success: function(response) {
+          console.log(response);
+        }
+      });
+      
     }
   });
   return mainHomeView;

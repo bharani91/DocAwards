@@ -12,39 +12,49 @@ define([
 ], function($, _, Backbone, FormData, personal_details_template, specializations_template, qualifications_template, experiences_template, consultation_template, contact_details_template){
     var ProfileFormView = Backbone.View.extend({
       initialize: function(options) {
-        var urls = {
-          "personal_details" : "http://docawards.com/doctors/add",
-          "specializations" : "http://docawards.com/docspeclinks/add",
-          "qualifications" : "http://docawards.com/qualifications/add",
-          "experiences" : "http://docawards.com/experiences/add",
-          "consultation" : "http://docawards.com/docconsultlocations/add",
-          "contact_details" : "http://docawards.com/doctor_contacts/add",
-
-        };
-        this.model_url = urls[options.url];
         this.el = options.el;
         this.template = _.template(eval(options.template));
         this.render();
+
         console.log(this.model);
       },
 
       events: {
-        "click .next" : "submit_form" 
+        "click .next" : "next",
+        "click .submit": "submit"
       },
 
       render: function() {
-        $(this.el).html(this.template(this.model.toJSON()));
+        $(this.el).html(this.template(this.model.toJSON()))
       },
 
-      submit_form: function() {
-        var data = new FormData({url: this.model_url});
-        data.set($(this.el).find("form").serializeFormJSON());
+      next: function() {
+        this.model.set($(this.el).find("form").serializeFormJSON());
+        this.model.save();
 
-        console.log(data);
-        // data.save();
-        // if(!window.current_doctor) {
-        //   return false;  
-        // }
+      },
+
+      submit: function() {
+        //console.log(window.form_data);
+        var data = {};
+        $.each(window.form_data, function(index, obj) {
+          for(key in obj) {
+            data[key] = obj[key];
+          }
+        });
+
+        console.log("DATA", data);
+
+        $.ajax({
+          type: 'POST',
+          url: "http://docawards.com/doctors/ws_add.json",
+          data: data,
+          success: function(data) {
+            console.log(data);
+            alert("Saved!");
+          }
+        });
+
       }
     })
 

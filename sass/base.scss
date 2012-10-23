@@ -595,6 +595,14 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 }
 
 
+.multiple_select {
+  height: 100px !important;
+}
+
+.chzn-container-multi .chzn-choices li.search-field,  .chzn-container-multi .chzn-choices li.search-field input {
+  height: 30px !important;
+}
+
 
 
 

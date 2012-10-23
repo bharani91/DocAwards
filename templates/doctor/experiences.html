@@ -1297,20 +1297,18 @@
   <div class="row">
         <div class="twelve columns">
           <form class="experiences" method="post">
-
-            <input type="hidden" value="<%= id %>" name="data[Experience][doctor_id]">
-
+            
 
             <div class="field">
               <div class="row">
                 <div class="six columns">
                   <label>From</label>
-                  <input type="text" class="datepicker">
+                  <input type="text" name="data[Experience][0][from]" class="datepicker">
                 </div>
 
                 <div class="six columns">
                   <label>To</label>
-                  <input type="text" class="datepicker">
+                  <input type="text" name="data[Experience][0][to]" class="datepicker">
                 </div>
                 
               </div><!--row-->
@@ -1321,12 +1319,12 @@
               <div class="row">
                 <div class="six columns">
                   <label>Department</label>
-                  <input name="data[Experience][dept]" maxlength="45" type="text" id="ExperienceDept">
+                  <input name="data[Experience][0][dept]" maxlength="45" type="text" id="ExperienceDept">
                 </div>
 
                 <div class="six columns">
                   <label>Location</label>
-                  <select class="seven chosen_simple" name="data[Experience][location_id]" id="ExperienceLocationId">
+                  <select class="seven chosen_simple" name="data[Experience][0][location_id]" id="ExperienceLocationId">
                     <option value="2">Sama Chest Center</option>
                     <option value="3">Sir Ganga Ram Hospital</option>
                     <option value="4">St Lukes Rosevelt Hospital</option>

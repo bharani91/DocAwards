@@ -2,14 +2,13 @@
         <div class="twelve columns">
           <form class="personal_details" method="post">
 
-            <input type="hidden" value="<%= id %>" name="data[Doctor][user_id]">
-
+            <input type="hidden" name="data[Doctor][user_id]" value="<%= id %>">
             <div class="field">
               <div class="row">
                 <div class="nine columns">
                   <div class="four columns">
                     <label>First Name</label>
-                    <input type="text" name="data[Doctor][first_name]" placeholder="First Name">
+                    <input type="text" name="data[Doctor][first_name]"  placeholder="First Name">
                   </div>
                   <div class="four columns">
                     <label>Middle Name</label>
@@ -22,7 +21,7 @@
                 </div>
                 <div class="two columns offset-by-one">
                   <label>Date of Birth</label>
-                  <input type="text" class="datepicker">
+                  <input type="text" name="data[Doctor][DOB]" class="datepicker">
                </div>
 
               </div>
@@ -33,8 +32,8 @@
             <div class="field">
               <div class="row"> 
                 <div class="nine columns">
-                  <label>Profile Photo</label>
-                  <input type="text" name="data[Doctor][image]" id="DoctorImage">
+                  <label>One line Intro</label>
+                  <input type="text" name="data[Doctor][one_line_intro]" placeholder="Your One-line Introduction">
                 </div><!--seven_columns-->
 
                 <div class="three columns">
@@ -88,14 +87,6 @@
               </div>
             </div>
 
-            <div class="field">
-              
-            </div>
-
-            <div class="field">
-              <label>One-line Bio</label>
-              <input type="text" name="data[Doctor][one_line_intro]" placeholder="Your One-line Introduction">
-            </div>
 
             
           </form>      

@@ -2,14 +2,12 @@
         <div class="twelve columns">
           <form class="consultation" method="post">
 
-            <input type="hidden" value="<%= id %>" name="data[Docconsultlocation][doctor_id]">
-
 
             <div class="field">
               <div class="row">
                 <div class="six columns">
                   <label>Location</label>
-                  <select class="chosen_simple" name="data[Docconsultlocation][location_id]">
+                  <select class="chosen_simple" name="data[Docconsultlocation][0][location_id]">
                     <option value="2">Sama Chest Center</option>
                     <option value="3">Sir Ganga Ram Hospital</option>
                     <option value="4">St Lukes Rosevelt Hospital</option>
@@ -18,7 +16,7 @@
 
                 <div class="six columns">
                   <label>Location Type</label>
-                  <select class="chosen_simple" name="data[Docconsultlocation][consultlocationtype_id]">
+                  <select class="chosen_simple" name="data[Docconsultlocation][0][consultlocationtype_id]">
                     <option value="1">HOSPITAL</option>
                     <option value="2">HOME_CLINIC</option>
                     <option value="3">OPD CLINIC</option>
@@ -32,7 +30,7 @@
 
             <div class="field">
               <label>Additional Information</label>
-              <input name="data[Docconsultlocation][addl]" maxlength="45" type="text" id="DocconsultlocationAddl">
+              <input name="data[Docconsultlocation][0][addl]" maxlength="45" type="text" id="DocconsultlocationAddl">
             </div>
           </form>
 

@@ -12,12 +12,14 @@ define([
   'views/doctor/list',
   'views/doctor/create_profile',
   'views/doctor/profile_form',
+  'models/form_data',
   'models/user'
 
-], function($, _, Backbone, HeaderView, FooterView, mainHomeView, Doctor, DoctorView, DiseaseDoctorList, SpecialityDoctorList, DoctorListView, CreateProfileView, ProfileFormView, User){
+], function($, _, Backbone, HeaderView, FooterView, mainHomeView, Doctor, DoctorView, DiseaseDoctorList, SpecialityDoctorList, DoctorListView, CreateProfileView, ProfileFormView, FormData, User){
   var AppRouter = Backbone.Router.extend({
     routes: {
       ""                    :       "home",
+      "#authenticate"   :       "authenticate", 
       "doctor/:id"          :       "doctorProfile",
       "disease/:id"         :       "diseaseListing",
       "speciality/:id"      :       "specialityListing",
@@ -29,7 +31,18 @@ define([
       var home_view = new mainHomeView();
       // hide regular header
       $(".header_wrapper").hide();
+      var queries = {};
+      $.each(document.location.search.substr(1).split('&'),function(c,q){
+        var i = q.split('=');
+        queries[i[0].toString()] = i[1].toString();
+      });
+      
+      alert(queries["user_id"]);
+      
+    },
 
+    authenticate: function() {
+      alert("authenticated");
     },
 
     doctorProfile: function(id)  {
@@ -50,13 +63,16 @@ define([
     createProfile: function() {
       var header_view = new HeaderView();
       $(".header_wrapper").fadeIn("slow");
+
+      window.form_data = [];
+      
       var create_profile_view = new CreateProfileView();
 
       $(".wrapper").hide().fadeIn("slow", function() {
         // TEMPORARY - CHANGE AFTER IMPLEMENTING SIGNUP
-        var temp_user = new User({ id: 1 });
+        var temp_user = new FormData({ id: 1 });
         
-        var form_view = new ProfileFormView({model: temp_user, url: "personal_details", el: "li#personal_detailsTab", template: "personal_details_template"});
+        var form_view = new ProfileFormView({model: new FormData({id: 1}), url: "personal_details", el: "li#personal_detailsTab", template: "personal_details_template"});
 
         // Datepicker
         $( ".datepicker" ).datepicker({
@@ -80,11 +96,11 @@ define([
       // TEMPORARY - CHANGE AFTER IMPLEMENTING SIGNUP
       var temp_user = new User({ id: 1 });
 
-      // UNCOMMENT AFTER IMPLEMENTING SIGNUP
-      // var user_model = (id != "personal_details") ? window.current_doctor : window.current_user;
+      //UNCOMMENT AFTER IMPLEMENTING SIGNUP
+      //var user_model = (id != "personal_details") ? window.current_doctor : window.current_user;
 
 
-      var form_view = new ProfileFormView({model: temp_user, url: id, el: el, template: template});
+      var form_view = new ProfileFormView({model: new FormData({id: 1}), url: id, el: el, template: template});
 
       var $tab = $('a[href="#create_profile/' + id + '"]').parent('dd'),
           $activeTab = $tab.closest('dl').find('dd.active');
