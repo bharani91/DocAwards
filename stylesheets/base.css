@@ -426,7 +426,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 /* line 481, ../sass/base.scss */
 .landing_page .main .slogan {
   margin-top: 0px !important;
-  text-align: center;
+  text-align: left;
   color: #000;
   font-weight: bold;
   padding-top: 15px;
@@ -496,62 +496,66 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   line-height: 42px;
   font-size: 19px;
 }
+/* line 550, ../sass/base.scss */
+.chzn-container-single .chzn-single span {
+  color: #8e8e8f;
+}
 
-/* line 557, ../sass/base.scss */
+/* line 560, ../sass/base.scss */
 .create_profile {
   margin-top: 80px !important;
 }
-/* line 559, ../sass/base.scss */
+/* line 562, ../sass/base.scss */
 .create_profile textarea {
   height: 120px;
 }
-/* line 562, ../sass/base.scss */
+/* line 565, ../sass/base.scss */
 .create_profile .row.select_row {
   margin-left: 0;
 }
 
-/* line 567, ../sass/base.scss */
+/* line 570, ../sass/base.scss */
 .field {
   margin-top: 20px;
 }
 
-/* line 571, ../sass/base.scss */
+/* line 574, ../sass/base.scss */
 .field:first-child {
   margin-top: 0;
 }
 
-/* line 575, ../sass/base.scss */
+/* line 578, ../sass/base.scss */
 .button_list {
   margin-top: 20px;
 }
 
-/* line 579, ../sass/base.scss */
+/* line 582, ../sass/base.scss */
 .new_speciality {
   margin-top: 40px;
 }
 
-/* line 583, ../sass/base.scss */
+/* line 586, ../sass/base.scss */
 .location_modal_link {
   margin-top: 30px;
 }
 
-/* line 588, ../sass/base.scss */
+/* line 591, ../sass/base.scss */
 .reveal-modal .chzn-container-single, .reveal-modal .chzn-drop, .reveal-modal .chzn-results {
   width: 100% !important;
 }
 
-/* line 592, ../sass/base.scss */
+/* line 595, ../sass/base.scss */
 .reveal-modal .chzn-search input {
   width: 94% !important;
   height: 30px;
 }
 
-/* line 598, ../sass/base.scss */
+/* line 601, ../sass/base.scss */
 .multiple_select {
   height: 100px !important;
 }
 
-/* line 602, ../sass/base.scss */
+/* line 605, ../sass/base.scss */
 .chzn-container-multi .chzn-choices li.search-field, .chzn-container-multi .chzn-choices li.search-field input {
   height: 30px !important;
 }

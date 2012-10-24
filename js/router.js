@@ -77,7 +77,9 @@ define([
         // Datepicker
         $( ".datepicker" ).datepicker({
             changeMonth: true,
-            changeYear: true
+            changeYear: true,
+            yearRange: "1910:1999",
+            defaultDate: "-30y"
           });
 
         $(".chosen_simple").chosen();
@@ -116,7 +118,9 @@ define([
        // Datepicker
       $( ".datepicker" ).datepicker({
           changeMonth: true,
-          changeYear: true
+          changeYear: false,
+          yearRange: "1910:1999",
+          defaultDate: "-30y"
         });
 
       $(".chosen_simple").chosen();
