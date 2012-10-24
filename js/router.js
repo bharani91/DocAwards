@@ -20,7 +20,7 @@ define([
   var AppRouter = Backbone.Router.extend({
     routes: {
       ""                    :       "home",
-      "#authenticate"   :       "authenticate", 
+      "#authenticate"       :       "authenticate", 
       "doctor/:id"          :       "doctorProfile",
       "disease/:id"         :       "diseaseListing",
       "speciality/:id"      :       "specialityListing",
@@ -140,7 +140,7 @@ define([
     
     faq: function() {
       //load up accordian
-      $(document).foundationAccordion();
+      
 
       var faq_view = new FaqView();
       // hide regular header

@@ -23,7 +23,9 @@ define([
         new FooterView();
       });
 
-      $(".wrapper, .footer_wrapper").fadeIn("slow", function() {});
+      $(".wrapper, .footer_wrapper").fadeIn("slow", function() {
+        $(document).foundationAccordion();
+      });
     }
   });
   return faqView;
