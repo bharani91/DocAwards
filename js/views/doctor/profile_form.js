@@ -47,7 +47,7 @@ define([
 
         $.ajax({
           type: 'POST',
-          url: "http://docawards.com/doctors/ws_add.json",
+          url: "http://docawards.com/api/doctors/ws_add.json",
           data: data,
           success: function(data) {
             console.log(data);

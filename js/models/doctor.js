@@ -8,7 +8,7 @@ define([
     },
 
     url: function() {
-      return "http://docawards.com/doctors/get_doctors.json?doctor_id=" + this.id
+      return "http://docawards.com/api/doctors/get_doctors.json?doctor_id=" + this.id
     },
 
     parse: function(resp) {
