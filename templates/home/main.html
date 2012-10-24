@@ -1,6 +1,6 @@
 <div id="signup_modal"  class="reveal-modal">
         <h3>Signup for DocAwards</h3>
-        <form method="post" action="http://docawards.com/users/backbone_add" id="signup_form">
+        <form method="post" action="http://docawards.com/api/users/backbone_add" id="signup_form">
           <div class="field">
             <label>Username</label>
             <input name="data[User][username]" maxlength="45" type="text" placeholder="nikhil_sama">
@@ -28,7 +28,7 @@
 
       <div id="login_modal" class="reveal-modal">
         <h3>Log in</h3>
-        <form method="post" action="http://docawards.com/users/backbone_login" id="login_form">
+        <form method="post" action="http://docawards.com/api/users/backbone_login" id="login_form">
           <div class="field">
             <label>Username</label>
             <input name="data[User][username]" maxlength="45" type="text" placeholder="nikhil_sama">
@@ -48,7 +48,7 @@
 
         </form>
 
-        <!-- <iframe src="http:/docawards.com/users/login" id="login_frame"></iframe> -->
+        <!-- <iframe src="http:/docawards.com/api/users/login" id="login_frame"></iframe> -->
 
 
         <a class="close-reveal-modal">&#215;</a>
@@ -79,7 +79,7 @@
                 </select>
               </div>
               <div class="three mobile-one columns">
-                <a href="#" id="search_btn" class="postfix button expand">Ask!</a>
+                <a href="#" id="search_btn" class="postfix button expand">Find!</a>
               </div>
             </form>
           </div><!--seven_columns-->

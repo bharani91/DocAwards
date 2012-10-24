@@ -81,7 +81,7 @@ define([
       // UNCOMMENT AFTER TESTING
       // $.ajax({
       //   type: 'POST',
-      //   url: "http://docawards.com/users/add",
+      //   url: "http://docawards.com/api/users/add",
       //   data: form_data,
       //   success: function(response) {
       //     var new_id = parseInt($(response).find("#content table tr:last td:first").text()),
@@ -109,7 +109,7 @@ define([
 
       $.ajax({
         type: 'POST',
-        url: "http://docawards.com/users/ajax_login.json",
+        url: "http://docawards.com/api/users/ajax_login.json",
         data: form_data,
         success: function(response) {
           console.log(response);

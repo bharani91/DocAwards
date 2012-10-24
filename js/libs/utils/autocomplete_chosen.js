@@ -22,7 +22,7 @@
   $('.chzn-search input').autocomplete({
     source: function( request, response ) {
       $.ajax({
-        url: "http://docawards.com/specialties/autocomplete.json?term=" + request.term + "&jsonp_callback=cbck",
+        url: "http://docawards.com/api/specialties/autocomplete.json?term=" + request.term + "&jsonp_callback=cbck",
         dataType: "jsonp",
         jsonpCallback: "cbck",
         data: {

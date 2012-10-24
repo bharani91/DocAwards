@@ -12,11 +12,11 @@ define([
 
     initialize: function() {
       this.urls = {
-        "specializations" : "http://docawards.com/docspeclinks/add",
-        "qualifications" : "http://docawards.com/qualifications/add",
-        "experiences" : "http://docawards.com/experiences/add",
-        "consultation" : "http://docawards.com/docconsultlocations/add",
-        "contact_details" : "http://docawards.com/doctor_contacts/add",
+        "specializations" : "http://docawards.com/api/docspeclinks/add",
+        "qualifications" : "http://docawards.com/api/qualifications/add",
+        "experiences" : "http://docawards.com/api/experiences/add",
+        "consultation" : "http://docawards.com/api/docconsultlocations/add",
+        "contact_details" : "http://docawards.com/api/doctor_contacts/add",
 
       };
       this.render();

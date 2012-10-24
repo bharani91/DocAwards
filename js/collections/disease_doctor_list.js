@@ -10,7 +10,7 @@ define([
     },
 
     url: function() {
-      return "http://docawards.com/doctors/get_doctors.json?disease_id=" + this.id 
+      return "http://docawards.com/api/doctors/get_doctors.json?disease_id=" + this.id 
     },
   });
 
