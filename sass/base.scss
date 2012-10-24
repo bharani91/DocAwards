@@ -23,6 +23,13 @@ $dark_gray: #5B5B5C;
 $light_blue: #73AEF7;
 $dark_blue: #0382F7;
 
+body {
+  color: $dark_gray;
+  h1, h2, h3 {
+    color: $dark_gray;
+  }
+}
+
 @mixin rounded($radius: 3px) {
   -moz-border-radius: $radius;
   -webkit-border-radius: $radius;
@@ -481,7 +488,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
     .slogan {
       margin-top: 0px !important;
       text-align: left;
-      color: #000;
+      color: darken($dark_gray, 10%);
       font-weight: bold;
       padding-top: 15px;
     }

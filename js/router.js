@@ -13,9 +13,10 @@ define([
   'views/doctor/create_profile',
   'views/doctor/profile_form',
   'models/form_data',
-  'models/user'
+  'models/user',
+  'views/home/faq'
 
-], function($, _, Backbone, HeaderView, FooterView, mainHomeView, Doctor, DoctorView, DiseaseDoctorList, SpecialityDoctorList, DoctorListView, CreateProfileView, ProfileFormView, FormData, User){
+], function($, _, Backbone, HeaderView, FooterView, mainHomeView, Doctor, DoctorView, DiseaseDoctorList, SpecialityDoctorList, DoctorListView, CreateProfileView, ProfileFormView, FormData, User, FaqView){
   var AppRouter = Backbone.Router.extend({
     routes: {
       ""                    :       "home",
@@ -24,7 +25,8 @@ define([
       "disease/:id"         :       "diseaseListing",
       "speciality/:id"      :       "specialityListing",
       "create_profile"      :       "createProfile",
-      "create_profile/:id"  :       "createProfileTab"
+      "create_profile/:id"  :       "createProfileTab",
+      "faq"                 :       "faq"
     },
 
     home: function(){
@@ -134,6 +136,15 @@ define([
 
       var footer_view = new FooterView();
       
+    },
+    
+    faq: function() {
+      //load up accordian
+      $(document).foundationAccordion();
+
+      var faq_view = new FaqView();
+      // hide regular header
+      $(".header_wrapper").hide();
     }
 
   });
