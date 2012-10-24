@@ -24,6 +24,8 @@ define([
       var that = this; 
       $(".wrapper").fadeOut("fast", function() {
         $(this).html(that.el);
+        $(".chzn-select").chosen();
+        window.autocomplete_select();
         new FooterView();
       });
 
@@ -36,8 +38,7 @@ define([
           $('#login_modal').reveal();
         });
 
-        $(".chzn-select").chosen();
-        window.autocomplete_select();
+        
 
         $('#carousel').elastislide({
           imageW  : 180,
