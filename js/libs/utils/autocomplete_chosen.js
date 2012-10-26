@@ -15,7 +15,7 @@
     $('.chzn-select optgroup.specialties').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
   })
 
-  $(".chzn-select").trigger("liszt:updated");
+  $(".chzn-select").trigger("ajax_liszt:updated");
 }
 
  window.autocomplete_select = function() {

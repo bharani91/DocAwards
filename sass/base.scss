@@ -177,11 +177,11 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 // Dashboard content
 // ---------------------------------------
 
-.chzn-container.chzn-container-single, .chzn-container-single .chzn-drop {
+.container_inner .chzn-container.chzn-container-single, .container_inner .chzn-container-single .chzn-drop {
   min-width: 390px !important;
 }
 
-.chzn-container-single .chzn-search input {
+.container_inner .chzn-container-single .chzn-search input {
   min-width: 360px;
 }
 
@@ -571,6 +571,17 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 // ---------------------------------------
 // Create Profile
 // ---------------------------------------
+label small {
+  font-size: 12px;
+}
+
+.days_checkboxes .two, .row .two {
+  width: 13.66667%;
+}
+
+.add_another {
+  margin-left: 5px;
+}
 
 .create_profile {
   margin-top: 80px !important;
@@ -620,6 +631,8 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 .chzn-container-multi .chzn-choices li.search-field,  .chzn-container-multi .chzn-choices li.search-field input {
   height: 30px !important;
 }
+
+
 
 
 

@@ -16,19 +16,11 @@ define([
     },
 
     sync: function(method, model, options){  
-      // options.dataType =  "jsonp";
-      // options.jsonpCallback = "cbck";
       $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
         options.xhrFields = {
           withCredentials: true
         };
       });
-      // options.beforeSend = function(xhr){
-      //   xhr.withCredentials = true;
-      // };
-
-      // options.xhrFields['withCredentials'] = true;
-
       return Backbone.sync(method, model, options);  
     }  
 

@@ -14,13 +14,14 @@ define([
   'views/doctor/profile_form',
   'models/form_data',
   'models/user',
-  'views/home/faq'
+  'views/home/faq',
+  'collections/datas'
 
-], function($, _, Backbone, HeaderView, FooterView, mainHomeView, Doctor, DoctorView, DiseaseDoctorList, SpecialityDoctorList, DoctorListView, CreateProfileView, ProfileFormView, FormData, User, FaqView){
+], function($, _, Backbone, HeaderView, FooterView, mainHomeView, Doctor, DoctorView, DiseaseDoctorList, SpecialityDoctorList, DoctorListView, CreateProfileView, ProfileFormView, FormData, User, FaqView, DataCollection){
   var AppRouter = Backbone.Router.extend({
     routes: {
       ""                    :       "home",
-      "#authenticate"       :       "authenticate", 
+      "logout"              :       "logout",
       "doctor/:id"          :       "doctorProfile",
       "disease/:id"         :       "diseaseListing",
       "speciality/:id"      :       "specialityListing",
@@ -33,18 +34,22 @@ define([
       var home_view = new mainHomeView();
       // hide regular header
       $(".header_wrapper").hide();
-      var queries = {};
-      $.each(document.location.search.substr(1).split('&'),function(c,q){
-        var i = q.split('=');
-        queries[i[0].toString()] = i[1].toString();
-      });
-      
-      alert(queries["user_id"]);
+      if(window.location.search.indexOf("?") >= 0) {
+        var queries = {};
+        $.each(window.location.search.substr(1).split('&'),function(c,q){
+          var i = q.split('=');
+          queries[i[0].toString()] = i[1].toString();
+        });
+
+        window.current_user = new User({id: queries["user_id"]});
+        window.location.search = "";
+      } 
       
     },
 
-    authenticate: function() {
-      alert("authenticated");
+    logout: function() {
+      if(window.current_user) window.current_user.destroy();
+      window.app.navigate("", true);
     },
 
     doctorProfile: function(id)  {
@@ -72,16 +77,19 @@ define([
 
       $(".wrapper").hide().fadeIn("slow", function() {
         // TEMPORARY - CHANGE AFTER IMPLEMENTING SIGNUP
-        var temp_user = new FormData({ id: 1 });
+
+        window.datas = new DataCollection();
+
         
-        var form_view = new ProfileFormView({model: new FormData({id: 1}), url: "personal_details", el: "li#personal_detailsTab", template: "personal_details_template"});
+        var form_view = new ProfileFormView({ collection: window.datas, url: "personal_details", el: "li#personal_detailsTab", template: "personal_details_template"});
 
         // Datepicker
         $( ".datepicker" ).datepicker({
             changeMonth: true,
             changeYear: true,
             yearRange: "1910:1999",
-            defaultDate: "-30y"
+            defaultDate: "-30y",
+            dateFormat: 'dd-mm-yyyy'
           });
 
         $(".chosen_simple").chosen();
@@ -97,14 +105,13 @@ define([
       var el = "li#" + id + "Tab",
           template = id + "_template";
 
-      // TEMPORARY - CHANGE AFTER IMPLEMENTING SIGNUP
-      var temp_user = new User({ id: 1 });
+
 
       //UNCOMMENT AFTER IMPLEMENTING SIGNUP
       //var user_model = (id != "personal_details") ? window.current_doctor : window.current_user;
 
-
-      var form_view = new ProfileFormView({model: new FormData({id: 1}), url: id, el: el, template: template});
+      if (!window.datas) window.datas = new DataCollection();
+      var form_view = new ProfileFormView({collection: window.datas, url: id, el: el, template: template});
 
       var $tab = $('a[href="#create_profile/' + id + '"]').parent('dd'),
           $activeTab = $tab.closest('dl').find('dd.active');
@@ -120,9 +127,10 @@ define([
        // Datepicker
       $( ".datepicker" ).datepicker({
           changeMonth: true,
-          changeYear: false,
+          changeYear: true,
           yearRange: "1910:1999",
-          defaultDate: "-30y"
+          defaultDate: "-30y",
+          dateFormat: 'dd-mm-yy'
         });
 
       $(".chosen_simple").chosen();

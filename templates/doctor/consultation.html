@@ -1,11 +1,11 @@
   <div class="row">
         <div class="twelve columns">
-          <form class="consultation" method="post">
+          <form class="primary consultation" method="post">
 
 
             <div class="field">
               <div class="row">
-                <div class="six columns">
+                <div class="four columns">
                   <label>Location</label>
                   <select class="chosen_simple" name="data[Docconsultlocation][0][location_id]">
                     <option value="2">Sama Chest Center</option>
@@ -14,7 +14,7 @@
                   </select>
                 </div>
 
-                <div class="six columns">
+                <div class="four columns">
                   <label>Location Type</label>
                   <select class="chosen_simple" name="data[Docconsultlocation][0][consultlocationtype_id]">
                     <option value="1">HOSPITAL</option>
@@ -22,16 +22,73 @@
                     <option value="3">OPD CLINIC</option>
                   </select>
                 </div>
+
+                <div class="four columns">
+                  <label>Additional Information</label>
+                  <input name="data[Docconsultlocation][0][addl]" maxlength="45" type="text" id="DocconsultlocationAddl">
+                </div>
               </div><!--row-->
               
             </div><!--field-->
 
-           <hr>
 
             <div class="field">
-              <label>Additional Information</label>
-              <input name="data[Docconsultlocation][0][addl]" maxlength="45" type="text" id="DocconsultlocationAddl">
+              <div class="row">
+                <div class="three columns">
+                  <label>Start Time</label>
+                  <input name="data[Docconsultlocation][0][ConsultTiming][0][start]"  type="text"/>
+                </div>
+
+                <div class="three columns">
+                  <label>End Time</label>
+                  <input name="data[Docconsultlocation][0][ConsultTiming][0][end]"  type="text"/>
+                </div>
+
+                <div class="six columns days_checkboxes">
+                  <label>Days</label>
+                  <label class="two column inline">
+                    <input type="checkbox" >
+                    <span class="checkbox"></span> M
+                  </label>
+                  <label class="two column inline">
+                    <input type="checkbox" >
+                    <span class="checkbox"></span> T
+                  </label>
+                  <label class="two column inline">
+                    <input type="checkbox" >
+                    <span class="checkbox"></span> W
+                  </label>
+                  <label class="two column inline">
+                    <input type="checkbox" >
+                    <span class="checkbox"></span> Th
+                  </label>
+                  <label class="two column inline">
+                    <input type="checkbox" >
+                    <span class="checkbox"></span> F
+                  </label>
+                  <label class="two column inline">
+                    <input type="checkbox" >
+                    <span class="checkbox"></span> Sat
+                  </label>
+                  <label class="two column inline">
+                    <input type="checkbox" >
+                    <span class="checkbox"></span> S
+                  </label>
+
+                </div>
+
+
+              </div><!--row-->
+              
+            </div><!--field-->
+
+            <div class="field button_wrapper">
+              <div class="row">
+                <a href="#" class="button medium add_another" data-elem="consultation_field">Add another Consultation</a>            
+              </div><!--row-->   
             </div>
+
+            
           </form>
 
         </div>

@@ -1,7 +1,7 @@
  <div id="add_location" class="reveal-modal">
   <h3>Add your Locatoin</h3>
   <div class="field">
-  <form>
+  <form class="add_new_location" method="post">
     <label>Name</label>
       <input type="text" id="LocationName" maxlength="45" name="data[Location][name]">
     </div>
@@ -12,6 +12,7 @@
     </div>
 
     <div class="field">
+      <label>Neighborhood</label>
       <input type="text" id="LocationNeighborhood" maxlength="45" name="data[Location][neighborhood]">
     </div>
 
@@ -1021,10 +1022,6 @@
     </div>
 
 
-    <div class="field">
-      <input type="text" id="LocationNeighborhood" maxlength="45" name="data[Location][neighborhood]">
-    </div>
-
 
 
     <div class="field">
@@ -1283,6 +1280,15 @@
     </div>
 
     <div class="field">
+      <label>PinCode</label>
+      <select class="chosen_simple" name="data[Location][pin_code_id]" id="LocationPinCodeId">
+        <option value="4">10019</option>
+        <option value="2">110049</option>
+        <option value="3">110060</option>
+      </select>
+    </div>
+
+    <div class="field">
       <input type="submit" value="Add Speciality" class="button success tiny right">
     </div>
 
@@ -1293,57 +1299,48 @@
 
 
 
-
   <div class="row">
         <div class="twelve columns">
-          <form class="experiences" method="post">
+          <form class="primary experiences" method="post">
             
 
             <div class="field">
               <div class="row">
-                <div class="six columns">
+                <div class="three columns">
                   <label>From</label>
                   <input type="text" name="data[Experience][0][from]" class="datepicker">
                 </div>
 
-                <div class="six columns">
+                <div class="three columns">
                   <label>To</label>
                   <input type="text" name="data[Experience][0][to]" class="datepicker">
+                </div>
+
+                <div class="three columns">
+                  <label>Department</label>
+                  <input name="data[Experience][0][dept]" maxlength="45" type="text" id="ExperienceDept">
+                </div>
+
+                <div class="three columns">
+                  <label>Location  <small>( <a href="#" class="open_modal" data-modal="add_location">Add new</a> )</small></label></label>
+                  <select class="chosen_simple location_select" name="data[Experience][0][location_id]" id="ExperienceLocationId">
+                    <option value="2">Sama Chest Center</option>
+                    <option value="3">Sir Ganga Ram Hospital</option>
+                    <option value="4">St Lukes Rosevelt Hospital</option>
+                  </select>
+
+                 
                 </div>
                 
               </div><!--row-->
             </div><!--field-->
 
 
-            <div class="field">
+            <div class="field button_wrapper">
               <div class="row">
-                <div class="six columns">
-                  <label>Department</label>
-                  <input name="data[Experience][0][dept]" maxlength="45" type="text" id="ExperienceDept">
-                </div>
-
-                <div class="six columns">
-                  <label>Location</label>
-                  <select class="seven chosen_simple" name="data[Experience][0][location_id]" id="ExperienceLocationId">
-                    <option value="2">Sama Chest Center</option>
-                    <option value="3">Sir Ganga Ram Hospital</option>
-                    <option value="4">St Lukes Rosevelt Hospital</option>
-                  </select>
-
-                  <a href="#" class="open_modal button medium secondary right" data-modal="add_location">Add New Location</a>
-                </div>
+                 <a href="#" class="button medium add_another" data-elem="experience_field">Add another experience</a>
               </div>
             </div>
-
-            <div class="field">
-              
-            </div>
-
-            <div class="field">
-              
-            </div>
-
-
 
           </form>
         </div>
