@@ -30,7 +30,6 @@ define([
           "contact_field" : 0,
         }; 
 
-
         this.render();
       },
 
