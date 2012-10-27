@@ -3,7 +3,7 @@ window.initialize_map = function(obj)  {
   var latlng = new google.maps.LatLng(obj[0]["lat"], obj[0]["long"]);
   // Creating an object literal containing the properties we want to pass to the map
   var options = {
-    zoom: 12,
+    zoom: 11,
     center: latlng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }; 

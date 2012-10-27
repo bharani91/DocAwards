@@ -4,7 +4,7 @@
       </div>
 
       <div class="ten columns">  
-        <h2><%= headshot.first_name %>  <%= headshot.last_name %></h2>
+        <h2>Dr. <%= headshot.first_name %>  <%= headshot.last_name %></h2>
         <h4 class="subheader"><%= headshot.one_line_intro %></h4>
       </div>
     </section> 
@@ -18,14 +18,20 @@
         <div class="row about_doc feed_entry doctor_list">
           <h5>Specializations</h5>
           <% _.each(specializations, function(specialization) { %>
-            <p class="subheader"><%= specialization["Specialty"]["name"] %></p>
+            <p class="subheader">
+              <span class="has-tip tip-right" data-width="200" title="<%= specialization["Specialty"]["description"] %>" width=>
+              <%= specialization["Specialty"]["name"] %></p>
+              </span>
           <% }); %>
 
           <hr>
           
           <h5>Education and Training</h5>
           <% _.each(qualifications, function(qualification) { %>
-            <p class="subheader"><%= qualification["Degree"]["name"] %>, <%= qualification["Location"]["name"] %></p>
+            <p class="subheader"><%= qualification["Degree"]["name"] %>, 
+              <span class="has-tip tip-right" data-width="200" 
+              title="<%= qualification["Location"]['name']+' in '+qualification["Location"]["neighborhood"]+', '+qualification["Location"]['City']['name']+', '+qualification["Location"]['Country']['name']%>">
+              <%= qualification["Location"]["name"] %></span></p>
           <% }); %>
 
         </div><!-- End Feed Entry -->
@@ -38,11 +44,7 @@
           <h5>Experience</h5>
           <% _.each(experiences, function(experience) { %>
             <div class="exp">
-              <p><strong><%= experience["Location"]["name"] %></strong></p>
-              <% if (experience["dept"]) { %>
-                <p class="subheader">Department: <strong><%= experience["dept"] %></strong></p>
-              <% } %>
-              <p class="subheader">From: <strong><%= experience["from"] %></strong> to <strong><%= experience["to"] %></strong></p>
+              <%= new Date(experience["from"]).getFullYear() %> to <%= new Date(experience["to"]).getFullYear() %> at <span class="has-tip" data-width="200" title="<%= experience["Location"]['name']+' in '+experience["Location"]["neighborhood"]+', '+experience["Location"]['City']['name']+', '+experience["Location"]['Country']['name']%>"<strong><%= experience["Location"]["name"] %></strong></span>
             </div><!--exp-->
           <% }); %>
 

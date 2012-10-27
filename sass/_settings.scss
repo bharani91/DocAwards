@@ -74,10 +74,10 @@
 
 // Tooltip Settings
 
-// $hasTipBorderBottom: dotted 1px #ccc;
-// $hasTipFontWeight: bold;
-// $hasTipFontColor: #333;
-// $hasTipBorderBottomHover: dotted 1px darken($mainColor, 20%);
+$hasTipBorderBottom: none;
+$hasTipFontWeight: normal;
+$hasTipFontColor: #5B5B5C;
+$hasTipBorderBottomHover: none;
 // $hasTipFontColorHover: $mainColor;
 // $tooltipBackgroundColor: #000;
 // $tooltipBackgroundOpacity: 0.85;

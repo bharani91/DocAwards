@@ -209,6 +209,12 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
       }
     }
 
+    .white-tool-tip, .white-tool-tip {
+      font-weight: normal;
+      color: white;
+      border-bottom: none;
+    }
+
     p.bio {
       font-size: 13px;
     }
@@ -398,10 +404,6 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 
   .exp {
     padding-top: 10px;
-    border-bottom: 1px solid #ddd;
-    &:last-child {
-      border-bottom: none;
-    }
   }
 
 }
@@ -484,12 +486,16 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   }
 
   .main {
-    background: url("../images/docs2.jpg") left top no-repeat;
     min-height: 400px;
+    #landing-page-slider, div.orbit-wrapper {
+      position: absolute;
+      min-height: 400px;
+      z-index: -1;
+    }
     .ask_container {
       padding-top: 220px;
       .container_inner {
-        background: rgba(white, 0.55);
+        background: rgba(white, 0.60);
         padding-bottom: 10px;
       }
     }

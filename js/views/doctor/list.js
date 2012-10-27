@@ -38,6 +38,7 @@ define([
           new HeaderView();
           new JumbotronView();
           new FooterView();
+          $(document).foundationTooltips();
         });
 
         $(".header_wrapper, .wrapper, .footer_wrapper").fadeIn("slow");

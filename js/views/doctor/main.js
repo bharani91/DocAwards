@@ -53,7 +53,9 @@ define([
           var temp = {};
           temp["lat"] = consultation["Location"]["lat"];
           temp["long"] = consultation["Location"]["long"];
-          temp["name"] = consultation["Location"]["name"]
+          temp["name"] = consultation["Location"]["name"] + ', ' + 
+            consultation["Location"]["neighborhood"] + ', ' +
+            consultation["Location"]["City"]["name"];
           latlng.push(temp);
         });
         window.initialize_map(latlng);

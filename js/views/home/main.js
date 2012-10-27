@@ -27,6 +27,13 @@ define([
         $(".chzn-select").chosen();
         window.autocomplete_select();
         new FooterView();
+        $("#landing-page-slider").orbit({
+          animationSpeed: 200,
+          timer: true,
+          directionalNav: false, 
+          captions: false, 
+          fluid: true
+        });
       });
 
       $(".wrapper, .footer_wrapper").fadeIn("slow", function() {
@@ -39,7 +46,6 @@ define([
         });
 
         
-
         $('#carousel').elastislide({
           imageW  : 180,
           minItems  : 5
@@ -56,10 +62,10 @@ define([
             alert("Please select a term!");
             return false;
           } else if(type == "doctor") {
-            window.app.navigate("#doctor/" + id, true)
+            window.app.navigate("#doctor/" + id, false)
             return false;
           } else if(type == "disease") {
-            window.app.navigate("#disease/" + id, true)
+            window.app.navigate("#disease/" + id, false)
             return false;
           } else if(type == "speciality") {
             window.app.navigate("#speciality/" + id, true);
