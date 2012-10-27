@@ -1,7 +1,7 @@
  <div id="add_specialization" class="reveal-modal">
   <h3>Add your specialization</h3>
   <div class="field">
-  <form>
+  <form class="add_new_specialization" method="post">
     <label>Name of speciality</label>
       <input name="data[Specialty][name]" maxlength="100" type="text">
     </div>
@@ -21,10 +21,10 @@
 
  <div class="row">
         <div class="twelve columns">
-          <form class="specializations" method="post">
+          <form class="primary specializations" method="post">
 
             <div class="field">
-              <label>Speciality</label>
+              <label>Speciality <small>( <a href="#" class="open_modal" data-modal="add_specialization">Add new</a> )</small></label>
               <select class="chosen_simple multiple_select" multiple name="data[Docspeclink][0][specialty_id]" id="DocspeclinkSpecialtyId">
                   <option value="2">Allergy</option>
                   <option value="1">Allergy and Immunology</option>
@@ -92,16 +92,6 @@
                   </select>
             </div>
 
-            
-
-            <div class="new_speciality panel">
-              <div class="row">
-                <div class="field">
-                  Couldnt find your speciality in this list? 
-                  <a href="#" class="open_modal button tiny right" data-modal="add_specialization">Add New</a>
-                </div>
-              </div>
-            </div><!--new_speciality-->
 
           </form>
         </div>

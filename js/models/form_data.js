@@ -25,7 +25,39 @@ define([
     },
 
     sync: function(method, model, options) {
-      window.form_data.push(model.toJSON());
+      var m = model.toJSON(), type = model.get("form_type");
+
+      if(type == "personal_details") {
+        //model.unset("form_type"); 
+        for(key in m) {
+          window.form_data[key] = m[key];
+        }
+
+        console.log(window.form_data);
+      }
+
+
+      if(type == "specializations") {
+        //model.unset("form_type"); 
+        _.each(m["data[Docspeclink][0][specialty_id]"], function(spec_link, index) {
+          window.form_data["data[Docspeclink][" + index +"][specialty_id]"] = spec_link;
+        });
+      } 
+
+      if(type == "experiences") {
+        //...
+      } 
+
+      if(type == "qualifications") {
+        //...
+      }
+
+      model.unset("form_type");
+      
+
+
+      //window.form_data.push(model.toJSON());
+
       // $.ajax({
       //   type: 'POST',
       //   url: this.url,
