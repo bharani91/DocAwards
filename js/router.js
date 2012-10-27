@@ -89,7 +89,7 @@ define([
             changeYear: true,
             yearRange: "1910:1999",
             defaultDate: "-30y",
-            dateFormat: 'dd-mm-yyyy'
+            dateFormat: 'dd-mm-yy'
           });
 
         $(".chosen_simple").chosen();
