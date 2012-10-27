@@ -158,15 +158,6 @@ define([
         console.log(data);
         
 
-        var select = $(this.el).find(".location_select"),
-            last_option = parseInt(select.find("option:last-child").val()),
-            opt = "<option value=" + (++last_option) + ">" + data["data[Location][name]"] + "</option>";
-
-        select.append(opt);
-        
-        $("#add_location").find(".close-reveal-modal").trigger("click");
-        select.trigger("liszt:updated");
-
         $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
           options.xhrFields = {
             withCredentials: true
@@ -175,14 +166,28 @@ define([
 
         $.ajax({
           type: 'POST',
-          url: "http://docawards.com/api/locations/add",
+          url: "http://docawards.com/api/locations/add.json",
           data: data,
           beforeSend: function() {
             console.log("Sending", data)
           },
           success: function(data) {
             console.log(data);
-            alert("Saved!");
+            var opt = "";
+            window.temp_locations = data;
+            for(var i in data["result"]) {
+              console.log(data["result"][i])
+              opt += "<option value=" + i + ">" + data["result"][i] + "</option>"
+            }
+
+            var select = $(".primary").find(".location_select");
+            // last_option = parseInt(select.find("option:last-child").val()),
+            // opt = "<option value=" + (++last_option) + ">" + data["data[Location][name]"] + "</option>";
+            select.empty().append(opt);
+            $("#add_location").find(".close-reveal-modal").trigger("click");
+            select.trigger("liszt:updated");
+
+
           }
         });
     
