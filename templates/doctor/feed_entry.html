@@ -1,41 +1,32 @@
-<div class="row inner">
-        <div class="three columns">
-          <a href="#" class="th"><img src="http://docawards.com/api/<%= Doctor.image %>" /></a>
-        </div>
+<a href="#doctor/<%= id %>">
+  <div class="row inner">
+    <div class="three columns">
+      <a href="#doctor/<%= id %>" class="th"><img src="<%= image %>" /></a>
+    </div>
 
-        <div class="nine columns">
-          <a href="#"><h3 class="doctor_name">Dr. <%= Doctor.first_name %> <%= Doctor.last_name %></h3></a>
-          <p class="bui"><%= Doctor.one_line_intro %></p>
-        </div>
-      </div><!--row-->
+    <div class="nine columns">
+      <a href="#doctor/<%= id %>"><h3 class="doctor_name"><%= name %></h3></a>
+      <p class="bui"><%= one_line_intro %></p>
+    </div>
+  </div><!--row-->      
 
-      
-
-      <div class="row meta bottom">
-        <div class="seven columns">
-          <div href="#" class="tiny button dropdown up">
-            <span class="foundicon-graph icon"></span>Specialization
+  <div class="row meta bottom">
+    <div class="seven columns">
+      <span class="has-tip tip-right white-tool-tip" data-width="200" title="<%= specialty_tool_tip %>">
+        <span class="foundicon-idea icon"></span>
+            <%= specialty %>
             <span></span>
-            <ul>
-              <% _.each(Docspeclink, function(specialization) { %>
-                <li><%= specialization["Specialty"]["name"] %></li>
-              <% }); %>
-            </ul>
-          </div><!--button-->
+      </span>
+      <br>
+      <span class="has-tip tip-right white-tool-tip" title="<%= location_tool_tip %>">
+        <span class="foundicon-location icon"></span>
+          <%= location %>
+        <span></span>
+      </span>         
+    </div>
 
-
-          <div href="#" class="tiny button dropdown up">
-            <span class="foundicon-location icon"></span>Location
-            <span></span>
-            <ul>
-              <% _.each(Docconsultlocation, function(location) { %>
-                <li><%= location["Location"]["name"] %></li>
-              <% }); %>
-            </ul>
-          </div><!--button-->
-        </div>
-
-        <div class="thank_container five columns">
-          <a href="#doctor/<%= Doctor.id %>" class="button tiny">View Profile</a>
-        </div>
-      </div>
+    <div class="thank_container five columns">
+      <a href="#doctor/<%= id %>" class="button tiny">View Profile</a>
+    </div>
+  </div>
+</a>
