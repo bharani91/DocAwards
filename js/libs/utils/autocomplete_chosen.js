@@ -22,9 +22,8 @@
   $('.chzn-search input').autocomplete({
     source: function( request, response ) {
       $.ajax({
-        url: "http://docawards.com/api/specialties/autocomplete.json?term=" + request.term + "&jsonp_callback=cbck",
-        dataType: "jsonp",
-        jsonpCallback: "cbck",
+        url: "http://docawards.com/api/specialties/autocomplete.json?term=" + request.term,
+        dataType: "json",
         data: {
             featureClass: "P",
             style: "full",
@@ -40,7 +39,7 @@
         success: function( data ) {
           result = {};
           result.doctors = []; result.diseases = []; result.specialities = [] 
-          $.map(data.doctors, function(item) {
+          $.map(data.data.doctors, function(item) {
               doc = item.Doctor;
               result.doctors.push({
                   label: doc.first_name + " " + doc.last_name,
@@ -50,7 +49,7 @@
               });
           });
 
-          $.map(data.diseases, function(item) {
+          $.map(data.data.diseases, function(item) {
               disease = item.Disease;
               result.diseases.push({
                   label: disease.name,
@@ -60,7 +59,7 @@
               });
           });
 
-          $.map(data.specialties, function(item) {
+          $.map(data.data.specialties, function(item) {
               speciality = item.Specialty;
               result.specialities.push({
                   label: speciality.name,
