@@ -5,7 +5,7 @@
 
             <div class="field">
               <div class="row">
-                <div class="four columns">
+                <div class="three columns">
                   <label>Location</label>
                   <select class="chosen_simple" name="data[Docconsultlocation][0][location_id]">
                     <option value="2">Sama Chest Center</option>
@@ -14,16 +14,22 @@
                   </select>
                 </div>
 
-                <div class="four columns">
+                <div class="three columns">
                   <label>Location Type</label>
                   <select class="chosen_simple" name="data[Docconsultlocation][0][consultlocationtype_id]">
-                    <option value="1">HOSPITAL</option>
-                    <option value="2">HOME_CLINIC</option>
-                    <option value="3">OPD CLINIC</option>
+                    <option value="1">Hospital</option>
+                    <option value="2">Home Clinic</option>
+                    <option value="3">OPD Clinic</option>
                   </select>
                 </div>
-
-                <div class="four columns">
+                <div class="three columns">
+                  <label>Type</label>
+                  <select class="chosen_simple" name="data[Docconsultlocation][0][ConsultTiming][0][consult_type_id]">
+                    <option value="1">Walkin</option>
+                    <option value="2">Schedule Appointment</option>
+                  </select>
+                </div>
+                <div class="three columns">
                   <label>Additional Information</label>
                   <input name="data[Docconsultlocation][0][addl]" maxlength="45" type="text" id="DocconsultlocationAddl">
                 </div>
@@ -43,6 +49,7 @@
                   <label>End Time</label>
                   <input name="data[Docconsultlocation][0][ConsultTiming][0][end]"  type="text"/>
                 </div>
+
 
                 <div class="six columns days_checkboxes">
                   <label>Days</label>
