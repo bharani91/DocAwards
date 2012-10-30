@@ -12,17 +12,20 @@
 
   <div class="row meta bottom">
     <div class="seven columns">
-      <span class="has-tip tip-right white-tool-tip" data-width="200" title="<%= specialty_tool_tip %>">
-        <span class="foundicon-idea icon"></span>
-            <%= specialty %>
-            <span></span>
-      </span>
-      <br>
-      <span class="has-tip tip-right white-tool-tip" title="<%= location_tool_tip %>">
-        <span class="foundicon-location icon"></span>
-          <%= location %>
-        <span></span>
-      </span>         
+      <div class="row loc-spec-icon">
+        <span class="has-tip tip-right white-tool-tip" data-width="200" title="<%= specialty_tool_tip %>">
+          <span class="foundicon-idea icon"></span>
+              <%= specialty %>
+              <span></span>
+        </span>
+      </div>
+      <div class="row">
+        <span class="has-tip tip-right white-tool-tip" title="<%= location_tool_tip %>">
+          <span class="foundicon-location icon"></span>
+            <%= location %>
+          <span></span>
+        </span>         
+      </div>
     </div>
 
     <div class="thank_container five columns">
