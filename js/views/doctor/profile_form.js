@@ -54,12 +54,16 @@ define([
         });
         console.log(type);
         this.put_into_form(type[0].toJSON());
-
       },
 
       next: function(evt) {
         var model = new FormData($(this.form).serializeFormJSON());
         model.set({"form_type": this.form_type});
+        //delete preivously created model (if any)
+        old_model = this.collection.filter(function(model){ 
+          return model.attributes.form_type === this.form_type; 
+        });
+        this.collection.remove(old_model);        
         this.collection.add(model);
       },
 
@@ -115,9 +119,14 @@ define([
           $this = $(that.el).parent().find("li.active form.primary");
           for(key in type) {
             $this.find("input[name='" + key + "']").val(type[key]);
+            //console.log("key is "+key);
+            //console.log("val to put is "+type[key]);
+            //console.log($this.find("select[name='"+key+"']"));
+            $this.find("select[name='"+key+"']").val(type[key]);
+            $this.find("select[name='"+key+"']").trigger('liszt:updated');
+            //console.log($this.find("select[name='"+key+"']").val());
           }
         }, 100);
-        
       },
 
       add_new_speciality: function(evt) {
