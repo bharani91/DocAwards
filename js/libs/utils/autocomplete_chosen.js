@@ -1,18 +1,21 @@
  window.render_options = function(result) { 
-  $('.chzn-select').append("<optgroup label='Doctors' class='doctors'></optgroup");
-  $('.chzn-select').append("<optgroup label='Diseases' class='diseases'></optgroup");
-  $('.chzn-select').append("<optgroup label='Specialties' class='specialties'></optgroup");
 
   $.map( result.doctors, function( item ) {  
-    $('.chzn-select optgroup.doctors').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
+    if ($('.chzn-select optgroup.doctors option[data-id='+item.id+']').length == 0) {
+      $('.chzn-select optgroup.doctors').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
+    }
   })
 
   $.map( result.diseases, function( item ) {  
-    $('.chzn-select optgroup.diseases').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
+    if ($('.chzn-select optgroup.diseases option[data-id='+item.id+']').length == 0) {
+     $('.chzn-select optgroup.diseases').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
+    }
   })
 
   $.map( result.specialities, function( item ) {  
-    $('.chzn-select optgroup.specialties').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
+    if ($('.chzn-select optgroup.specialties option[data-id='+item.id+']').length == 0) {    
+      $('.chzn-select optgroup.specialties').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
+    }
   })
 
   $(".chzn-select").trigger("ajax_liszt:updated");
@@ -31,8 +34,8 @@
         },
         
         beforeSend: function(){
-          $('.chzn-select').empty();
-          $('ul.chzn-results').empty();
+          // $('.chzn-select').empty();
+          // $('ul.chzn-results').empty();
 
           
         },
