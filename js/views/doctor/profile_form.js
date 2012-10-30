@@ -60,12 +60,24 @@ define([
         var model = new FormData($(this.form).serializeFormJSON());
         model.set({"form_type": this.form_type});
         //delete preivously created model (if any)
+        var that = this;
         old_model = this.collection.filter(function(model){ 
-          return model.attributes.form_type === this.form_type; 
+          return model.attributes.form_type === that.form_type; 
         });
         this.collection.remove(old_model);        
         this.collection.add(model);
-      },
+
+        //Preload the form for the next tab if a model exists for it
+        var next_type = $(evt.target).attr('href').split("/")[1];
+        console.log(next_type);
+        model = this.collection.filter(function(model){
+          return model.attributes.form_type == next_type;
+        });
+        if (model && model[0]) {
+          console.log("putting next into form");
+          this.put_into_form(model[0].toJSON());
+        }
+        },
 
       submit: function() {
         var data = {};
