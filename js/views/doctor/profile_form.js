@@ -43,17 +43,12 @@ define([
       },
 
       render: function() {
+        this.preload_tab_data(this.form_type);
         $(this.el).append(this.template());
         this.form = $(this.el).find(".primary")
       },
 
       prev: function(evt) {
-        var type, current_type = $(evt.target).attr("href").split("/")[1];
-        type = this.collection.filter(function(model){ 
-          return model.attributes.form_type === current_type; 
-        });
-        console.log(type);
-        this.put_into_form(type[0].toJSON());
       },
 
       next: function(evt) {
@@ -64,20 +59,12 @@ define([
         old_model = this.collection.filter(function(model){ 
           return model.attributes.form_type === that.form_type; 
         });
-        this.collection.remove(old_model);        
+        this.collection.remove(old_model);
+
+        //save this model data        
         this.collection.add(model);
 
-        //Preload the form for the next tab if a model exists for it
-        var next_type = $(evt.target).attr('href').split("/")[1];
-        console.log(next_type);
-        model = this.collection.filter(function(model){
-          return model.attributes.form_type == next_type;
-        });
-        if (model && model[0]) {
-          console.log("putting next into form");
-          this.put_into_form(model[0].toJSON());
-        }
-        },
+      },
 
       submit: function() {
         var data = {};
@@ -140,7 +127,17 @@ define([
           }
         }, 100);
       },
-
+      preload_tab_data: function(type) {
+        //Preload the form for the next tab if a model exists for it
+        //Model would exist if the user has saved something then clicked next
+        var form_type = type;
+        model = this.collection.filter(function(model){
+          return model.attributes.form_type == form_type;
+        });
+        if (model && model[0]) {
+          this.put_into_form(model[0].toJSON());
+        }
+      },
       add_new_speciality: function(evt) {
         var $form = $(evt.target),
             data = $form.serializeFormJSON();
