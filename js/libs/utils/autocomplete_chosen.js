@@ -24,6 +24,7 @@
  window.autocomplete_select = function() {
   $('.chzn-search input').autocomplete({
     source: function( request, response ) {
+      console.log("source fn called");
       $.ajax({
         url: "http://docawards.com/api/specialties/autocomplete.json?term=" + request.term,
         dataType: "json",
@@ -34,10 +35,6 @@
         },
         
         beforeSend: function(){
-          // $('.chzn-select').empty();
-          // $('ul.chzn-results').empty();
-
-          
         },
         success: function( data ) {
           result = {};
@@ -82,4 +79,52 @@
     }
   });
 
+}
+
+window.autocomplete_ajax_chosen = function() {          
+  $autocomplete_url = $('.ajax_chosen').data('url');
+  console.log("url is "+$autocomplete_url);
+  if (!$autocomplete_url) {
+    return;
+  }
+  console.log("starting autocomplete");
+
+  $('.chzn-search input').autocomplete({
+    source: function( request, response ) {
+      console.log("source fn called");
+
+      $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+        options.xhrFields = {
+          withCredentials: true
+        };
+      });
+
+      $.ajax({
+        url: $('.ajax_chosen').data('url')+"?term=" + request.term,
+        dataType: "json",
+        data: {
+            featureClass: "P",
+            style: "full",
+            maxRows: 12,
+        },
+        beforeSend: function(){
+        },
+        success: function( data ) {
+          console.log("Success called");
+          console.log(data);
+          result = {};
+          for(var key in data.data) {
+            console.log('called with');
+            console.log(key);
+            console.log(data.data[key]);
+            if ($('.ajax_chosen option[value='+key+']').length == 0) { 
+              $('.ajax_chosen').append($('<option>'+data.data[key]+'</option>').val(key));
+              $('.ajax_chosen').trigger("ajax_liszt:updated");
+            }
+          }
+         }
+      });
+      response (null); 
+    }
+  });
 }

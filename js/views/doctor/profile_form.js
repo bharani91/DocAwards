@@ -45,8 +45,8 @@ define([
       render: function() {
         this.preload_tab_data(this.form_type);
         $(this.el).append(this.template());
-        this.form = $(this.el).find(".primary")
-        this.prepopulate_chosens(); 
+        this.form = $(this.el).find(".primary");
+        //this.prepopulate_chosens();
       },
       prev: function(evt) {
       },
@@ -232,46 +232,9 @@ define([
       },
 
       prepopulate_chosens: function() {
-          $('.location_select input').autocomplete({
-            source: function( request, response ) {
-              $.ajax({
-                url: "http://docawards.com/api/locations/autocomplete.json?term=" + request.term,
-                dataType: "json",
-                data: {
-                    featureClass: "P",
-                    style: "full",
-                    maxRows: 12,
-                },
-                beforeSend: function(){
-                  $('.location_select').empty();
-                  $('ul.chzn-results').empty(); 
-                },
-                success: function( data ) {
-                  result = {};
-                  $.map(data.data, function(item) {
-                      location = item.Location;
-                      result.doctors.push({
-                          label: location.name,
-                          value: doc.first_name + " " + doc.last_name,
-                          id: doc.id,
-                          type: "doctor"
-                     });
-                  });
-                }
-
-              });
-
-              $.map( result, function( item ) {  
-                $('.location_select').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
-              })
-              $(".location_select").trigger("ajax_liszt:updated");
-            }
-          });
-              }
-
-
-
-    })
+        window.autocomplete_ajax_chosen(this);
+      }
+    });
 
   return ProfileFormView;
 });

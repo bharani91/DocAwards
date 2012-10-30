@@ -1,7 +1,7 @@
 <div class="consultation_field" style="display: none;">
   <div class="field" >
       <div class="row">
-        <div class="four columns">
+        <div class="three columns">
           <label>Location</label>
           <select class="chosen_temp" name="data[Docconsultlocation][<%= id %>][location_id]">
             <option value="2">Sama Chest Center</option>
@@ -10,7 +10,7 @@
           </select>
         </div>
 
-        <div class="four columns">
+        <div class="three columns">
           <label>Location Type</label>
           <select class="chosen_temp" name="data[Docconsultlocation][<%= id %>][consultlocationtype_id]">
             <option value="1">HOSPITAL</option>
@@ -19,7 +19,15 @@
           </select>
         </div>
 
-        <div class="four columns">
+        <div class="three columns">
+          <label>Type</label>
+          <select class="chosen_simple" name="data[Docconsultlocation][<%= id %>][ConsultTiming][0][consult_type_id]">
+            <option value="1">Walkin</option>
+            <option value="2">Schedule Appointment</option>
+          </select>
+        </div>
+
+        <div class="three columns">
           <label>Additional Information</label>
           <input name="data[Docconsultlocation][<%= id %>][addl]" maxlength="45" type="text" >
         </div>
