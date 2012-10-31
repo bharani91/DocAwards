@@ -46,7 +46,6 @@ define([
         this.preload_tab_data(this.form_type);
         $(this.el).append(this.template());
         this.form = $(this.el).find(".primary");
-        //this.prepopulate_chosens();
       },
       prev: function(evt) {
       },
@@ -220,6 +219,8 @@ define([
 
         var inserted = $(tmpl({ id: (++this.field_count[elem]) })).attr("class", "field").insertBefore($(evt.target).parent().parent()).show();
         inserted.find(".chosen_temp").removeClass("chosen_temp").addClass("chosen_simple").chosen();
+        window.autocomplete_ajax_chosen();
+
         console.log(inserted.find(".datepicker"))
         inserted.find(".datepicker_temp").removeClass("datepicker_temp").datepicker({
           changeMonth: true,
@@ -231,9 +232,6 @@ define([
         return false;
       },
 
-      prepopulate_chosens: function() {
-        window.autocomplete_ajax_chosen(this);
-      }
     });
 
   return ProfileFormView;

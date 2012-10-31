@@ -82,17 +82,11 @@
 }
 
 window.autocomplete_ajax_chosen = function() {          
-  $autocomplete_url = $('.ajax_chosen').data('url');
-  console.log("url is "+$autocomplete_url);
-  if (!$autocomplete_url) {
-    return;
-  }
-  console.log("starting autocomplete");
 
   $('.chzn-search input').autocomplete({
     source: function( request, response ) {
-      console.log("source fn called");
-
+      select_el = $(this['element'].parent().parent().parent().siblings('select'));
+      url = select_el.data('url');
       $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
         options.xhrFields = {
           withCredentials: true
@@ -100,7 +94,7 @@ window.autocomplete_ajax_chosen = function() {
       });
 
       $.ajax({
-        url: $('.ajax_chosen').data('url')+"?term=" + request.term,
+        url: url+"?term=" + request.term,
         dataType: "json",
         data: {
             featureClass: "P",
@@ -110,16 +104,11 @@ window.autocomplete_ajax_chosen = function() {
         beforeSend: function(){
         },
         success: function( data ) {
-          console.log("Success called");
-          console.log(data);
           result = {};
           for(var key in data.data) {
-            console.log('called with');
-            console.log(key);
-            console.log(data.data[key]);
-            if ($('.ajax_chosen option[value='+key+']').length == 0) { 
-              $('.ajax_chosen').append($('<option>'+data.data[key]+'</option>').val(key));
-              $('.ajax_chosen').trigger("ajax_liszt:updated");
+            if (select_el.find('option[value='+key+']').length == 0) { 
+              select_el.append($('<option>'+data.data[key]+'</option>').val(key));
+              select_el.trigger("ajax_liszt:updated");
             }
           }
          }
