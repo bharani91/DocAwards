@@ -44,7 +44,7 @@
           <h5>Experience</h5>
           <% _.each(experiences, function(experience) { %>
             <div class="exp">
-              <%= new Date(experience["from"]).getFullYear() %> to <%= new Date(experience["to"]).getFullYear() %> at <span class="has-tip" data-width="200" title="<%= experience["Location"]['name']+' in '+experience["Location"]["neighborhood"]+', '+experience["Location"]['City']['name']+', '+experience["Location"]['Country']['name']%>"<strong><%= experience["Location"]["name"] %></strong></span>
+              <%= experience["from"] %> to <%= experience["to"] %> at <span class="has-tip" data-width="200" title="<%= experience["Location"]['name']+' in '+experience["Location"]["neighborhood"]+', '+experience["Location"]['City']['name']+', '+experience["Location"]['Country']['name']%>"<strong><%= experience["Location"]["name"] %></strong></span>
             </div><!--exp-->
           <% }); %>
 

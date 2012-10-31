@@ -25,11 +25,9 @@ define([
         var that = this;
         _.each(this.collection.models, function(doctor) {
           var profile = new DoctorHeadShotView({model: doctor});
-          console.log(profile.el)
           $(that.el).append(profile.el);
         });
 
-        console.log(this.el);
         $(this.el).find(".feed_entry").wrapInChunks('<div class="row" />', 2).appendTo($(this.el));
         var that = this;
         $(".wrapper").fadeOut("fast", function() {

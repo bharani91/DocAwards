@@ -21,13 +21,16 @@ define([
   var AppRouter = Backbone.Router.extend({
     routes: {
       ""                    :       "home",
-      "logout"              :       "logout",
       "doctor/:id"          :       "doctorProfile",
       "disease/:id"         :       "diseaseListing",
       "speciality/:id"      :       "specialityListing",
       "create_profile"      :       "createProfile",
       "create_profile/:id"  :       "createProfileTab",
       "faq"                 :       "faq"
+    },
+
+    initialize: function() {
+      console.log("Get user id");
     },
 
     home: function(){
@@ -47,24 +50,17 @@ define([
       
     },
 
-    logout: function() {
-      if(window.current_user) window.current_user.destroy();
-      window.app.navigate("", true);
-    },
-
     doctorProfile: function(id)  {
       var doctor = new Doctor({id: id});
       var doctor_view = new DoctorView({model: doctor});
     },
 
     diseaseListing: function(id) {
-      var doctor_list = new DiseaseDoctorList({ id: id });
-      var doctor_list_view = new DoctorListView({collection: doctor_list});
+      var doctor_list_view = new DoctorListView({collection: new DiseaseDoctorList({ id: id })});
     },
 
     specialityListing: function(id) {
-      var doctor_list = new SpecialityDoctorList({ id: id });
-      var doctor_list_view = new DoctorListView({collection: doctor_list});
+      var doctor_list_view = new DoctorListView({collection: new SpecialityDoctorList({ id: id })});
     },
 
     createProfile: function() {

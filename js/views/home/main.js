@@ -62,10 +62,10 @@ define([
             alert("Please select a term!");
             return false;
           } else if(type == "doctor") {
-            window.app.navigate("#doctor/" + id, false)
+            window.app.navigate("#doctor/" + id, true)
             return false;
           } else if(type == "disease") {
-            window.app.navigate("#disease/" + id, false)
+            window.app.navigate("#disease/" + id, true)
             return false;
           } else if(type == "speciality") {
             window.app.navigate("#speciality/" + id, true);

@@ -25,6 +25,7 @@ define([
 
     render: function()  {
       var model = this.model.toJSON()
+      console.log(model["Docconsultlocation"]);
       $(this.el).append(this.template({
         headshot: model["Doctor"],
         specializations: model["Docspeclink"],
