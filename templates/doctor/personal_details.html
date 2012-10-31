@@ -18,11 +18,20 @@
                     <input type="text" name="data[Doctor][last_name]" placeholder="Last Name">
                   </div>
                 </div>
-                <div class="two columns offset-by-one">
-                  <label>Date of Birth</label>
-                  <input type="text" name="data[Doctor][DOB]" class="datepicker">
-               </div>
+                <div class="three columns">
+                  <div class="six columns ">
+                      <label>Gender</label>
+                      <select class="chosen_simple" name="data[Doctor][gender]">
+                        <option value="M" selected="selected">Male</option>
+                        <option value="F">Female</option>
+                      </select>
 
+                  </div>
+                  <div class="six columns ">
+                    <label>Date of Birth</label>
+                    <input type="text" name="data[Doctor][DOB]" class="datepicker">
+                 </div>
+                </div>
               </div>
             </div>
 

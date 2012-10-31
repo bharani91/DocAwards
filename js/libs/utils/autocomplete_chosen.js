@@ -1,18 +1,21 @@
  window.render_options = function(result) { 
-  $('.chzn-select').append("<optgroup label='Doctors' class='doctors'></optgroup");
-  $('.chzn-select').append("<optgroup label='Diseases' class='diseases'></optgroup");
-  $('.chzn-select').append("<optgroup label='Specialties' class='specialties'></optgroup");
 
   $.map( result.doctors, function( item ) {  
-    $('.chzn-select optgroup.doctors').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
+    if ($('.chzn-select optgroup.doctors option[data-id='+item.id+']').length == 0) {
+      $('.chzn-select optgroup.doctors').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
+    }
   })
 
   $.map( result.diseases, function( item ) {  
-    $('.chzn-select optgroup.diseases').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
+    if ($('.chzn-select optgroup.diseases option[data-id='+item.id+']').length == 0) {
+     $('.chzn-select optgroup.diseases').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
+    }
   })
 
   $.map( result.specialities, function( item ) {  
-    $('.chzn-select optgroup.specialties').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
+    if ($('.chzn-select optgroup.specialties option[data-id='+item.id+']').length == 0) {    
+      $('.chzn-select optgroup.specialties').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
+    }
   })
 
   $(".chzn-select").trigger("ajax_liszt:updated");
@@ -22,9 +25,8 @@
   $('.chzn-search input').autocomplete({
     source: function( request, response ) {
       $.ajax({
-        url: "http://docawards.com/api/specialties/autocomplete.json?term=" + request.term + "&jsonp_callback=cbck",
-        dataType: "jsonp",
-        jsonpCallback: "cbck",
+        url: "http://docawards.com/api/specialties/autocomplete.json?term=" + request.term,
+        dataType: "json",
         data: {
             featureClass: "P",
             style: "full",
@@ -32,15 +34,15 @@
         },
         
         beforeSend: function(){
-          $('.chzn-select').empty();
-          $('ul.chzn-results').empty();
+          // $('.chzn-select').empty();
+          // $('ul.chzn-results').empty();
 
           
         },
         success: function( data ) {
           result = {};
           result.doctors = []; result.diseases = []; result.specialities = [] 
-          $.map(data.doctors, function(item) {
+          $.map(data.data.doctors, function(item) {
               doc = item.Doctor;
               result.doctors.push({
                   label: doc.first_name + " " + doc.last_name,
@@ -50,7 +52,7 @@
               });
           });
 
-          $.map(data.diseases, function(item) {
+          $.map(data.data.diseases, function(item) {
               disease = item.Disease;
               result.diseases.push({
                   label: disease.name,
@@ -60,7 +62,7 @@
               });
           });
 
-          $.map(data.specialties, function(item) {
+          $.map(data.data.specialties, function(item) {
               speciality = item.Specialty;
               result.specialities.push({
                   label: speciality.name,

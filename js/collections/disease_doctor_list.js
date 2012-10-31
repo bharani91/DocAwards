@@ -12,6 +12,10 @@ define([
     url: function() {
       return "http://docawards.com/api/doctors/get_doctors.json?brief=1&disease_id=" + this.id 
     },
+
+    parse: function(response) {
+      return response.data;
+    }
   });
 
   return DiseaseDoctorList;

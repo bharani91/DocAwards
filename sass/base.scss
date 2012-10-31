@@ -209,11 +209,16 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
       }
     }
 
+    .row.loc-spec-icon {
+      height: 18px;
+      overflow: hidden;
+    }
     .white-tool-tip, .white-tool-tip {
       font-weight: normal;
       color: white;
       border-bottom: none;
     }
+
 
     p.bio {
       font-size: 13px;

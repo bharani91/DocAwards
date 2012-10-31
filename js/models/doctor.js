@@ -11,8 +11,8 @@ define([
       return "http://docawards.com/api/doctors/get_doctors.json?doctor_id=" + this.id
     },
 
-    parse: function(resp) {
-      return resp[0]
+    parse: function(response) {
+      return response.data[0];
     },
 
     sync: function(method, model, options){  

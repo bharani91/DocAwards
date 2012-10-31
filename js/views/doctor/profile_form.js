@@ -43,24 +43,27 @@ define([
       },
 
       render: function() {
+        this.preload_tab_data(this.form_type);
         $(this.el).append(this.template());
         this.form = $(this.el).find(".primary")
+        this.prepopulate_chosens(); 
       },
-
       prev: function(evt) {
-        var type, current_type = $(evt.target).attr("href").split("/")[1];
-        type = this.collection.filter(function(model){ 
-          return model.attributes.form_type === current_type; 
-        });
-        console.log(type);
-        this.put_into_form(type[0].toJSON());
-
       },
 
       next: function(evt) {
         var model = new FormData($(this.form).serializeFormJSON());
         model.set({"form_type": this.form_type});
+        //delete preivously created model (if any)
+        var that = this;
+        old_model = this.collection.filter(function(model){ 
+          return model.attributes.form_type === that.form_type; 
+        });
+        this.collection.remove(old_model);
+
+        //save this model data        
         this.collection.add(model);
+
       },
 
       submit: function() {
@@ -115,11 +118,26 @@ define([
           $this = $(that.el).parent().find("li.active form.primary");
           for(key in type) {
             $this.find("input[name='" + key + "']").val(type[key]);
+            //console.log("key is "+key);
+            //console.log("val to put is "+type[key]);
+            //console.log($this.find("select[name='"+key+"']"));
+            $this.find("select[name='"+key+"']").val(type[key]);
+            $this.find("select[name='"+key+"']").trigger('liszt:updated');
+            //console.log($this.find("select[name='"+key+"']").val());
           }
         }, 100);
-        
       },
-
+      preload_tab_data: function(type) {
+        //Preload the form for the next tab if a model exists for it
+        //Model would exist if the user has saved something then clicked next
+        var form_type = type;
+        model = this.collection.filter(function(model){
+          return model.attributes.form_type == form_type;
+        });
+        if (model && model[0]) {
+          this.put_into_form(model[0].toJSON());
+        }
+      },
       add_new_speciality: function(evt) {
         var $form = $(evt.target),
             data = $form.serializeFormJSON();
@@ -211,7 +229,45 @@ define([
           dateFormat: 'dd-mm-yy'
         });
         return false;
-      }
+      },
+
+      prepopulate_chosens: function() {
+          $('.location_select input').autocomplete({
+            source: function( request, response ) {
+              $.ajax({
+                url: "http://docawards.com/api/locations/autocomplete.json?term=" + request.term,
+                dataType: "json",
+                data: {
+                    featureClass: "P",
+                    style: "full",
+                    maxRows: 12,
+                },
+                beforeSend: function(){
+                  $('.location_select').empty();
+                  $('ul.chzn-results').empty(); 
+                },
+                success: function( data ) {
+                  result = {};
+                  $.map(data.data, function(item) {
+                      location = item.Location;
+                      result.doctors.push({
+                          label: location.name,
+                          value: doc.first_name + " " + doc.last_name,
+                          id: doc.id,
+                          type: "doctor"
+                     });
+                  });
+                }
+
+              });
+
+              $.map( result, function( item ) {  
+                $('.location_select').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
+              })
+              $(".location_select").trigger("ajax_liszt:updated");
+            }
+          });
+              }
 
 
 
