@@ -594,6 +594,35 @@ label small {
   margin-left: 5px;
 }
 
+.primary .chzn-container {
+  width: 216px !important; 
+  .chzn-drop {
+    width: 216px !important;
+    input {
+      width: 190px !important;
+    }
+  }
+}
+
+
+.primary .small + .chzn-container {
+  width: 90px !important;
+  .chzn-drop {
+    width: 90px !important;
+    input {
+      width: 60px !important;
+    }
+  }
+}
+
+.primary .multiple_select + .chzn-container {
+  width: 96% !important;
+  .chzn-drop {
+    width: 100% !important;
+  }
+}
+
+
 .create_profile {
   margin-top: 80px !important;
   textarea {

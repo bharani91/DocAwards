@@ -547,60 +547,95 @@ label small {
 }
 
 /* line 597, ../sass/base.scss */
+.primary .chzn-container {
+  width: 216px !important;
+}
+/* line 599, ../sass/base.scss */
+.primary .chzn-container .chzn-drop {
+  width: 216px !important;
+}
+/* line 601, ../sass/base.scss */
+.primary .chzn-container .chzn-drop input {
+  width: 190px !important;
+}
+
+/* line 608, ../sass/base.scss */
+.primary .small + .chzn-container {
+  width: 90px !important;
+}
+/* line 610, ../sass/base.scss */
+.primary .small + .chzn-container .chzn-drop {
+  width: 90px !important;
+}
+/* line 612, ../sass/base.scss */
+.primary .small + .chzn-container .chzn-drop input {
+  width: 60px !important;
+}
+
+/* line 618, ../sass/base.scss */
+.primary .multiple_select + .chzn-container {
+  width: 96% !important;
+}
+/* line 620, ../sass/base.scss */
+.primary .multiple_select + .chzn-container .chzn-drop {
+  width: 100% !important;
+}
+
+/* line 626, ../sass/base.scss */
 .create_profile {
   margin-top: 80px !important;
 }
-/* line 599, ../sass/base.scss */
+/* line 628, ../sass/base.scss */
 .create_profile textarea {
   height: 120px;
 }
-/* line 602, ../sass/base.scss */
+/* line 631, ../sass/base.scss */
 .create_profile .row.select_row {
   margin-left: 0;
 }
 
-/* line 607, ../sass/base.scss */
+/* line 636, ../sass/base.scss */
 .field {
   margin-top: 20px;
 }
 
-/* line 611, ../sass/base.scss */
+/* line 640, ../sass/base.scss */
 .field:first-child {
   margin-top: 0;
 }
 
-/* line 615, ../sass/base.scss */
+/* line 644, ../sass/base.scss */
 .button_list {
   margin-top: 20px;
 }
 
-/* line 619, ../sass/base.scss */
+/* line 648, ../sass/base.scss */
 .new_speciality {
   margin-top: 40px;
 }
 
-/* line 623, ../sass/base.scss */
+/* line 652, ../sass/base.scss */
 .location_modal_link {
   margin-top: 30px;
 }
 
-/* line 628, ../sass/base.scss */
+/* line 657, ../sass/base.scss */
 .reveal-modal .chzn-container-single, .reveal-modal .chzn-drop, .reveal-modal .chzn-results {
   width: 100% !important;
 }
 
-/* line 632, ../sass/base.scss */
+/* line 661, ../sass/base.scss */
 .reveal-modal .chzn-search input {
   width: 94% !important;
   height: 30px;
 }
 
-/* line 638, ../sass/base.scss */
+/* line 667, ../sass/base.scss */
 .multiple_select {
   height: 100px !important;
 }
 
-/* line 642, ../sass/base.scss */
+/* line 671, ../sass/base.scss */
 .chzn-container-multi .chzn-choices li.search-field, .chzn-container-multi .chzn-choices li.search-field input {
   height: 30px !important;
 }

@@ -22,14 +22,14 @@ define([
         this.el = options.el;
         this.form_type = options.template.split("_template")[0];
         this.template = _.template(eval(options.template));
-        
+
         // Initialize all field counts to zero
         this.field_count = {
-          "qualification_field" : 0,
-          "experience_field" : 0,
-          "experience_field" : 0,
-          "consultation_field" : 0,
-          "contact_field" : 0,
+          "qualification_field" : -1,
+          "experience_field" : -1,
+          "experience_field" : -1,
+          "consultation_field" : -1,
+          "contact_field" : -1,
         }; 
 
         this.render();
@@ -51,6 +51,15 @@ define([
         this.preload_tab_data(this.form_type);
         $(this.el).append(this.template());
         this.form = $(this.el).find(".primary");
+        
+        // Check if the string ends with s, if not just append _field
+        var form_type = this.form_type.split("_")[0],
+            field = (form_type.charAt(form_type.length - 1) == "s") ? form_type.slice(0, -1) + "_field" : form_type + "_field",
+            count = this.field_count[field];        
+        console.log(field);
+        if(count == -1) {
+          this.add_another_field(field);
+        }
       },
       prev: function(evt) {
       },
@@ -217,12 +226,20 @@ define([
       },
 
       add_another_field: function(evt) {
-        var elem = $(evt.target).data("elem"), 
-            tmpl = _.template(eval(elem));
+        // Check Type to see if the function is called on 'click' or on load
+        if(typeof evt == "string") {
+          var elem = evt,
+          target = $("a[data-elem='" + elem + "']");
+        } else {
+          var elem = $(evt.target).data("elem"),
+              target = $(evt.target);
+        }
+         
+        var tmpl = _.template(eval(elem));
 
 
 
-        var inserted = $(tmpl({ id: (++this.field_count[elem]) })).attr("class", "field").insertBefore($(evt.target).parent().parent()).show();
+        var inserted = $(tmpl({ id: (++this.field_count[elem]) })).attr("class", "field").insertBefore(target.parent().parent()).show();
         inserted.find(".chosen_temp").removeClass("chosen_temp").addClass("chosen_simple").chosen();
         window.autocomplete_ajax_chosen();
 
