@@ -13,8 +13,10 @@ define([
   'text!templates/partials/experience_field.html',
   'text!templates/partials/consultation_field.html',
   'text!templates/partials/contact_field.html',
+  'text!templates/partials/add_location_modal.html',
+  'text!templates/partials/add_specializations_modal.html'
 
-], function($, _, Backbone, FormData, personal_details_template, specializations_template, qualifications_template, experiences_template, consultation_template, contact_details_template, qualification_field, experience_field, consultation_field, contact_field){
+], function($, _, Backbone, FormData, personal_details_template, specializations_template, qualifications_template, experiences_template, consultation_template, contact_details_template, qualification_field, experience_field, consultation_field, contact_field, add_location_modal, add_specializations_modal){
     var ProfileFormView = Backbone.View.extend({
       initialize: function(options) {
         this.el = options.el;
@@ -31,6 +33,9 @@ define([
         }; 
 
         this.render();
+        add_location_template = _.template(add_location_modal);
+        add_specializations_template = _.template(add_specializations_modal);
+        $(this.el).append(add_location_template).append(add_specializations_template);
       },
 
       events: {
