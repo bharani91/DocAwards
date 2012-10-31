@@ -24,6 +24,7 @@
  window.autocomplete_select = function() {
   $('.chzn-search input').autocomplete({
     source: function( request, response ) {
+      console.log("source fn called");
       $.ajax({
         url: "http://docawards.com/api/specialties/autocomplete.json?term=" + request.term,
         dataType: "json",
@@ -34,10 +35,6 @@
         },
         
         beforeSend: function(){
-          // $('.chzn-select').empty();
-          // $('ul.chzn-results').empty();
-
-          
         },
         success: function( data ) {
           result = {};
@@ -82,4 +79,41 @@
     }
   });
 
+}
+
+window.autocomplete_ajax_chosen = function() {          
+
+  $('.chzn-search input').autocomplete({
+    source: function( request, response ) {
+      select_el = $(this['element'].parent().parent().parent().siblings('select'));
+      url = select_el.data('url');
+      $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+        options.xhrFields = {
+          withCredentials: true
+        };
+      });
+
+      $.ajax({
+        url: url+"?term=" + request.term,
+        dataType: "json",
+        data: {
+            featureClass: "P",
+            style: "full",
+            maxRows: 12,
+        },
+        beforeSend: function(){
+        },
+        success: function( data ) {
+          result = {};
+          for(var key in data.data) {
+            if (select_el.find('option[value='+key+']').length == 0) { 
+              select_el.append($('<option>'+data.data[key]+'</option>').val(key));
+              select_el.trigger("ajax_liszt:updated");
+            }
+          }
+         }
+      });
+      response (null); 
+    }
+  });
 }

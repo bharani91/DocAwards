@@ -130,16 +130,15 @@ define([
         });
 
       $(".chosen_simple").chosen();
+      window.autocomplete_ajax_chosen();
 
       $(".open_modal").live("click", function() {
         var elem = $(this).data("modal")
         $("#" + elem).reveal();
-
         return false;
       });
 
       var footer_view = new FooterView();
-      
     },
     
     faq: function() {

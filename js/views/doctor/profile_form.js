@@ -13,8 +13,10 @@ define([
   'text!templates/partials/experience_field.html',
   'text!templates/partials/consultation_field.html',
   'text!templates/partials/contact_field.html',
+  'text!templates/partials/add_location_modal.html',
+  'text!templates/partials/add_specializations_modal.html'
 
-], function($, _, Backbone, FormData, personal_details_template, specializations_template, qualifications_template, experiences_template, consultation_template, contact_details_template, qualification_field, experience_field, consultation_field, contact_field){
+], function($, _, Backbone, FormData, personal_details_template, specializations_template, qualifications_template, experiences_template, consultation_template, contact_details_template, qualification_field, experience_field, consultation_field, contact_field, add_location_modal, add_specializations_modal){
     var ProfileFormView = Backbone.View.extend({
       initialize: function(options) {
         this.el = options.el;
@@ -31,6 +33,9 @@ define([
         }; 
 
         this.render();
+        add_location_template = _.template(add_location_modal);
+        add_specializations_template = _.template(add_specializations_modal);
+        $(this.el).append(add_location_template).append(add_specializations_template);
       },
 
       events: {
@@ -45,8 +50,7 @@ define([
       render: function() {
         this.preload_tab_data(this.form_type);
         $(this.el).append(this.template());
-        this.form = $(this.el).find(".primary")
-        this.prepopulate_chosens(); 
+        this.form = $(this.el).find(".primary");
       },
       prev: function(evt) {
       },
@@ -220,6 +224,8 @@ define([
 
         var inserted = $(tmpl({ id: (++this.field_count[elem]) })).attr("class", "field").insertBefore($(evt.target).parent().parent()).show();
         inserted.find(".chosen_temp").removeClass("chosen_temp").addClass("chosen_simple").chosen();
+        window.autocomplete_ajax_chosen();
+
         console.log(inserted.find(".datepicker"))
         inserted.find(".datepicker_temp").removeClass("datepicker_temp").datepicker({
           changeMonth: true,
@@ -231,47 +237,7 @@ define([
         return false;
       },
 
-      prepopulate_chosens: function() {
-          $('.location_select input').autocomplete({
-            source: function( request, response ) {
-              $.ajax({
-                url: "http://docawards.com/api/locations/autocomplete.json?term=" + request.term,
-                dataType: "json",
-                data: {
-                    featureClass: "P",
-                    style: "full",
-                    maxRows: 12,
-                },
-                beforeSend: function(){
-                  $('.location_select').empty();
-                  $('ul.chzn-results').empty(); 
-                },
-                success: function( data ) {
-                  result = {};
-                  $.map(data.data, function(item) {
-                      location = item.Location;
-                      result.doctors.push({
-                          label: location.name,
-                          value: doc.first_name + " " + doc.last_name,
-                          id: doc.id,
-                          type: "doctor"
-                     });
-                  });
-                }
-
-              });
-
-              $.map( result, function( item ) {  
-                $('.location_select').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
-              })
-              $(".location_select").trigger("ajax_liszt:updated");
-            }
-          });
-              }
-
-
-
-    })
+    });
 
   return ProfileFormView;
 });
