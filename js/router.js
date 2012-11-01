@@ -67,6 +67,7 @@ define([
       var header_view = new HeaderView();
       $(".header_wrapper").fadeIn("slow");
 
+
       window.form_data = [];
       
       var create_profile_view = new CreateProfileView();
@@ -79,19 +80,19 @@ define([
         
         var form_view = new ProfileFormView({ collection: window.datas, url: "personal_details", el: "li#personal_detailsTab", template: "personal_details_template"});
 
-        // Datepicker
-        // $( ".datepicker" ).datepicker({
-        //     changeMonth: true,
-        //     changeYear: true,
-        //     yearRange: "1910:2012",
-        //     defaultDate: "-10y",
-        //     dateFormat: 'dd-mm-yy'
-        // });
-        // $( ".timepicker" ).timepicker({
-        //   showPeriod: true,
-        //   showLeadingZero: true
-        // });
-      
+        //Datepicker
+        $( ".datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1910:2012",
+            defaultDate: "-10y",
+            dateFormat: 'dd-mm-yy'
+        });
+        $( ".timepicker" ).timepicker({
+          showPeriod: true,
+          showLeadingZero: true
+        });
+
         $(".chosen_simple").chosen();
       });
       
@@ -125,18 +126,18 @@ define([
       $tab.addClass('active');
 
        // Datepicker
-      // $( ".datepicker" ).datepicker({
-      //     changeMonth: true,
-      //     changeYear: true,
-      //     yearRange: "1910:2012",
-      //     defaultDate: "-10y",
-      //     dateFormat: 'dd-mm-yy'
-      //   });
+      $( ".datepicker" ).datepicker({
+          changeMonth: true,
+          changeYear: true,
+          yearRange: "1910:2012",
+          defaultDate: "-10y",
+          dateFormat: 'dd-mm-yy'
+        });
 
-      // $( ".timepicker" ).timepicker({
-      //     showPeriod: true,
-      //     showLeadingZero: true
-      // });
+      $( ".timepicker" ).timepicker({
+          showPeriod: true,
+          showLeadingZero: true
+      });
 
       $(".chosen_simple").chosen();
       window.autocomplete_ajax_chosen();
@@ -149,7 +150,7 @@ define([
 
       var footer_view = new FooterView();
     },
-    
+
     faq: function() {
       //load up accordian
       
