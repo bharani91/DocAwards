@@ -12,6 +12,11 @@
     </div>
 
     <div class="field">
+      <label>Neighborhood<span class="has-tip tip-top" data-width="200" title="Enter well-known landmark or neighborhood name, so patients will immidiately be able to place your approximate location.">(?)</span></label>
+      <input type="text" id="LocationNeighborhood" maxlength="45" name="data[Location][neighborhood]" placeholder="Enter well-known landmark or neighborhood name">
+    </div>
+
+    <div class="field">
       <select class="chosen_simple ajax_chosen city_select" id="LocationCityId" data-placeholder="City" name="data[Location][city_id]" data-servermodel="cities">
         <option value="278" selected="selected">Delhi</option>
         <option value="700">Abohar</option>
@@ -1017,13 +1022,6 @@
 
 
     <div class="field">
-      <label>Neighborhood<span class="has-tip tip-top" data-width="200" title="Enter well-known landmark or neighborhood name, so patients will immidiately be able to place your approximate location.">(?)</span></label>
-      <input type="text" id="LocationNeighborhood" maxlength="45" name="data[Location][neighborhood]" placeholder="Enter well-known landmark or neighborhood name">
-    </div>
-
-
-
-    <div class="field">
       <select class="chosen_simple" id="LocationCountryId" data-placeholder="Country" name="data[Location][country_id]"
       data-servermodel="countries">
         <option value="102">India</option>
@@ -1041,6 +1039,16 @@
       </select><small>Can't find your pin code ? <a href="#" class="open_modal" data-modal="add_pin_code">Add new</a></small>
     </div>
     
+    <div class="field">
+      <label>Latitude</label>
+      <input type="text" id="LocationAddress" name="data[Location][lat]">
+    </div>
+
+    <div class="field">
+      <label>Longitude</label>
+      <input type="text" id="LocationAddress" name="data[Location][long]">
+    </div>
+
 
     <div class="field">
       <input type="submit" value="Add Location" class="button success tiny right">

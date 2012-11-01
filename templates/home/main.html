@@ -2,13 +2,13 @@
         <h3>Signup for DocAwards</h3>
         <form method="post" action="http://docawards.com/api/users/backbone_add" id="signup_form">
           <div class="field">
-            <label>Username</label>
-            <input name="data[User][username]" maxlength="45" type="text" placeholder="nikhil_sama">
+            <label>Email</label>
+            <input name="data[User][username]" maxlength="100" type="text" placeholder="eg. xyz@mailhost.com">
           </div>
 
           <div class="field">
             <label>Password</label>
-            <input name="data[User][password]" maxlength="45" type="password" placeholder="Secret Password">
+            <input name="data[User][password]" maxlength="45" type="password" placeholder="">
           </div>
 
           <div class="field">
@@ -30,13 +30,13 @@
         <h3>Log in</h3>
         <form method="post" action="http://docawards.com/api/users/backbone_login" id="login_form">
           <div class="field">
-            <label>Username</label>
-            <input name="data[User][username]" maxlength="45" type="text" placeholder="nikhil_sama">
+            <label>Email</label>
+            <input name="data[User][username]" maxlength="100" type="text" placeholder="eg. xyz@mailhost.com">
           </div>
 
           <div class="field">
             <label>Password</label>
-            <input name="data[User][password]" maxlength="45" type="password" placeholder="Secret Password">
+            <input name="data[User][password]" maxlength="45" type="password" placeholder="">
           </div>
 
           <input type="hidden" value="http://localhost:9000/docawards/" name="success_redirect">
