@@ -30,7 +30,28 @@ define([
     },
 
     initialize: function() {
-      console.log("Get user id");
+
+      // Get Current User id
+      if(!window.current_user) {
+        $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+          options.xhrFields = {
+            withCredentials: true
+          };
+        });
+
+        $.ajax({
+          type: 'GET',
+          url: "http://www.docawards.com/api/users/get_user.json",
+          success: function(data) {
+            console.log("loaded");
+            if (data.code == '200') {
+              if(data.data["Doctor"])
+                window.current_user = new Doctor({ id: data.data["Doctor"][0]["id"]});
+            }
+          }
+        });
+      }
+
     },
 
     home: function(){
@@ -73,11 +94,8 @@ define([
       var create_profile_view = new CreateProfileView();
 
       $(".wrapper").hide().fadeIn("slow", function() {
-        // TEMPORARY - CHANGE AFTER IMPLEMENTING SIGNUP
 
         window.datas = new DataCollection();
-
-        
         var form_view = new ProfileFormView({ collection: window.datas, url: "personal_details", el: "li#personal_detailsTab", template: "personal_details_template"});
 
         //Datepicker

@@ -17,13 +17,9 @@ define([
   'text!templates/partials/add_location_modal.html',
   'text!templates/partials/add_specializations_modal.html',
   'text!templates/partials/add_degree_modal.html',
-<<<<<<< HEAD
-=======
   'text!templates/partials/add_city_modal.html',
   'text!templates/partials/add_country_modal.html',
   'text!templates/partials/add_pin_code_modal.html'
-
->>>>>>> 4c5b2d1f1a18d9953970488f88df67d8d3f51e35
 
 ], function($, _, Backbone, FormData, Doctor, personal_details_template, specializations_template, qualifications_template, 
             experiences_template, consultation_template, contact_details_template, qualification_field, experience_field, 
@@ -34,7 +30,7 @@ define([
         this.el = options.el;
         this.form_type = options.template.split("_template")[0];
         this.template = _.template(eval(options.template));
-        this.check_existing_doctor();
+
         // Initialize all field counts to zero
         this.field_count = {
           "qualification_field" : -1,
@@ -44,13 +40,20 @@ define([
           "contact_field" : -1,
         }; 
 
+        if(window.current_user) {
+          this.check_existing_doctor();  
+        }
+        
+
         this.render();
-        add_location_template = _.template(add_location_modal);
-        add_specializations_template = _.template(add_specializations_modal);
-        add_degrees_template = _.template(add_degrees_modal);
-        add_cities_template = _.template(add_cities_modal);
-        add_countries_template = _.template(add_countries_modal);
-        add_pin_codes_template = _.template(add_pin_code_modal)
+        
+        var add_location_template = _.template(add_location_modal),
+            add_specializations_template = _.template(add_specializations_modal),
+            add_degrees_template = _.template(add_degrees_modal),
+            add_cities_template = _.template(add_cities_modal),
+            add_countries_template = _.template(add_countries_modal),
+            add_pin_codes_template = _.template(add_pin_code_modal);
+        
         $(this.el).append(add_location_template).append(add_specializations_template).append(add_degrees_template).append(add_cities_template).append(add_countries_template).append(add_pin_codes_template);
       },
 
@@ -117,7 +120,7 @@ define([
         });
 
         // Replace with current user
-        data["data[Doctor][user_id]"] = 1;
+        data["data[Doctor][user_id]"] = window.current_user.get("id");
         data["data[Doctor][image]"] = "temp.jpg";
 
         console.log("DATA", data);
@@ -252,7 +255,7 @@ define([
 
       // Check if a doctor with the given ID exists
       check_existing_doctor: function() {
-        var doctor = new Doctor({id: 1}),
+        var doctor = window.current_user,
             that = this;
         doctor.fetch({
           success: function(model) {

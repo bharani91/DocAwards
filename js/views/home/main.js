@@ -24,6 +24,15 @@ define([
       var that = this; 
       $(".wrapper").fadeOut("fast", function() {
         $(this).html(that.el);
+        
+        if(window.current_user) {
+          that.$(".login").hide();
+          that.$(".logout").show();
+        } else {
+          that.$(".login").show();
+          that.$(".logout").hide();
+        }
+
         $(".chzn-select").chosen();
         window.autocomplete_select();
         new FooterView();

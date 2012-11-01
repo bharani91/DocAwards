@@ -14,6 +14,12 @@ define([
 
     render: function()  {
       $(".header_wrapper").html(this.template());
+      if(window.current_user) {
+        $("li.logout").show();
+      } else {
+        $("li.logout").hide();
+      }
+
       
     } 
 

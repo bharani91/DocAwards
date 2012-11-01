@@ -465,7 +465,11 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 // ---------------------------------------
 // Landing Page
 // ---------------------------------------
+.logout {
+  display: none;
+}
 
+    
 #landing-page-slider {
   max-height: 650px;
 }
@@ -503,7 +507,6 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
     .btn {
       margin-top: 8px;
     }
-
   }
 
   .main {
