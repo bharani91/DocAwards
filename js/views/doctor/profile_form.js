@@ -14,9 +14,12 @@ define([
   'text!templates/partials/consultation_field.html',
   'text!templates/partials/contact_field.html',
   'text!templates/partials/add_location_modal.html',
-  'text!templates/partials/add_specializations_modal.html'
+  'text!templates/partials/add_specializations_modal.html',
+  'text!templates/partials/add_degree_modal.html'
 
-], function($, _, Backbone, FormData, personal_details_template, specializations_template, qualifications_template, experiences_template, consultation_template, contact_details_template, qualification_field, experience_field, consultation_field, contact_field, add_location_modal, add_specializations_modal){
+], function($, _, Backbone, FormData, personal_details_template, specializations_template, qualifications_template, 
+            experiences_template, consultation_template, contact_details_template, qualification_field, experience_field, 
+            consultation_field, contact_field, add_location_modal, add_specializations_modal, add_degrees_modal){
     var ProfileFormView = Backbone.View.extend({
       initialize: function(options) {
         this.el = options.el;
@@ -35,15 +38,15 @@ define([
         this.render();
         add_location_template = _.template(add_location_modal);
         add_specializations_template = _.template(add_specializations_modal);
-        $(this.el).append(add_location_template).append(add_specializations_template);
+        add_degrees_template = _.template(add_degrees_modal);
+        $(this.el).append(add_location_template).append(add_specializations_template).append(add_degrees_template);
       },
 
       events: {
         "click .prev"                   :              "prev",
         "click .next"                   :              "next",
         "click .submit"                 :              "submit",
-        "submit .add_new_specialization":              "add_new_speciality",
-        "submit .add_new_location"      :              "add_new_location",
+        "submit .add_new_entry"         :              "add_new_entry",
         "click .add_another"            :              "add_another_field"  
       },
 
@@ -151,19 +154,9 @@ define([
           this.put_into_form(model[0].toJSON());
         }
       },
-      add_new_speciality: function(evt) {
+      add_new_entry: function(evt) {
         var $form = $(evt.target),
             data = $form.serializeFormJSON();
-
-        var select = $(this.el).find(".chosen_simple.multiple_select"),
-            last_option = parseInt(select.find("option:last-child").val()),
-            opt = "<option value=" + (++last_option) + ">" + data["data[Specialty][name]"] + "</option>";
-
-        select.append(opt);
-        $("#add_specialization").find(".close-reveal-modal").trigger("click");
-        select.trigger("liszt:updated");
-
-
         $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
           options.xhrFields = {
             withCredentials: true
@@ -172,56 +165,21 @@ define([
 
         $.ajax({
           type: 'POST',
-          url: "http://docawards.com/api/specialties/add",
+          url: "http://docawards.com/api/"+$form.data('servermodel')+"/ws_add.json",
           data: data,
           success: function(data) {
             console.log(data);
-            alert("Saved!");
-          }
-        });
-        return false;
-      },
-
-      add_new_location: function(evt) {
-        var $form = $(evt.target),
-            data = $form.serializeFormJSON();
-
-        console.log(data);
-        
-
-        $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-          options.xhrFields = {
-            withCredentials: true
-          };
-        });
-
-        $.ajax({
-          type: 'POST',
-          url: "http://docawards.com/api/locations/add.json",
-          data: data,
-          beforeSend: function() {
-            console.log("Sending", data)
-          },
-          success: function(data) {
-            console.log(data);
-            var opt = "";
-            window.temp_locations = data;
-            for(var i in data["result"]) {
-              console.log(data["result"][i])
-              opt += "<option value=" + i + ">" + data["result"][i] + "</option>"
+            if (data.code = '200') {
+              alert("Saved!");
+              select = $($form.data('targetselect'));
+              for(var key in data.data) {
+                select.append('<option selected="selected" value='+key+'>'+data.data[key]+'</option>');
+              }
+              select.trigger("liszt:updated");
+              $form.parent().siblings('.close-reveal-modal').trigger('click');
             }
-
-            var select = $(".primary").find(".location_select");
-            // last_option = parseInt(select.find("option:last-child").val()),
-            // opt = "<option value=" + (++last_option) + ">" + data["data[Location][name]"] + "</option>";
-            select.empty().append(opt);
-            $("#add_location").find(".close-reveal-modal").trigger("click");
-            select.trigger("liszt:updated");
-
-
           }
         });
-    
         return false;
       },
 
