@@ -1,0 +1,14 @@
+ <div id="add_country" class="reveal-modal">
+  <h3>Add Country name</h3>
+  <div class="field">
+  <form class="add_new_entry" data-servermodel="countries" data-targetselect=".country_select" method="post">
+    <label>Name of Country</label>
+      <input name="data[Country][name]" maxlength="100" type="text">
+    </div>
+
+    <div class="field">
+      <input type="submit" value="Add Country" class="button success tiny right">
+    </div>
+  </form>
+  <a class="close-reveal-modal">&#215;</a>
+</div>

@@ -3,7 +3,6 @@ define([
   'underscore',
   'backbone',
   'models/form_data',
-  'models/doctor',
   'text!templates/doctor/personal_details.html',
   'text!templates/doctor/specializations.html',
   'text!templates/doctor/qualifications.html',
@@ -17,16 +16,21 @@ define([
   'text!templates/partials/add_location_modal.html',
   'text!templates/partials/add_specializations_modal.html',
   'text!templates/partials/add_degree_modal.html',
+  'text!templates/partials/add_city_modal.html',
+  'text!templates/partials/add_country_modal.html',
+  'text!templates/partials/add_pin_code_modal.html'
 
-], function($, _, Backbone, FormData, Doctor, personal_details_template, specializations_template, qualifications_template, 
+
+], function($, _, Backbone, FormData, personal_details_template, specializations_template, qualifications_template, 
             experiences_template, consultation_template, contact_details_template, qualification_field, experience_field, 
-            consultation_field, contact_field, add_location_modal, add_specializations_modal, add_degrees_modal){
+            consultation_field, contact_field, add_location_modal, add_specializations_modal, add_degrees_modal, 
+            add_cities_modal, add_countries_modal, add_pin_code_modal){
     var ProfileFormView = Backbone.View.extend({
       initialize: function(options) {
         this.el = options.el;
         this.form_type = options.template.split("_template")[0];
         this.template = _.template(eval(options.template));
-        this.check_existing_doctor();
+
         // Initialize all field counts to zero
         this.field_count = {
           "qualification_field" : -1,
@@ -40,7 +44,10 @@ define([
         add_location_template = _.template(add_location_modal);
         add_specializations_template = _.template(add_specializations_modal);
         add_degrees_template = _.template(add_degrees_modal);
-        $(this.el).append(add_location_template).append(add_specializations_template).append(add_degrees_template);
+        add_cities_template = _.template(add_cities_modal);
+        add_countries_template = _.template(add_countries_modal);
+        add_pin_codes_template = _.template(add_pin_code_modal)
+        $(this.el).append(add_location_template).append(add_specializations_template).append(add_degrees_template).append(add_cities_template).append(add_countries_template).append(add_pin_codes_template);
       },
 
       events: {
@@ -52,7 +59,6 @@ define([
       },
 
       render: function() {
-        
         this.preload_tab_data(this.form_type);
         $(this.el).append(this.template());
         this.form = $(this.el).find(".primary");
@@ -132,37 +138,19 @@ define([
 
       put_into_form: function(type) {
         var that = this;
-        
-        // Check if the string ends with s, if not just append _field
-        var form_type = this.form_type.split("_")[0],
-            field = (form_type.charAt(form_type.length - 1) == "s") ? form_type.slice(0, -1) + "_field" : form_type + "_field",
-            count = this.field_count[field];  
-
-        for(var i = 0; i <= count && count >= 0 ; i++) {  
-          this.add_another_field(field);
-        }
-
         setTimeout(function() {
           $this = $(that.el).parent().find("li.active form.primary");
-          if(form_type == "specializations") {
-            console.log(type['data[Docspeclink]'].split(", "))
-            $(".multiple_select").val(type['data[Docspeclink]'].split(", "));
-            $(".multiple_select").trigger('liszt:updated');
-
-          } else {
-            for(key in type) {
-              $this.find("input[name='" + key + "']").val(type[key]);
-              $this.find("select[name='"+key+"']").val(type[key]);
-              $this.find("select[name='"+key+"']").trigger('liszt:updated');
-            }
-          }  
-        }, 100)
-
-
-
-        
+          for(key in type) {
+            $this.find("input[name='" + key + "']").val(type[key]);
+            //console.log("key is "+key);
+            //console.log("val to put is "+type[key]);
+            //console.log($this.find("select[name='"+key+"']"));
+            $this.find("select[name='"+key+"']").val(type[key]);
+            $this.find("select[name='"+key+"']").trigger('liszt:updated');
+            //console.log($this.find("select[name='"+key+"']").val());
+          }
+        }, 100);
       },
-
       preload_tab_data: function(type) {
         //Preload the form for the next tab if a model exists for it
         //Model would exist if the user has saved something then clicked next
@@ -174,7 +162,6 @@ define([
           this.put_into_form(model[0].toJSON());
         }
       },
-
       add_new_entry: function(evt) {
         var $form = $(evt.target),
             data = $form.serializeFormJSON();
@@ -230,80 +217,8 @@ define([
           defaultDate: "-30y",
           dateFormat: 'dd-mm-yy'
         });
-
-        inserted.find(".timepicker_temp").removeClass("timepicker_temp").timepicker({
-          showPeriod: true,
-          showLeadingZero: true
-        });
-
         return false;
       },
-
-      // Check if a doctor with the given ID exists
-      check_existing_doctor: function() {
-        var doctor = new Doctor({id: 1}),
-            that = this;
-        doctor.fetch({
-          success: function(model) {
-            that.parse_doctor_data(model.toJSON());
-          }
-        });
-
-      },
-
-      // Parse the received JSON into a simple object with appropropriate 'name' field
-      parse_doctor_data: function(model) {
-        console.log(model);
-        var data = {};
-        for(var obj in model) {
-          // Nested Data eg: Consult locations, experiences
-          if(model[obj].constructor == Array) {
-            
-            // Set the initial partial fields counter
-            var field = obj.toLowerCase() + "_field";
-            if(this.field_count[field]) this.field_count[field] = model[obj].length;
-
-            // Fill Consult Locations separately because of difference in names
-            if(obj == 'Docconsultlocation') this.field_count['consultation_field'] = model['Docconsultlocation'].length
-
-
-            // Separate out the DocSpecLinks to use in Multiple-select Chosen
-            if(obj == 'Docspeclink') {
-              var temp = ""
-              for(var i = 0; i < model[obj].length; i++) {
-                temp += (model[obj][i]['specialty_id'] + ", ");
-              }
-
-              data["data[Docspeclink]"] = temp;
-
-            } else {
-              for(var i = 0; i < model[obj].length; i++) {
-                for(key in model[obj][i]) {
-                  if(typeof model[obj][i][key] != 'object') {
-                    data[ 'data[' + obj + '][' + i + '][' + key + ']' ] = model[obj][i][key];
-                  }
-                } 
-              }  
-            }
-            
-          } else if(model[obj].constructor == Object) {
-            // Doctor Profile
-            for(key in model[obj]) {
-              data[ 'data[' + obj + '][' + key + ']' ] = model[obj][key];
-            }
-          }
-        }
-
-        console.log(this.field_count);
-
-        this.put_into_form(data);
-
-        console.log(data);
-      },
-
-
-
-    
 
     });
 
