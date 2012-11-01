@@ -83,10 +83,17 @@
 
 window.autocomplete_ajax_chosen = function() {          
 
-  $('.chzn-search input').autocomplete({
+  $('.chzn-search input, .chzn-choices .search-field input').autocomplete({
     source: function( request, response ) {
+      console.log("called");
       select_el = $(this['element'].parent().parent().parent().siblings('select'));
-      url = select_el.data('url');
+      servermodel = select_el.data('servermodel'); 
+      if (!servermodel) {
+        console.log("no model");
+        return
+      }
+      url = 'http://docawards.com/api/'+servermodel+'/autocomplete.json';
+      ajaxopt = select_el.data('ajaxopt');
       $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
         options.xhrFields = {
           withCredentials: true
@@ -94,7 +101,7 @@ window.autocomplete_ajax_chosen = function() {
       });
 
       $.ajax({
-        url: url+"?term=" + request.term,
+        url: url+"?term=" + request.term + (ajaxopt ? "&"+ajaxopt : ""),
         dataType: "json",
         data: {
             featureClass: "P",
