@@ -43,7 +43,6 @@ define([
         if(window.current_user) {
           this.check_existing_doctor();  
         }
-        
 
         this.render();
         
