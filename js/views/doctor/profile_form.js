@@ -15,11 +15,16 @@ define([
   'text!templates/partials/contact_field.html',
   'text!templates/partials/add_location_modal.html',
   'text!templates/partials/add_specializations_modal.html',
-  'text!templates/partials/add_degree_modal.html'
+  'text!templates/partials/add_degree_modal.html',
+  'text!templates/partials/add_city_modal.html',
+  'text!templates/partials/add_country_modal.html',
+  'text!templates/partials/add_pin_code_modal.html'
+
 
 ], function($, _, Backbone, FormData, personal_details_template, specializations_template, qualifications_template, 
             experiences_template, consultation_template, contact_details_template, qualification_field, experience_field, 
-            consultation_field, contact_field, add_location_modal, add_specializations_modal, add_degrees_modal){
+            consultation_field, contact_field, add_location_modal, add_specializations_modal, add_degrees_modal, 
+            add_cities_modal, add_countries_modal, add_pin_code_modal){
     var ProfileFormView = Backbone.View.extend({
       initialize: function(options) {
         this.el = options.el;
@@ -39,7 +44,10 @@ define([
         add_location_template = _.template(add_location_modal);
         add_specializations_template = _.template(add_specializations_modal);
         add_degrees_template = _.template(add_degrees_modal);
-        $(this.el).append(add_location_template).append(add_specializations_template).append(add_degrees_template);
+        add_cities_template = _.template(add_cities_modal);
+        add_countries_template = _.template(add_countries_modal);
+        add_pin_codes_template = _.template(add_pin_code_modal)
+        $(this.el).append(add_location_template).append(add_specializations_template).append(add_degrees_template).append(add_cities_template).append(add_countries_template).append(add_pin_codes_template);
       },
 
       events: {

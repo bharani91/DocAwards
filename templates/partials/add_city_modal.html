@@ -1,0 +1,14 @@
+ <div id="add_city" class="reveal-modal">
+  <h3>Add City name</h3>
+  <div class="field">
+  <form class="add_new_entry" data-servermodel="cities" data-targetselect=".city_select" method="post">
+    <label>Name of City</label>
+      <input name="data[City][name]" maxlength="100" type="text">
+    </div>
+
+    <div class="field">
+      <input type="submit" value="Add City" class="button success tiny right">
+    </div>
+  </form>
+  <a class="close-reveal-modal">&#215;</a>
+</div>

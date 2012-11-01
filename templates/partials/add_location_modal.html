@@ -12,7 +12,8 @@
     </div>
 
     <div class="field">
-      <select class="chosen_simple ajax_chosen" id="LocationCityId" data-placeholder="City" name="data[Location][city_id]" data-servermodel="cities">
+      <select class="chosen_simple ajax_chosen city_select" id="LocationCityId" data-placeholder="City" name="data[Location][city_id]" data-servermodel="cities">
+        <option value="278" selected="selected">Delhi</option>
         <option value="700">Abohar</option>
         <option value="577">Achalpur</option>
         <option value="2">Adilabad</option>
@@ -254,7 +255,6 @@
         <option value="991">Dehra Dun</option>
         <option value="992">Dehra Dun Cantonment</option>
         <option value="227">Dehri</option>
-        <option value="278">Delhi</option>
         <option value="901">Deoband</option>
         <option value="604">Deolali</option>
         <option value="279">Deoli</option>
@@ -1012,7 +1012,7 @@
         <option value="491">Yelahanka</option>
         <option value="105">Yemmiganur</option>
         <option value="302">Ziauddin Pur</option>
-      </select>
+      </select><small>Can't find your city ? <a href="#" class="open_modal" data-modal="add_city">Add new</a></small>
     </div>
 
 
@@ -1029,7 +1029,7 @@
         <option value="102">India</option>
         <option value="235">United Kingdom</option>
         <option value="236">United States</option>
-      </select>
+      </select><small>Can't find your country ? <a href="#" class="open_modal" data-modal="add_country">Add new</a></small>
     </div>
 
     <div class="field">
@@ -1038,7 +1038,7 @@
         <option value="4">10019</option>
         <option value="2">110049</option>
         <option value="3">110060</option>
-      </select>
+      </select><small>Can't find your pin code ? <a href="#" class="open_modal" data-modal="add_pin_code">Add new</a></small>
     </div>
     
 
