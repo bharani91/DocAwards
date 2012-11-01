@@ -37,16 +37,16 @@ define([
       var home_view = new mainHomeView();
       // hide regular header
       $(".header_wrapper").hide();
-      if(window.location.search.indexOf("?") >= 0) {
-        var queries = {};
-        $.each(window.location.search.substr(1).split('&'),function(c,q){
-          var i = q.split('=');
-          queries[i[0].toString()] = i[1].toString();
-        });
+      // if(window.location.search.indexOf("?") >= 0) {
+      //   var queries = {};
+      //   $.each(window.location.search.substr(1).split('&'),function(c,q){
+      //     var i = q.split('=');
+      //     queries[i[0].toString()] = i[1].toString();
+      //   });
 
-        window.current_user = new User({id: queries["user_id"]});
-        window.location.search = "";
-      } 
+      //   window.current_user = new User({id: queries["user_id"]});
+      //   window.location.search = "";
+      // } 
       
     },
 
@@ -80,14 +80,18 @@ define([
         var form_view = new ProfileFormView({ collection: window.datas, url: "personal_details", el: "li#personal_detailsTab", template: "personal_details_template"});
 
         // Datepicker
-        $( ".datepicker" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "1910:2012",
-            defaultDate: "-10y",
-            dateFormat: 'dd-mm-yy'
-          });
-
+        // $( ".datepicker" ).datepicker({
+        //     changeMonth: true,
+        //     changeYear: true,
+        //     yearRange: "1910:2012",
+        //     defaultDate: "-10y",
+        //     dateFormat: 'dd-mm-yy'
+        // });
+        // $( ".timepicker" ).timepicker({
+        //   showPeriod: true,
+        //   showLeadingZero: true
+        // });
+      
         $(".chosen_simple").chosen();
       });
       
@@ -121,13 +125,18 @@ define([
       $tab.addClass('active');
 
        // Datepicker
-      $( ".datepicker" ).datepicker({
-          changeMonth: true,
-          changeYear: true,
-          yearRange: "1910:2012",
-          defaultDate: "-10y",
-          dateFormat: 'dd-mm-yy'
-        });
+      // $( ".datepicker" ).datepicker({
+      //     changeMonth: true,
+      //     changeYear: true,
+      //     yearRange: "1910:2012",
+      //     defaultDate: "-10y",
+      //     dateFormat: 'dd-mm-yy'
+      //   });
+
+      // $( ".timepicker" ).timepicker({
+      //     showPeriod: true,
+      //     showLeadingZero: true
+      // });
 
       $(".chosen_simple").chosen();
       window.autocomplete_ajax_chosen();

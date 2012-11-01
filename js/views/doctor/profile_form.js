@@ -209,6 +209,12 @@ define([
           defaultDate: "-30y",
           dateFormat: 'dd-mm-yy'
         });
+
+        inserted.find(".timepicker_temp").removeClass("timepicker_temp").timepicker({
+          showPeriod: true,
+          showLeadingZero: true
+        });
+
         return false;
       },
 

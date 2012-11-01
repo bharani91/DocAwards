@@ -28,9 +28,11 @@ define([
         window.autocomplete_select();
         new FooterView();
         $("#landing-page-slider").orbit({
-          animationSpeed: 200,
+          animation: "fade",
+          animationSpeed: 300,
           timer: true,
-          directionalNav: false, 
+          directionalNav: true,
+          pauseOnHover: false, 
           captions: false, 
           fluid: true
         });

@@ -466,10 +466,18 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 // Landing Page
 // ---------------------------------------
 
+#landing-page-slider {
+  max-height: 650px;
+}
+
+.orbit_container {
+  height: 650px;
+}
+
 .landing_page {
   #logo {
     h1 {
-      color: lighten($dark_gray, 20%);
+      color: #000;
       font-size: 12px;  
       i {
         font-size: 10px;
@@ -482,8 +490,16 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   }
   border-top: 3px solid $dark_blue;
   header#top {
-    padding: 10px 0;
-
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 60px;
+    width: 100%;
+    background: #fff;
+    background: rgba(white, 0.60);
+    .header_wrapper {
+      padding-top: 8px;
+    }
     .btn {
       margin-top: 8px;
     }
@@ -491,23 +507,25 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   }
 
   .main {
-    min-height: 400px;
     #landing-page-slider, div.orbit-wrapper {
       position: absolute;
       min-height: 400px;
       z-index: -1;
+      div.orbit .orbit-slide {
+        width: 100%;
+      }
     }
     .ask_container {
-      padding-top: 220px;
+      padding-top: 350px;
       .container_inner {
         background: rgba(white, 0.60);
-        padding-bottom: 10px;
+        padding-bottom: 20px;
       }
     }
     .slogan {
       margin-top: 0px !important;
-      text-align: left;
-      color: darken($dark_gray, 10%);
+      color: #000;
+      text-align: center;
       font-weight: bold;
       padding-top: 15px;
     }
@@ -670,6 +688,12 @@ label small {
 
 .chzn-container-multi .chzn-choices li.search-field,  .chzn-container-multi .chzn-choices li.search-field input {
   height: 30px !important;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+  font-size: 12px;
+  padding-left: 3px;
+  padding-right: 19px;
 }
 
 
