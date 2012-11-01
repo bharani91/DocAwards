@@ -237,7 +237,7 @@ define([
         inserted.find(".datepicker_temp").removeClass("datepicker_temp").datepicker({
           changeMonth: true,
           changeYear: true,
-          yearRange: "1910:1999",
+          yearRange: "1910:2020",
           defaultDate: "-30y",
           dateFormat: 'dd-mm-yy'
         });

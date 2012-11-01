@@ -1,5 +1,4 @@
  window.render_options = function(result) { 
-
   $.map( result.doctors, function( item ) {  
     if ($('.chzn-select optgroup.doctors option[data-id='+item.id+']').length == 0) {
       $('.chzn-select optgroup.doctors').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
@@ -24,9 +23,9 @@
  window.autocomplete_select = function() {
   $('.chzn-search input').autocomplete({
     source: function( request, response ) {
-      console.log("source fn called");
+
       $.ajax({
-        url: "http://docawards.com/api/specialties/autocomplete.json?term=" + request.term,
+        url: "http://docawards.com/api/specialties/landing_page_autocomplete.json?term=" + request.term,
         dataType: "json",
         data: {
             featureClass: "P",
