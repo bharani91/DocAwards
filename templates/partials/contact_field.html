@@ -1,19 +1,20 @@
 <div class="contact_field" style="display: none;">
     <div class="row">
       <div class="four columns">
+        <label>Type<span class="has-tip tip-top" data-width="200px" title="You categorize your email/phone numbers by type such as Personal, Secretary, Main Desk, Appointments, Emergency or any other type catgory you wish to use.">(?)</span></label>
+        <input name="data[DoctorContact][<%= id %>][type]" maxlength="45" type="text" id="DoctorContactType" placeholder="eg. Personal or secretary etc.">
+      </div>
+
+      <div class="four columns">
         <label>Phone Number</label>
-        <input name="data[DoctorContact][<%= id %>][phone]" maxlength="45" type="text" id="DoctorContactPhone">
+        <input name="data[DoctorContact][<%= id %>][phone]" maxlength="45" type="text" id="DoctorContactPhone" >
       </div>
 
       <div class="four columns">
         <label>Email</label>
-        <input name="data[DoctorContact][<%= id %>][email]" maxlength="150" type="text" id="DoctorContactEmail">
+        <input name="data[DoctorContact][<%= id %>][email]" maxlength="150" type="text" id="DoctorContactEmail" >
       </div>
 
-      <div class="four columns">
-        <label>Type</label>
-        <input name="data[DoctorContact][<%= id %>][type]" maxlength="45" type="text" id="DoctorContactType">
-      </div>
 
 
     </div>

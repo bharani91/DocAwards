@@ -83,8 +83,8 @@ define([
         $( ".datepicker" ).datepicker({
             changeMonth: true,
             changeYear: true,
-            yearRange: "1910:1999",
-            defaultDate: "-30y",
+            yearRange: "1910:2012",
+            defaultDate: "-10y",
             dateFormat: 'dd-mm-yy'
           });
 
@@ -124,8 +124,8 @@ define([
       $( ".datepicker" ).datepicker({
           changeMonth: true,
           changeYear: true,
-          yearRange: "1910:1999",
-          defaultDate: "-30y",
+          yearRange: "1910:2012",
+          defaultDate: "-10y",
           dateFormat: 'dd-mm-yy'
         });
 

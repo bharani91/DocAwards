@@ -2,7 +2,7 @@
   <div class="field" >
       <div class="row">
         <div class="three columns">
-          <label>Location</label>
+          <label>Location<small>( <a href="#" class="open_modal" data-modal="add_location">Add new</a> )</small></label>
           <select class="chosen_temp" name="data[Docconsultlocation][<%= id %>][location_id]">
             <option value="2">Sama Chest Center</option>
             <option value="3">Sir Ganga Ram Hospital</option>
@@ -13,23 +13,23 @@
         <div class="three columns">
           <label>Location Type</label>
           <select class="chosen_temp" name="data[Docconsultlocation][<%= id %>][consultlocationtype_id]">
-            <option value="1">HOSPITAL</option>
-            <option value="2">HOME_CLINIC</option>
-            <option value="3">OPD CLINIC</option>
+            <option value="1">Hospital</option>
+            <option value="2">Home Clinic</option>
+            <option value="3">OPD Clinic</option>
           </select>
         </div>
 
         <div class="three columns">
           <label>Type</label>
           <select class="chosen_temp" name="data[Docconsultlocation][<%= id %>][ConsultTiming][0][consult_type_id]">
-            <option value="1">Walkin</option>
+            <option value="1">Walk-in</option>
             <option value="2">Schedule Appointment</option>
           </select>
         </div>
 
         <div class="three columns">
-          <label>Additional Information</label>
-          <input name="data[Docconsultlocation][<%= id %>][addl]" maxlength="45" type="text" >
+          <label>Additional Information<span class="has-tip tip-top" data-width="200" title="Enter any additional information that would help to locate your consultation room within the location you have selected.  Examples include room number, floor number, or text directions on how to get to your consult location from the entrance of the main location">(?)</span></label>
+          <input name="data[Docconsultlocation][<%= id %>][addl]" maxlength="45" type="text" placeholder="eg. floor, room num etc.">
         </div>
       </div><!--row-->
   </div><!--field-->
