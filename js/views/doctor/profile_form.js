@@ -58,7 +58,7 @@ define([
 
       events: {
         "click .prev"                   :              "prev",
-        "click .next"                   :              "next",
+        "click .next"                   :              "saveTab",
         "click .submit"                 :              "submit",
         "submit .add_new_entry"         :              "add_new_entry",
         "click .add_another"            :              "add_another_field"  
@@ -82,7 +82,7 @@ define([
       prev: function(evt) {
       },
 
-      next: function(evt) {
+      saveTab: function(evt) {
         var model = new FormData($(this.form).serializeFormJSON());
         model.set({"form_type": this.form_type});
         //delete preivously created model (if any)
@@ -98,6 +98,7 @@ define([
       },
 
       submit: function() {
+        this.saveTab();
         var data = {};
         _.each(this.collection.models, function(model) {
           var type = model.get("form_type"), m = model.toJSON();
