@@ -95,6 +95,21 @@ header#header {
   } 
 }
 
+.notifications {
+  width: 100%;
+  .alert-box {
+    display: none;
+    height: 60px;
+    width: 100%;
+    position: fixed;                     
+    top: 0;
+    left: 0;
+    z-index: 999;
+    text-align: center;
+    line-height: 35px;
+  }
+}
+
 section.jumbotron {
   margin-top: 60px;
   padding: 10px 0;
@@ -144,7 +159,7 @@ section.jumbotron {
 }
 
 #header {
-  z-index: 9999;
+  z-index: 900;
 }
 
 .top-bar ul li .round.progress.success {

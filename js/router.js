@@ -31,6 +31,11 @@ define([
 
     initialize: function() {
 
+
+
+
+
+
       // Get Current User id
       if(!window.current_user) {
         $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
@@ -46,8 +51,9 @@ define([
         
           success: function(data) {
             if (data.code == '200') {
-              if(data.data.status > 0 && data.data["Doctor"]) {
-                window.current_user = new Doctor({ id: data.data["Doctor"][0]["id"]});
+              if(data.data.status > 0 && data.data["User"]) {
+                console.log(data);
+                window.current_user = new Doctor({ id: data.data["User"]["id"]});
               }
             }
           }
@@ -57,6 +63,7 @@ define([
     },
 
     home: function(){
+
       var home_view = new mainHomeView();
       // hide regular header
       $(".header_wrapper").hide();

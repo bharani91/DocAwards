@@ -5,8 +5,8 @@ define([
   'backbone',
   'text!templates/home/main.html',
   'views/shared/footer',
-  'models/user'
-], function($, _, Backbone, mainHomeTemplate, FooterView, User ){
+  'models/doctor'
+], function($, _, Backbone, mainHomeTemplate, FooterView, Doctor ){
 
   var mainHomeView = Backbone.View.extend({
     template: _.template(mainHomeTemplate),
@@ -15,7 +15,7 @@ define([
     },
 
     events: {
-      
+      "submit #signup_form": "signup",
       "submit #login_form": "login"
     },
 
@@ -36,6 +36,10 @@ define([
         $(".chzn-select").chosen();
         window.autocomplete_select();
         new FooterView();
+
+        
+
+
         $("#landing-page-slider").orbit({
           animation: "horizontal-push",
           animationSpeed: 1000,
@@ -95,30 +99,29 @@ define([
       console.log(JSON.stringify(form_data));
 
       
-      // UNCOMMENT AFTER TESTING
-      // $.ajax({
-      //   type: 'POST',
-      //   url: "http://docawards.com/api/users/add",
-      //   data: form_data,
-      //   success: function(response) {
-      //     var new_id = parseInt($(response).find("#content table tr:last td:first").text()),
-      //         new_username = $(response).find("#content table tr:last td:nth-child(2)").text(),
-      //         user = new User({id: new_id})
+      $.ajax({
+        type: 'POST',
+        url: "http://docawards.com/api/users/add",
+        data: form_data,
+        success: function(response) {
+          var new_id = parseInt($(response).find("#content table tr:last td:first").text()),
+              new_username = $(response).find("#content table tr:last td:nth-child(2)").text(),
+              user = new Doctor({id: new_id})
 
-      //     window.current_user = user;
+          window.current_user = user;
 
-      //     console.log(window.current_user);
-      //     window.app.navigate("#create_profile", true);
-      //   }
-      // });
+          console.log(window.current_user);
+          window.app.navigate("#create_profile", true);
+        }
+      });
 
       //COMMENT OUT AFTER TESTING
-      window.app.navigate("#create_profile", true);
+      //window.app.navigate("#create_profile", true);
       
       
     },
 
-    login: function() {
+    login: function(evt) {
       var $form = this.$("#login_modal").find("form"),
           form_data = $form.serializeFormJSON();
 
@@ -129,10 +132,11 @@ define([
         url: "http://docawards.com/api/users/ajax_login.json",
         data: form_data,
         success: function(response) {
-          console.log(response);
+          console.log(response);          
+
+          
         }
       });
-      
     }
   });
   return mainHomeView;

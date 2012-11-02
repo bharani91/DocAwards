@@ -64,6 +64,8 @@ define([
 
       $(".header_wrapper, .footer_wrapper").fadeIn("slow");
 
+      
+
 
       
     },

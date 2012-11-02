@@ -19,7 +19,6 @@ define([
       } else {
         $("li.logout").hide();
       }
-
       
     } 
 
