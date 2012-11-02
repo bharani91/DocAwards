@@ -106,7 +106,6 @@ define([
 
         window.datas = new DataCollection();
         var form_view = new ProfileFormView({ collection: window.datas, url: "personal_details", el: "li#personal_detailsTab", template: "personal_details_template"});
-
         //Datepicker
         $( ".datepicker" ).datepicker({
             changeMonth: true,
@@ -129,7 +128,6 @@ define([
     createProfileTab: function(id) {
       var header_view = new HeaderView(),
           create_profile_view = new CreateProfileView();
-      
       var el = "li#" + id + "Tab",
           template = id + "_template";
 
