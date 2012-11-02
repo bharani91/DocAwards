@@ -37,10 +37,10 @@ define([
         window.autocomplete_select();
         new FooterView();
         $("#landing-page-slider").orbit({
-          animation: "fade",
-          animationSpeed: 300,
+          animation: "horizontal-push",
+          animationSpeed: 1000,
           timer: true,
-          directionalNav: true,
+          directionalNav: false,
           pauseOnHover: false, 
           captions: false, 
           fluid: true

@@ -41,12 +41,14 @@ define([
 
         $.ajax({
           type: 'GET',
-          url: "http://www.docawards.com/api/users/get_user.json",
+          url: "http://docawards.com/api/users/get_user.json",
+          dataType: "json",
+        
           success: function(data) {
-            console.log("loaded");
             if (data.code == '200') {
-              if(data.data["Doctor"])
+              if(data.data.status > 0 && data.data["Doctor"]) {
                 window.current_user = new Doctor({ id: data.data["Doctor"][0]["id"]});
+              }
             }
           }
         });
