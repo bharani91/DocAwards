@@ -42,7 +42,7 @@ define([
 
         if( window.current_user && window.current_user.get("id")) {
           console.log("From current_user");
-          this.check_existing_doctor();  
+          this.check_existing_doctor();
         }
         
 
@@ -63,7 +63,8 @@ define([
         "click .next"                   :              "saveTab",
         "click .submit"                 :              "submit",
         "submit .add_new_entry"         :              "add_new_entry",
-        "click .add_another"            :              "add_another_field"  
+        "click .add_another"            :              "add_another_field",
+        "click .delete_entry"           :              "delete_field"
       },
 
       render: function() {
@@ -271,6 +272,15 @@ define([
           showLeadingZero: true
         });
 
+        return false;
+      },
+
+      delete_field: function(evt) {
+        button = $(evt.target).parent();
+        var elem = button.data("elem");
+        --this.field_count[elem];
+        $(evt.target).parent().parent().parent().remove();
+        $('.tooltip').hide(); // Dont know why it doesnt autohide, so doing manually
         return false;
       },
 
