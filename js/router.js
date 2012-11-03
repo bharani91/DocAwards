@@ -30,36 +30,6 @@ define([
     },
 
     initialize: function() {
-
-
-
-
-
-
-      // Get Current User id
-      if(!window.current_user) {
-        $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-          options.xhrFields = {
-            withCredentials: true
-          };
-        });
-
-        $.ajax({
-          type: 'GET',
-          url: "http://docawards.com/api/users/get_user.json",
-          dataType: "json",
-        
-          success: function(data) {
-            if (data.code == '200') {
-              if(data.data.status > 0 && data.data["User"]) {
-                console.log(data);
-                window.current_user = new Doctor({ id: data.data["User"]["id"]});
-              }
-            }
-          }
-        });
-      }
-
     },
 
     home: function(){
@@ -74,7 +44,7 @@ define([
       //     queries[i[0].toString()] = i[1].toString();
       //   });
 
-      //   window.current_user = new User({id: queries["user_id"]});
+      //   window.DocAwards.current_user = new User({id: queries["user_id"]});
       //   window.location.search = "";
       // } 
       
@@ -134,7 +104,7 @@ define([
 
 
       //UNCOMMENT AFTER IMPLEMENTING SIGNUP
-      //var user_model = (id != "personal_details") ? window.current_doctor : window.current_user;
+      //var user_model = (id != "personal_details") ? window.current_doctor : window.DocAwards.current_user;
 
       if (!window.datas) window.datas = new DataCollection();
       var form_view = new ProfileFormView({collection: window.datas, url: id, el: el, template: template});

@@ -12,6 +12,8 @@ define([
     template: _.template(mainHomeTemplate),
     initialize: function()  {
       this.render();
+      console.log(window.DocAwards.current_user);
+      //window.DocAwards.current_user.on('AuthChange', this.updateAuth(this));
     },
 
     events: {
@@ -19,25 +21,28 @@ define([
       "submit #login_form": "login"
     },
 
+    updateAuth: function (that) {
+      if (window.DocAwards.current_user.isLoggedIn()) {
+        console.log("Updateing auth triggered");
+        that.$(".login").hide();
+        that.$(".logout").show();
+      } else {
+        that.$(".login").show();
+        that.$(".logout").hide();
+      }
+    },
+    
     render: function()  {
       $(this.el).html(this.template());
       var that = this; 
       $(".wrapper").fadeOut("fast", function() {
         $(this).html(that.el);
+        that.updateAuth(that); 
         
-        if(window.current_user) {
-          that.$(".login").hide();
-          that.$(".logout").show();
-        } else {
-          that.$(".login").show();
-          that.$(".logout").hide();
-        }
 
         $(".chzn-select").chosen();
         window.autocomplete_select();
         new FooterView();
-
-        
 
 
         $("#landing-page-slider").orbit({
@@ -108,9 +113,9 @@ define([
               new_username = $(response).find("#content table tr:last td:nth-child(2)").text(),
               user = new Doctor({id: new_id})
 
-          window.current_user = user;
+          window.DocAwards.current_user = user;
 
-          console.log(window.current_user);
+          console.log(window.DocAwards.current_user);
           window.app.navigate("#create_profile", true);
         }
       });

@@ -40,10 +40,7 @@ define([
           "contact_field" : -1,
         }; 
 
-        if( window.current_user && window.current_user.get("id")) {
-          console.log("From current_user");
-          this.check_existing_doctor();
-        }
+        this.check_existing_doctor();
         this.render();
         
         var add_location_template = _.template(add_location_modal),
@@ -80,14 +77,7 @@ define([
           this.add_another_field(field);
         }
         
-        if( window.current_user && window.current_user.get("id")) {
-          console.log("From current_user");
-          this.check_existing_doctor();  
-        }
-        
-
-
-
+        this.check_existing_doctor();  
       },
       prev: function(evt) {
         console.log("From prev");
@@ -131,7 +121,7 @@ define([
         });
 
         // Replace with current user
-        data["data[Doctor][user_id]"] = window.current_user.get("id");
+        data["data[Doctor][user_id]"] = window.DocAwards.current_user.getUser().id;
         data["data[Doctor][image]"] = "temp.jpg";
 
         console.log("DATA", data);
@@ -376,7 +366,7 @@ define([
 
       // Check if a doctor with the given ID exists
       check_existing_doctor: function() {
-        var doctor = window.current_user,
+        var doctor = new Doctor({id: window.DocAwards.current_user.getUser().id});
             that = this;
         doctor.fetch({
           success: function(model) {
