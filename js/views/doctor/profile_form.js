@@ -40,15 +40,10 @@ define([
           "contact_field" : -1,
         }; 
 
-<<<<<<< HEAD
-=======
         if( window.current_user && window.current_user.get("id")) {
           console.log("From current_user");
           this.check_existing_doctor();
         }
-        
-
->>>>>>> e294e46f05641aa5ad5a703b03c506c13a65465e
         this.render();
         
         var add_location_template = _.template(add_location_modal),
