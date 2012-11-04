@@ -23,7 +23,6 @@ define([
 
     updateAuth: function (that) {
       if (window.DocAwards.current_user.isLoggedIn()) {
-        console.log("Updateing auth triggered");
         that.$(".login").hide();
         that.$(".logout").show();
       } else {
@@ -129,6 +128,18 @@ define([
     login: function(evt) {
       var $form = this.$("#login_modal").find("form"),
           form_data = $form.serializeFormJSON();
+      ajax_successful = false; 
+      var that = this; 
+
+      if (this.ajax_successful) {
+        //Post the form (no ajax) and get cookie, if ajax has already 
+        // been successful. 
+        // We use ajax to verfity that the entered user/pass is valie
+        // so user can correct any errors, then once ajax has validated input
+        // we send the users broser to do the form post in order to get the 
+        // auth cookie
+        return true;
+      }
 
       console.log(JSON.stringify(form_data));
 
@@ -136,12 +147,25 @@ define([
         type: 'POST',
         url: "http://docawards.com/api/users/ajax_login.json",
         data: form_data,
+        dataType: 'json',
         success: function(response) {
-          console.log(response);          
+          if (response.status == 1) {
+            that.ajax_successful = true;
+            $form.submit();
+          } else {
+            $('small.error').remove();
+            $('input[name="data[User][username]"]').removeClass('error');
+            $('input[name="data[User][Password]"]').removeClass('error');
 
-          
+            if (response.error_type == 'user') {
+              $('input[name="data[User][username]"]').addClass('error').parent().append('<small class="error">Not Found! Please enter a valid email address.</small>');
+            } else {
+              $('input[name="data[User][password]"]').addClass('error').parent().append('<small class="error">Incorrect Password.  Please re-enter the correct password.</small>');
+            }
+          }
         }
       });
+      return false;
     }
   });
   return mainHomeView;
