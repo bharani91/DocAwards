@@ -13,7 +13,7 @@ define([
     initialize: function()  {
       this.render();
       console.log(window.DocAwards.current_user);
-      //window.DocAwards.current_user.on('AuthChange', this.updateAuth(this));
+      window.DocAwards.current_user.bind('AuthChange', this.updateAuth(this));
     },
 
     events: {

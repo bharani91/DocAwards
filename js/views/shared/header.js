@@ -10,17 +10,21 @@ define([
     template: _.template(headerTemplate),
     initialize: function()  {
       this.render();
+      window.DocAwards.current_user.bind('AuthChange', this.loginLogoutShow);
     },
 
     render: function()  {
       $(".header_wrapper").html(this.template());
+      this.loginLogoutShow();
+    }, 
 
+    loginLogoutShow: function() {
       if(window.DocAwards.current_user.isLoggedIn()) {
         $("li.logout").show();
       } else {
         $("li.logout").hide();
       }       
-    } 
+    }
 
   });
   return HeaderView;
