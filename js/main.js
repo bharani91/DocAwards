@@ -12,9 +12,9 @@ require.config({
 
 require([
   'app',
-  'models/user'
+  'models/user',
+  'libs/utils/docawards_util'
 ], function(App, User){
-  window.DocAwards = {};
   window.DocAwards.current_user = new User(); 
   App.initialize();
 });

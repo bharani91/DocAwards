@@ -1,4 +1,7 @@
- window.render_options = function(result) { 
+
+ window.DocAwards = {};
+ window.DocAwards.UtilFunctions = {};
+ window.DocAwards.UtilFunctions.render_options = function(result) { 
   $.map( result.doctors, function( item ) {  
     if ($('.chzn-select optgroup.doctors option[data-id='+item.id+']').length == 0) {
       $('.chzn-select optgroup.doctors').append($('<option></option>').val(item.label).attr("data-type", item.type).attr("data-id", item.id).html(item.value));
@@ -20,22 +23,12 @@
   $(".chzn-select").trigger("ajax_liszt:updated");
 }
 
- window.autocomplete_select = function() {
+ window.DocAwards.UtilFunctions.autocomplete_select = function() {
   $('.chzn-search input').autocomplete({
     source: function( request, response ) {
 
-      $.ajax({
-        url: "http://docawards.com/api/specialties/landing_page_autocomplete.json?term=" + request.term,
-        dataType: "json",
-        data: {
-            featureClass: "P",
-            style: "full",
-            maxRows: 12,
-        },
-        
-        beforeSend: function(){
-        },
-        success: function( data ) {
+      window.DocAwards.UtilFunctions.ajax('GET', "specialties/landing_page_autocomplete.json?term=" + request.term, 
+        null, function( data ) {
           result = {};
           result.doctors = []; result.diseases = []; result.specialities = [] 
           $.map(data.data.doctors, function(item) {
@@ -69,18 +62,14 @@
           });
 
 
-          response( render_options(result) )
-
-          
-        }
-
-      })
+          response( window.DocAwards.UtilFunctions.render_options(result) );
+        });
     }
   });
 
 }
 
-window.autocomplete_ajax_chosen = function() {          
+window.DocAwards.UtilFunctions.autocomplete_ajax_chosen = function() {          
 
   $('.chzn-search input, .chzn-choices .search-field input').autocomplete({
     source: function( request, response ) {
@@ -91,25 +80,9 @@ window.autocomplete_ajax_chosen = function() {
         console.log("no model");
         return
       }
-      url = 'http://docawards.com/api/'+servermodel+'/autocomplete.json';
       ajaxopt = select_el.data('ajaxopt');
-      $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-        options.xhrFields = {
-          withCredentials: true
-        };
-      });
-
-      $.ajax({
-        url: url+"?term=" + request.term + (ajaxopt ? "&"+ajaxopt : ""),
-        dataType: "json",
-        data: {
-            featureClass: "P",
-            style: "full",
-            maxRows: 12,
-        },
-        beforeSend: function(){
-        },
-        success: function( data ) {
+      relurl = servermodel+'/autocomplete.json?term='+request.term+(ajaxopt ? "&"+ajaxopt : "");
+      window.DocAwards.UtilFunctions.ajax('GET', relurl, null, function( data ) {
           result = {};
           for(var key in data.data) {
             if (select_el.find('option[value='+key+']').length == 0) { 
@@ -117,9 +90,30 @@ window.autocomplete_ajax_chosen = function() {
               select_el.trigger("ajax_liszt:updated");
             }
           }
-         }
-      });
+         });
       response (null); 
+    }
+  });
+}
+
+window.DocAwards.UtilFunctions.ajax = function(type, relurl, postdata, successcbk) {
+  $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+    options.xhrFields = {
+      withCredentials: true
+    };
+  });
+
+  $.ajax({
+    type: type,
+    url: "http://docawards.com/api/"+relurl,
+    data: postdata,
+    dataType: 'json',
+    success: successcbk, 
+    error: function(xhr, status, error) {
+      console.log(xhr);
+      console.log(status);
+      console.log(error);
+      $(".alert-box.alert").text('Error: '+status+': '+error).slideDown("slow").delay(5000).slideUp("slow");
     }
   });
 }

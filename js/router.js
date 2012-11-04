@@ -145,7 +145,7 @@ define([
       });
 
       $(".chosen_simple").chosen();
-      window.autocomplete_ajax_chosen();
+      window.DocAwards.UtilFunctions.autocomplete_ajax_chosen();
 
       $(".open_modal").live("click", function() {
         var elem = $(this).data("modal")

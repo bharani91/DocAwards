@@ -127,22 +127,12 @@ define([
         console.log("DATA", data);
         window.temp_data = data;
 
-        $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-          options.xhrFields = {
-            withCredentials: true
-          };
-        });
-
-        $.ajax({
-          type: 'POST',
-          url: "http://docawards.com/api/doctors/ws_add.json",
-          data: data,
-          success: function(data) {
+        window.DocAwards.UtilFunctions.ajax('POST', 'doctors/ws_add.json', data, function(data) {
             console.log(data);
-            $(".alert-box.success").text("Saved your profile successfully").slideDown("slow")
-          }
-        });
-
+            $(".alert-box.success").text("Saved your profile successfully").slideDown("slow");
+            AppRouter.navigate('#doctor/'+window.DocAwards.current_user.doctor.id);
+          });
+        return false;
       },
 
       put_into_form: function(type) {
@@ -336,7 +326,7 @@ define([
 
         var inserted = $(tmpl({ id: (++this.field_count[elem]) })).attr("class", "field").insertBefore(target.parent().parent()).show();
         inserted.find(".chosen_temp").removeClass("chosen_temp").addClass("chosen_simple").chosen();
-        window.autocomplete_ajax_chosen();
+        window.DocAwards.UtilFunctions.autocomplete_ajax_chosen();
 
 
         inserted.find(".datepicker_temp").removeClass("datepicker_temp").datepicker({

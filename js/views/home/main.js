@@ -40,7 +40,7 @@ define([
         
 
         $(".chzn-select").chosen();
-        window.autocomplete_select();
+        window.DocAwards.UtilFunctions.autocomplete_select();
         new FooterView();
 
 
