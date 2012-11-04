@@ -68,15 +68,15 @@ define([
       $(".header_wrapper").fadeIn("slow");
 
       //Authentication Check
-      if (!window.DocAwards.current_user.isLoggedIn()) {
-        $(".alert-box.alert").text("Please log-in or create a new account to access this location").slideDown("slow").delay(3000).slideUp("slow");
-        return;
-      } else {
-        if (window.DocAwards.current_user.getUser().role != 'Doctor') {
-          $(".alert-box.alert").text("Sorry, this page is accessable to Doctors only.").slideDown("slow").delay(3000).slideUp("slow");
-          return;
-        }
-      }
+      // if (!window.DocAwards.current_user.isLoggedIn()) {
+      //   $(".alert-box.alert").text("Please log-in or create a new account to access this location").slideDown("slow").delay(3000).slideUp("slow");
+      //   return;
+      // } else {
+      //   if (window.DocAwards.current_user.getUser().role != 'Doctor') {
+      //     $(".alert-box.alert").text("Sorry, this page is accessable to Doctors only.").slideDown("slow").delay(3000).slideUp("slow");
+      //     return;
+      //   }
+      // }
 
       window.form_data = [];
       
