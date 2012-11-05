@@ -31,7 +31,7 @@
     };
 
     $(document).on('click.fndtn', 'dl.tabs dd a', function (event){
-      activateTab($(this).parent('dd'));
+      //activateTab($(this).parent('dd'));
 
 
     });

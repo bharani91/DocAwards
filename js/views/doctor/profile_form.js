@@ -31,16 +31,18 @@ define([
         this.form_type = options.template.split("_template")[0];
         this.template = _.template(eval(options.template));
 
-        // Initialize all field counts to zero
-        this.field_count = {
-          "qualification_field" : -1,
-          "experience_field" : -1,
-          "experience_field" : -1,
-          "consultation_field" : -1,
-          "contact_field" : -1,
-        }; 
+        if(this.collection.models.length == 0) {
+          this.collection.fetch_from_server();
+        }
 
-        this.check_existing_doctor();
+        
+
+        var that = this;
+        this.collection.bind("fetched_from_server", function(data) {
+          console.log(that.collection)
+          that.put_into_form(data);
+        });
+
         this.render();
         
         var add_location_template = _.template(add_location_modal),
@@ -71,13 +73,13 @@ define([
         // Check if the string ends with s, if not just append _field
         var form_type = this.form_type.split("_")[0],
             field = (form_type.charAt(form_type.length - 1) == "s") ? form_type.slice(0, -1) + "_field" : form_type + "_field",
-            count = this.field_count[field];        
+            count = this.collection.field_count[field];        
 
         if(count == -1) {
           this.add_another_field(field);
         }
-        
-        this.check_existing_doctor();  
+  
+        //this.preload_tab_data(form_type);
       },
       prev: function(evt) {
         console.log("From prev");
@@ -96,6 +98,8 @@ define([
 
         //save this model data        
         this.collection.add(model);
+        console.log("MODEL", model);
+        this.preload_tab_data(evt.target.href.split("#")[1].split("/")[1]);
 
       },
 
@@ -135,24 +139,23 @@ define([
         return false;
       },
 
-      put_into_form: function(type) {
+      put_into_form: function(type, form) {
         var that = this;
 
-        // Check if the string ends with s, if not just append _field
-        var form_type = this.form_type.split("_")[0],
+        var form_type = (form ? form.split("_")[0] : this.form_type.split("_")[0]),
             field = (form_type.charAt(form_type.length - 1) == "s") ? form_type.slice(0, -1) + "_field" : form_type + "_field",
-            count = this.field_count[field];  
+            count = this.collection.field_count[field];  
 
-        for(var i = 0; i < count && count >= 0 ; i++) {  
-          this.add_another_field(field);
-        }
+          for(var i = 0; i <  count && count >= 0 ; i++) {  
+            this.add_another_field(field, i);
+          }
 
         setTimeout(function() {
           $this = $(that.el).parent().find("li.active form.primary");
           if(form_type == "specializations") {
 
             if(type['data[Docspeclink]']) {
-
+              
               var elems = type['data[Docspeclink]'].split(", "),
                   servermodel = $(".multiple_select").data("servermodel");
 
@@ -160,7 +163,7 @@ define([
                 var id = elems[i];
                 var opt = $(".multiple_select").find("option[value=" + id + "]");
                 if(opt.length == 0) {
-                  console.log(servermodel);
+                  // console.log(servermodel);
                   // console.log("Could not find", elems[i]);
                   $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
                     options.xhrFields = {
@@ -173,15 +176,13 @@ define([
                     url: 'http://docawards.com/api/' + servermodel + '/autocomplete.json?search_by_id=' + id,
                     success: function(data) {
                       if(data.code == 200) {
-                        console.log(id);
+                        // console.log(id);
                         var opt_val = data.data[id],
                             opt = '<option value='+ id +'>' + opt_val + '</option>';
             
                         $(".multiple_select").append(opt);
                         $(".multiple_select").val(type['data[Docspeclink]'].split(", "));
                         $(".multiple_select").trigger('liszt:updated');
-
-                        // $(".multiple_select").trigger('liszt:updated');
                         console.log($(".multiple_select"));
                       }
                       
@@ -213,7 +214,7 @@ define([
             
             for(key in type) {
               if(key.indexOf('location_id') > -1) {
-                console.log(key);
+                // console.log(key);
                 var id = type[key];
                 options.push(id);
               }
@@ -244,8 +245,6 @@ define([
             });
 
 
-            
-
             for(key in type) {
 
 
@@ -259,9 +258,6 @@ define([
           }  
         }, 100)
 
-
-
-        
       },
 
       preload_tab_data: function(type) {
@@ -273,8 +269,10 @@ define([
           return model.attributes.form_type == form_type;
         });
 
+
         if (model && model[0]) {
-          this.put_into_form(model[0].toJSON());
+          console.log("FROM NEXT", model[0].toJSON());
+          this.put_into_form(model[0].toJSON(), form_type);
         }
       },
 
@@ -310,7 +308,7 @@ define([
         return false;
       },
 
-      add_another_field: function(evt) {
+      add_another_field: function(evt, i) {
         // Check Type to see if the function is called on 'click' or on load
         if(typeof evt == "string") {
           var elem = evt,
@@ -320,11 +318,12 @@ define([
               target = $(evt.target);
         }
          
+
         var tmpl = _.template(eval(elem));
 
+        var id = (i != undefined) ? i : (++this.collection.field_count[elem]);
 
-
-        var inserted = $(tmpl({ id: (++this.field_count[elem]) })).attr("class", "field").insertBefore(target.parent().parent()).show();
+        var inserted = $(tmpl({ id: id })).attr("class", "field").insertBefore(target.parent().parent()).show();
         inserted.find(".chosen_temp").removeClass("chosen_temp").addClass("chosen_simple").chosen();
         window.DocAwards.UtilFunctions.autocomplete_ajax_chosen();
 
@@ -348,7 +347,7 @@ define([
       delete_field: function(evt) {
         button = $(evt.target).parent();
         var elem = button.data("elem");
-        --this.field_count[elem];
+        --this.collection.field_count[elem];
         $(evt.target).parent().parent().parent().remove();
         $('.tooltip').hide(); // Dont know why it doesnt autohide, so doing manually
         return false;
@@ -375,10 +374,10 @@ define([
             
             // Set the initial partial fields counter
             var field = obj.toLowerCase() + "_field";
-            if(this.field_count[field]) this.field_count[field] = model[obj].length;
+            if(this.collection.field_count[field]) this.collection.field_count[field] = model[obj].length;
 
             // Fill Consult Locations separately because of difference in names
-            if(obj == 'Docconsultlocation') this.field_count['consultation_field'] = model['Docconsultlocation'].length
+            if(obj == 'Docconsultlocation') this.collection.field_count['consultation_field'] = model['Docconsultlocation'].length
 
 
             // Separate out the DocSpecLinks to use in Multiple-select Chosen

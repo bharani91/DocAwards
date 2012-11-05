@@ -85,6 +85,11 @@ define([
       $(".wrapper").hide().fadeIn("slow", function() {
 
         window.datas = new DataCollection();
+
+        // Fetch from server only once and prepopulate the fields
+        //window.datas.fetch_from_server();
+
+
         var form_view = new ProfileFormView({ collection: window.datas, url: "personal_details", el: "li#personal_detailsTab", template: "personal_details_template"});
         //Datepicker
         $( ".datepicker" ).datepicker({
@@ -116,7 +121,9 @@ define([
       //UNCOMMENT AFTER IMPLEMENTING SIGNUP
       //var user_model = (id != "personal_details") ? window.current_doctor : window.DocAwards.current_user;
 
-      if (!window.datas) window.datas = new DataCollection();
+      if (window.datas == undefined) window.datas = new DataCollection();
+
+
       var form_view = new ProfileFormView({collection: window.datas, url: id, el: el, template: template});
 
       var $tab = $('a[href="#create_profile/' + id + '"]').parent('dd'),
