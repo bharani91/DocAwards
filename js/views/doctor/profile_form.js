@@ -25,6 +25,7 @@ define([
             experiences_template, consultation_template, contact_details_template, qualification_field, experience_field, 
             consultation_field, contact_field, add_location_modal, add_specializations_modal, add_degrees_modal, 
             add_cities_modal, add_countries_modal, add_pin_code_modal){
+
     var ProfileFormView = Backbone.View.extend({
       initialize: function(options) {
         this.el = options.el;
@@ -34,8 +35,6 @@ define([
         if(this.collection.models.length == 0) {
           this.collection.fetch_from_server();
         }
-
-        
 
         var that = this;
         this.collection.bind("fetched_from_server", function(data) {
@@ -75,20 +74,19 @@ define([
             field = (form_type.charAt(form_type.length - 1) == "s") ? form_type.slice(0, -1) + "_field" : form_type + "_field",
             count = this.collection.field_count[field];        
 
+
+        // If doctor is creating a profile, show only one field otherwise show n-fields
         if(count == -1) {
           this.add_another_field(field);
         } else {
           for(var i = 0; i <  count && count >= 0 ; i++) {  
             this.add_another_field(field, i);
           }
-
         }
 
-
-
-  
         //this.preload_tab_data(form_type);
       },
+
       prev: function(evt) {
         console.log("From prev");
         this.preload_tab_data(evt.target.href.split("#")[1].split("/")[1]);
@@ -97,6 +95,7 @@ define([
       saveTab: function(evt) {
         var model = new FormData($(this.form).serializeFormJSON());
         model.set({"form_type": this.form_type});
+        
         //delete preivously created model (if any)
         var that = this;
         old_model = this.collection.filter(function(model){ 
@@ -112,7 +111,9 @@ define([
       },
 
       submit: function() {
+        // Add the last section to the collection
         this.saveTab();
+
         var data = {};
         _.each(this.collection.models, function(model) {
           var type = model.get("form_type"), m = model.toJSON();
@@ -129,13 +130,13 @@ define([
           } else {
             _.extend(data, m)
           }
-
         });
 
         // Replace with current user
         data["data[Doctor][user_id]"] = window.DocAwards.current_user.getUser().id;
         data["data[Doctor][image]"] = "temp.jpg";
 
+        // REMOVE AFTER TESTING
         console.log("DATA", data);
         window.temp_data = data;
 
@@ -154,10 +155,19 @@ define([
             field = (form_type.charAt(form_type.length - 1) == "s") ? form_type.slice(0, -1) + "_field" : form_type + "_field",
             count = this.collection.field_count[field];  
 
-          for(var i = 0; i <  count && count >= 0 ; i++) {  
+          // for(var i = 0; i <  count && count >= 0 ; i++) {  
             
-            this.add_another_field(field, i);
+          //   this.add_another_field(field, i);
+          // }
+
+          if(count == -1) {
+            this.add_another_field(field);
+          } else {
+            for(var i = 0; i <  count && count >= 0 ; i++) {  
+              this.add_another_field(field, i);
+            }
           }
+        
 
         setTimeout(function() {
           $this = $(that.el).parent().find("li.active form.primary");
