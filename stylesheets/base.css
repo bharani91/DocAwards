@@ -432,16 +432,6 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   display: none;
 }
 
-/* line 488, ../sass/base.scss */
-#landing-page-slider {
-  max-height: 500px;
-}
-
-/* line 492, ../sass/base.scss */
-.orbit_container {
-  height: 500px;
-}
-
 /* line 502, ../sass/base.scss */
 .landing_page {
   border-top: 3px solid #0382f7;
@@ -485,7 +475,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 }
 /* line 542, ../sass/base.scss */
 .landing_page .main .ask_container {
-  padding-top: 350px;
+  padding-top: 25%;
 }
 /* line 544, ../sass/base.scss */
 .landing_page .main .ask_container .container_inner {
@@ -521,7 +511,11 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   padding-top: 12px !important;
   padding-bottom: 28px;
 }
-/* line 578, ../sass/base.scss */
+/* line 577, ../sass/base.scss */
+.landing_page .es-carousel-wrapper {
+  margin-top: 5%;
+}
+/* line 579, ../sass/base.scss */
 .landing_page .es-carousel-wrapper h1 {
   color: #8e8e8f;
   font-size: 18px;
@@ -531,24 +525,24 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   padding: 10px 0;
 }
 
-/* line 590, ../sass/base.scss */
+/* line 591, ../sass/base.scss */
 .ui-state-error {
   min-width: 390px;
 }
 
-/* line 594, ../sass/base.scss */
+/* line 595, ../sass/base.scss */
 .ui-autocomplete.ui-menu.ui-widget {
   width: 390px !important;
   height: 200px;
   overflow-y: auto;
 }
 
-/* line 600, ../sass/base.scss */
+/* line 601, ../sass/base.scss */
 .button.dropdown {
   cursor: default;
 }
 
-/* line 604, ../sass/base.scss */
+/* line 605, ../sass/base.scss */
 .button.dropdown > ul li {
   display: block;
   color: #555;
@@ -559,127 +553,127 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   cursor: default !important;
 }
 
-/* line 614, ../sass/base.scss */
+/* line 615, ../sass/base.scss */
 .chzn-container-single .chzn-single {
   height: 42px;
   line-height: 42px;
   font-size: 19px;
 }
-/* line 618, ../sass/base.scss */
+/* line 619, ../sass/base.scss */
 .chzn-container-single .chzn-single span {
   color: #8e8e8f;
 }
 
-/* line 627, ../sass/base.scss */
+/* line 628, ../sass/base.scss */
 label small {
   font-size: 12px;
 }
 
-/* line 631, ../sass/base.scss */
+/* line 632, ../sass/base.scss */
 .days_checkboxes .two, .row .two {
   width: 13.66667%;
 }
 
-/* line 635, ../sass/base.scss */
+/* line 636, ../sass/base.scss */
 .add_another {
   margin-left: 5px;
 }
 
-/* line 639, ../sass/base.scss */
+/* line 640, ../sass/base.scss */
 .primary .chzn-container {
   width: 216px !important;
 }
-/* line 641, ../sass/base.scss */
+/* line 642, ../sass/base.scss */
 .primary .chzn-container .chzn-drop {
   width: 216px !important;
 }
-/* line 643, ../sass/base.scss */
+/* line 644, ../sass/base.scss */
 .primary .chzn-container .chzn-drop input {
   width: 190px !important;
 }
 
-/* line 650, ../sass/base.scss */
+/* line 651, ../sass/base.scss */
 .primary .small + .chzn-container {
   width: 90px !important;
 }
-/* line 652, ../sass/base.scss */
+/* line 653, ../sass/base.scss */
 .primary .small + .chzn-container .chzn-drop {
   width: 90px !important;
 }
-/* line 654, ../sass/base.scss */
+/* line 655, ../sass/base.scss */
 .primary .small + .chzn-container .chzn-drop input {
   width: 60px !important;
 }
 
-/* line 660, ../sass/base.scss */
+/* line 661, ../sass/base.scss */
 .primary .multiple_select + .chzn-container {
   width: 96% !important;
 }
-/* line 662, ../sass/base.scss */
+/* line 663, ../sass/base.scss */
 .primary .multiple_select + .chzn-container .chzn-drop {
   width: 100% !important;
 }
 
-/* line 668, ../sass/base.scss */
+/* line 669, ../sass/base.scss */
 .create_profile {
   margin-top: 80px !important;
 }
-/* line 670, ../sass/base.scss */
+/* line 671, ../sass/base.scss */
 .create_profile textarea {
   height: 120px;
 }
-/* line 673, ../sass/base.scss */
+/* line 674, ../sass/base.scss */
 .create_profile .row.select_row {
   margin-left: 0;
 }
 
-/* line 678, ../sass/base.scss */
+/* line 679, ../sass/base.scss */
 .field {
   margin-top: 20px;
 }
 
-/* line 682, ../sass/base.scss */
+/* line 683, ../sass/base.scss */
 .field:first-child {
   margin-top: 0;
 }
 
-/* line 686, ../sass/base.scss */
+/* line 687, ../sass/base.scss */
 .button_list {
   margin-top: 20px;
 }
 
-/* line 690, ../sass/base.scss */
+/* line 691, ../sass/base.scss */
 .new_speciality {
   margin-top: 40px;
 }
 
-/* line 694, ../sass/base.scss */
+/* line 695, ../sass/base.scss */
 .location_modal_link {
   margin-top: 30px;
 }
 
-/* line 699, ../sass/base.scss */
+/* line 700, ../sass/base.scss */
 .reveal-modal .chzn-container-single, .reveal-modal .chzn-drop, .reveal-modal .chzn-results {
   width: 100% !important;
 }
 
-/* line 703, ../sass/base.scss */
+/* line 704, ../sass/base.scss */
 .reveal-modal .chzn-search input {
   width: 94% !important;
   height: 30px;
 }
 
-/* line 709, ../sass/base.scss */
+/* line 710, ../sass/base.scss */
 .multiple_select {
   height: 100px !important;
 }
 
-/* line 713, ../sass/base.scss */
+/* line 714, ../sass/base.scss */
 .chzn-container-multi .chzn-choices li.search-field, .chzn-container-multi .chzn-choices li.search-field input {
   height: 30px !important;
 }
 
-/* line 717, ../sass/base.scss */
+/* line 718, ../sass/base.scss */
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
   font-size: 12px;
   padding-left: 3px;

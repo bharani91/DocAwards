@@ -77,7 +77,15 @@ define([
 
         if(count == -1) {
           this.add_another_field(field);
+        } else {
+          for(var i = 0; i <  count && count >= 0 ; i++) {  
+            this.add_another_field(field, i);
+          }
+
         }
+
+
+
   
         //this.preload_tab_data(form_type);
       },
@@ -147,6 +155,7 @@ define([
             count = this.collection.field_count[field];  
 
           for(var i = 0; i <  count && count >= 0 ; i++) {  
+            
             this.add_another_field(field, i);
           }
 
@@ -274,6 +283,12 @@ define([
           console.log("FROM NEXT", model[0].toJSON());
           this.put_into_form(model[0].toJSON(), form_type);
         }
+
+        var form_type = type,
+            field = (form_type.charAt(form_type.length - 1) == "s") ? form_type.slice(0, -1) + "_field" : form_type + "_field",
+            count = this.collection.field_count[field];
+
+
       },
 
       add_new_entry: function(evt) {
@@ -309,6 +324,7 @@ define([
       },
 
       add_another_field: function(evt, i) {
+        
         // Check Type to see if the function is called on 'click' or on load
         if(typeof evt == "string") {
           var elem = evt,
@@ -322,6 +338,7 @@ define([
         var tmpl = _.template(eval(elem));
 
         var id = (i != undefined) ? i : (++this.collection.field_count[elem]);
+
 
         var inserted = $(tmpl({ id: id })).attr("class", "field").insertBefore(target.parent().parent()).show();
         inserted.find(".chosen_temp").removeClass("chosen_temp").addClass("chosen_simple").chosen();

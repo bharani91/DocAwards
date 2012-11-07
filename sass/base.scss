@@ -486,11 +486,11 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 
     
 #landing-page-slider {
-  max-height: 500px;
+  //max-height: 500px;
 }
 
 .orbit_container {
-  height: 500px;
+  //height: 500px;
 }
 
 // .landing_wrapper {
@@ -540,7 +540,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
       }
     }
     .ask_container {
-      padding-top: 350px;
+      padding-top: 25%;
       .container_inner {
         background: rgba(white, 0.40);
         padding-bottom: 20px;
@@ -575,6 +575,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   }
 
   .es-carousel-wrapper {
+    margin-top: 5%;
     h1 {
       color: lighten($dark_gray, 20%);
       font-size: 18px; 
