@@ -486,12 +486,18 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 
     
 #landing-page-slider {
-  max-height: 650px;
+  max-height: 500px;
 }
 
 .orbit_container {
-  height: 650px;
+  height: 500px;
 }
+
+// .landing_wrapper {
+//   min-height: 400px;
+//   background: url("../images/landing_doc1.jpg") left top no-repeat;
+//   width: 100%;
+// }
 
 .landing_page {
   #logo {
@@ -509,13 +515,13 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   }
   border-top: 3px solid $dark_blue;
   header#top {
-    position: absolute;
-    top: 0;
-    left: 0;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
     height: 60px;
     width: 100%;
     background: #fff;
-    background: rgba(white, 0.60);
+    background: rgba(white, 0.40);
     .header_wrapper {
       padding-top: 8px;
     }
@@ -536,7 +542,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
     .ask_container {
       padding-top: 350px;
       .container_inner {
-        background: rgba(white, 0.60);
+        background: rgba(white, 0.40);
         padding-bottom: 20px;
       }
     }
