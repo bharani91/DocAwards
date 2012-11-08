@@ -15,9 +15,10 @@ define([
   'models/form_data',
   'models/user',
   'views/home/faq',
-  'collections/datas'
+  'collections/datas',
+  'views/doctor/upload_picture'
 
-], function($, _, Backbone, HeaderView, FooterView, mainHomeView, Doctor, DoctorView, DiseaseDoctorList, SpecialityDoctorList, DoctorListView, CreateProfileView, ProfileFormView, FormData, User, FaqView, DataCollection){
+], function($, _, Backbone, HeaderView, FooterView, mainHomeView, Doctor, DoctorView, DiseaseDoctorList, SpecialityDoctorList, DoctorListView, CreateProfileView, ProfileFormView, FormData, User, FaqView, DataCollection, UploadPicture){
   var AppRouter = Backbone.Router.extend({
     routes: {
       ""                    :       "home",
@@ -26,7 +27,9 @@ define([
       "speciality/:id"      :       "specialityListing",
       "create_profile"      :       "createProfile",
       "create_profile/:id"  :       "createProfileTab",
+      "upload_picture"     :       "uploadProfilePicture",
       "faq"                 :       "faq"
+      
     },
 
     initialize: function() {
@@ -161,6 +164,10 @@ define([
       });
 
       var footer_view = new FooterView();
+    },
+
+    uploadProfilePicture: function() {
+      var iframe = new UploadPicture();
     },
 
     faq: function() {

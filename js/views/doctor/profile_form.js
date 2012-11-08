@@ -151,8 +151,9 @@ define([
         window.DocAwards.UtilFunctions.ajax('POST', 'doctors/ws_add.json', data, function(data) {
             console.log(data);
             $(".alert-box.success").text("Saved your profile successfully").slideDown("slow");
-            AppRouter.navigate('#doctor/'+window.DocAwards.current_user.doctor.id);
+            window.app.navigate('#upload_picture', true);
           });
+
         return false;
       },
 
@@ -180,6 +181,9 @@ define([
               
               var elems = type['data[Docspeclink]'].split(", "),
                   servermodel = $(".multiple_select").data("servermodel");
+
+              $(".multiple_select").val(type['data[Docspeclink]'].split(", "));
+              $(".multiple_select").trigger('liszt:updated');
 
               for(var i = 0; i < elems.length - 1; i++) {
                 var id = elems[i];

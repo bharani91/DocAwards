@@ -679,3 +679,10 @@ label small {
   padding-left: 3px;
   padding-right: 19px;
 }
+
+/* line 730, ../sass/base.scss */
+#upload_iframe {
+  width: 100%;
+  height: 150px;
+  border: none;
+}
