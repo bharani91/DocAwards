@@ -79,7 +79,7 @@ define([
         if(count == -1) {
           this.add_another_field(field);
         } else {
-          for(var i = 0; i <  count && count >= 0 ; i++) {  
+          for(var i = 0; i <=  count && count >= 0 ; i++) {  
             this.add_another_field(field, i);
           }
         }
@@ -106,7 +106,7 @@ define([
         //save this model data        
         this.collection.add(model);
         console.log("MODEL", model);
-        this.preload_tab_data(evt.target.href.split("#")[1].split("/")[1]);
+        if(this.form_type != "contact_details") this.preload_tab_data(evt.target.href.split("#")[1].split("/")[1]);
 
       },
 
@@ -130,11 +130,19 @@ define([
           } else {
             _.extend(data, m)
           }
+
+
         });
 
         // Replace with current user
-        data["data[Doctor][user_id]"] = window.DocAwards.current_user.getUser().id;
+        // data["data[Doctor][user_id]"] = window.DocAwards.current_user.getUser().id;
         data["data[Doctor][image]"] = "temp.jpg";
+
+        for(key in data) {
+          if((_.isArray(data[key])) || (_.isObject(data[key]))) {
+            delete data[key];
+          }
+        }
 
         // REMOVE AFTER TESTING
         console.log("DATA", data);
@@ -155,18 +163,13 @@ define([
             field = (form_type.charAt(form_type.length - 1) == "s") ? form_type.slice(0, -1) + "_field" : form_type + "_field",
             count = this.collection.field_count[field];  
 
-          // for(var i = 0; i <  count && count >= 0 ; i++) {  
-            
-          //   this.add_another_field(field, i);
+          // if(count == -1) {
+          //   this.add_another_field(field);
+          // } else {
+          //   for(var i = 0; i <=  count ; i++) {  
+          //     this.add_another_field(field, i);
+          //   }
           // }
-
-          if(count == -1) {
-            this.add_another_field(field);
-          } else {
-            for(var i = 0; i <  count && count >= 0 ; i++) {  
-              this.add_another_field(field, i);
-            }
-          }
         
 
         setTimeout(function() {
@@ -182,8 +185,8 @@ define([
                 var id = elems[i];
                 var opt = $(".multiple_select").find("option[value=" + id + "]");
                 if(opt.length == 0) {
-                  // console.log(servermodel);
-                  // console.log("Could not find", elems[i]);
+                  console.log(servermodel);
+                  console.log("Could not find", elems[i]);
                   $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
                     options.xhrFields = {
                       withCredentials: true
@@ -195,18 +198,20 @@ define([
                     url: 'http://docawards.com/api/' + servermodel + '/autocomplete.json?search_by_id=' + id,
                     success: function(data) {
                       if(data.code == 200) {
-                        // console.log(id);
+
+                        console.log(id);
                         var opt_val = data.data[id],
                             opt = '<option value='+ id +'>' + opt_val + '</option>';
             
                         $(".multiple_select").append(opt);
                         $(".multiple_select").val(type['data[Docspeclink]'].split(", "));
                         $(".multiple_select").trigger('liszt:updated');
-                        console.log($(".multiple_select"));
+
                       }
-                      
                     }
                   });
+
+                  
                 }
               }
 
@@ -338,7 +343,7 @@ define([
         // Check Type to see if the function is called on 'click' or on load
         if(typeof evt == "string") {
           var elem = evt,
-          target = $("a[data-elem='" + elem + "']");
+          target = $("a[data-elem='" + elem + "'].button");
         } else {
           var elem = $(evt.target).data("elem"),
               target = $(evt.target);
@@ -347,8 +352,11 @@ define([
 
         var tmpl = _.template(eval(elem));
 
+
+
         var id = (i != undefined) ? i : (++this.collection.field_count[elem]);
 
+        console.log(target, elem);
 
         var inserted = $(tmpl({ id: id })).attr("class", "field").insertBefore(target.parent().parent()).show();
         inserted.find(".chosen_temp").removeClass("chosen_temp").addClass("chosen_simple").chosen();

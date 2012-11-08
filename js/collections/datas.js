@@ -8,7 +8,14 @@ define([
     model: FormData,
 
     initialize: function (options) {
-      this.id = 1 //window.DocAwards.current_user.getUser().id;
+      if(window.DocAwards.current_user.getDoctor().id) {
+        this.id = window.DocAwards.current_user.getDoctor().id;
+      } else {
+        window.DocAwards.current_user.bind('AuthChange', this.setID);  
+      }
+
+      
+
       // Initialize all field counts to zero
       this.field_count = {
         "qualification_field" : -1,
@@ -31,6 +38,10 @@ define([
 
     },
 
+    setID: function() {
+      this.id = window.DocAwards.current_user.getDoctor().id;
+    },
+
     url: function() {
       return "http://docawards.com/api/doctors/get_doctors.json?doctor_id=" + this.id
     },
@@ -40,7 +51,6 @@ define([
     },
 
     fetch_from_server: function() {
-      
       var that = this;
       this.fetch({
         success: function(collection) {
@@ -53,6 +63,7 @@ define([
     
     // Parse the received JSON into a simple object with appropropriate 'name' field
     parse_doctor_data: function(model) {
+
       var data = {};
       console.log("MODEL", model);
       for(var obj in model) {
@@ -61,10 +72,13 @@ define([
           // Set the initial partial fields counter
           var field = obj.toLowerCase() + "_field";
 
-          if(this.field_count[field]) this.field_count[field] = model[obj].length;
+          if(this.field_count[field]) this.field_count[field] = model[obj].length - 1;
 
           // Fill Consult Locations separately because of difference in names
-          if(obj == 'Docconsultlocation') this.field_count['consultation_field'] = model['Docconsultlocation'].length
+          if(obj == 'Docconsultlocation') this.field_count['consultation_field'] = model['Docconsultlocation'].length - 1
+
+          // Fill Consult Locations separately because of difference in names
+          if(obj == 'DoctorContact') this.field_count['contact_field'] = model['DoctorContact'].length - 1
 
 
           // Separate out the DocSpecLinks to use in Multiple-select Chosen

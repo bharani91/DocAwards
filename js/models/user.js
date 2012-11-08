@@ -58,6 +58,7 @@ define([
         current_user.doctor = null;
         current_user.message = model.attributes.name;
       }
+
       current_user.trigger('AuthChange');
     }, 
     isLoggedIn: function () {
@@ -71,6 +72,9 @@ define([
     }, 
     getUser: function () {
       return this.user;
+    },
+    getDoctor: function() {
+      return this.doctor[0];
     },
 
     isDoctor: function() {
