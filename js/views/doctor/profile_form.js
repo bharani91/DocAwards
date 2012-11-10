@@ -227,17 +227,8 @@ define([
       add_new_entry: function(evt) {
         var $form = $(evt.target),
             data = $form.serializeFormJSON();
-        $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-          options.xhrFields = {
-            withCredentials: true
-          };
-        });
-
-        $.ajax({
-          type: 'POST',
-          url: "http://docawards.com/api/"+$form.data('servermodel')+"/ws_add.json",
-          data: data,
-          success: function(data) {
+        window.DocAwards.UtilFunctions.ajax('POST', $form.data('servermodel')+"/ws_add.json",
+          data, function(data) {
             console.log(data);
             if (data.code = '200') {
               $(".alert-box.success").text("Added field successfully").slideDown("slow").delay(2000).slideUp("slow");
@@ -251,7 +242,6 @@ define([
             } else {
               $(".alert-box.alert").text("Failed to add field. Please try again").slideDown("slow").delay(2000).slideUp("slow");
             }
-          }
         });
         return false;
       },
