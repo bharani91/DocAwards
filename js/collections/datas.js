@@ -8,13 +8,13 @@ define([
     model: FormData,
 
     initialize: function (options) {
-      if(window.DocAwards.current_user.getDoctor().id) {
+      if(window.DocAwards.current_user.isLoggedIn() && 
+        window.DocAwards.current_user.getDoctor()) {
         this.id = window.DocAwards.current_user.getDoctor().id;
       } else {
+        this.id = null;
         window.DocAwards.current_user.bind('AuthChange', this.setID);  
-      }
-
-      
+      }     
 
       // Initialize all field counts to zero
       this.field_count = {
@@ -51,6 +51,9 @@ define([
     },
 
     fetch_from_server: function() {
+      if (!this.id) {
+        return; 
+      }
       var that = this;
       this.fetch({
         success: function(collection) {

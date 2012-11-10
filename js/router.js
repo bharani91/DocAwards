@@ -119,13 +119,7 @@ define([
       var el = "li#" + id + "Tab",
           template = id + "_template";
 
-
-
-      //UNCOMMENT AFTER IMPLEMENTING SIGNUP
-      //var user_model = (id != "personal_details") ? window.current_doctor : window.DocAwards.current_user;
-
       if (window.datas == undefined) window.datas = new DataCollection();
-
 
       var form_view = new ProfileFormView({collection: window.datas, url: id, el: el, template: template});
 
@@ -139,29 +133,6 @@ define([
       
       $activeTab.removeClass('active');
       $tab.addClass('active');
-
-       // Datepicker
-      $( ".datepicker" ).datepicker({
-          changeMonth: true,
-          changeYear: true,
-          yearRange: "1910:2012",
-          defaultDate: "-10y",
-          dateFormat: 'dd-mm-yy'
-        });
-
-      $( ".timepicker" ).timepicker({
-          showPeriod: true,
-          showLeadingZero: true
-      });
-
-      $(".chosen_simple").chosen();
-      window.DocAwards.UtilFunctions.autocomplete_ajax_chosen();
-
-      $(".open_modal").live("click", function() {
-        var elem = $(this).data("modal")
-        $("#" + elem).reveal();
-        return false;
-      });
 
       var footer_view = new FooterView();
     },

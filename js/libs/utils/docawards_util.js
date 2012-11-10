@@ -110,10 +110,47 @@ window.DocAwards.UtilFunctions.ajax = function(type, relurl, postdata, successcb
     dataType: 'json',
     success: successcbk, 
     error: function(xhr, status, error) {
+      //Check if this is because we are logged out
+      window.DocAwards.current_user.fetch();
+
       console.log(xhr);
       console.log(status);
       console.log(error);
-      $(".alert-box.alert").text('Error: '+status+': '+error).slideDown("slow").delay(5000).slideUp("slow");
+      $(".alert-box.alert").text('Something went wrong.  Please ensure you are connected to the Internet, and logged in to DocAwards.  Error: '+status+': '+error).slideDown("slow").delay(5000).slideUp("slow");
     }
   });
+}
+
+window.DocAwards.UtilFunctions.setChosenVal = function (elem, value) {
+  elem.val(value); 
+  elem.trigger('liszt:updated')
+
+  if (!elem.data("servermodel")) {
+    console.log("ERROR: setChosenVal called with no servermodel set in data.  Returning");
+    return;
+  }
+
+  // Now check if we need to get any ajax values
+  var ids_to_get = [];
+  for(var i = 0; i < value.length; i++) {
+    var id = value[i];
+    var opt = elem.find("option[value=" + id + "]");
+    if(opt.length == 0) {
+      console.log("Could not find", id);
+      ids_to_get.push(id);
+    }
+  }
+  if (ids_to_get.length) {
+    window.DocAwards.UtilFunctions.ajax('GET', elem.data("servermodel") + '/autocomplete.json?search_by_id=' + ids_to_get.join(","), 
+      null, function(data) {
+        if(data.code == 200) {
+          for(key in data.data) {
+            opt += '<option value='+ key +'>' + data.data[key] + '</option>';  
+          }
+          elem.append(opt);
+          elem.val(value); 
+          elem.trigger('liszt:updated')
+        }
+    });
+  }
 }
