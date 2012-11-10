@@ -84,12 +84,12 @@ define([
           }
         }
 
-        //this.preload_tab_data(form_type);
+        this.preload_tab_data(form_type);
       },
 
       prev: function(evt) {
         console.log("From prev");
-        this.preload_tab_data(evt.target.href.split("#")[1].split("/")[1]);
+        //this.preload_tab_data(evt.target.href.split("#")[1].split("/")[1]);
       },
 
       saveTab: function(evt) {
@@ -106,7 +106,7 @@ define([
         //save this model data        
         this.collection.add(model);
         console.log("MODEL", model);
-        if(this.form_type != "contact_details") this.preload_tab_data(evt.target.href.split("#")[1].split("/")[1]);
+        //if(this.form_type != "contact_details") this.preload_tab_data(evt.target.href.split("#")[1].split("/")[1]);
 
       },
 
@@ -162,129 +162,94 @@ define([
 
         var form_type = (form ? form.split("_")[0] : this.form_type.split("_")[0]),
             field = (form_type.charAt(form_type.length - 1) == "s") ? form_type.slice(0, -1) + "_field" : form_type + "_field",
-            count = this.collection.field_count[field];  
 
-          // if(count == -1) {
-          //   this.add_another_field(field);
-          // } else {
-          //   for(var i = 0; i <=  count ; i++) {  
-          //     this.add_another_field(field, i);
-          //   }
-          // }
-        
+        $this = $(that.el).parent().find("li.active form.primary");
+        if(form_type == "specializations") {
+          if(type['data[Docspeclink]']) {
+            var elems = type['data[Docspeclink]'].split(", "),
+                servermodel = $(".multiple_select").data("servermodel");
 
-        setTimeout(function() {
-          $this = $(that.el).parent().find("li.active form.primary");
-          if(form_type == "specializations") {
+            $(".multiple_select").val(type['data[Docspeclink]'].split(", "));
+            $(".multiple_select").trigger('liszt:updated');
 
-            if(type['data[Docspeclink]']) {
-              
-              var elems = type['data[Docspeclink]'].split(", "),
-                  servermodel = $(".multiple_select").data("servermodel");
+            for(var i = 0; i < elems.length - 1; i++) {
+              var id = elems[i];
+              var opt = $(".multiple_select").find("option[value=" + id + "]");
+              if(opt.length == 0) {
+                console.log(servermodel);
+                console.log("Could not find", elems[i]);
+                $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+                  options.xhrFields = {
+                    withCredentials: true
+                  };
+                });
 
-              $(".multiple_select").val(type['data[Docspeclink]'].split(", "));
-              $(".multiple_select").trigger('liszt:updated');
+                $.ajax({
+                  type: 'GET',
+                  url: 'http://docawards.com/api/' + servermodel + '/autocomplete.json?search_by_id=' + id,
+                  success: function(data) {
+                    if(data.code == 200) {
 
-              for(var i = 0; i < elems.length - 1; i++) {
-                var id = elems[i];
-                var opt = $(".multiple_select").find("option[value=" + id + "]");
-                if(opt.length == 0) {
-                  console.log(servermodel);
-                  console.log("Could not find", elems[i]);
-                  $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-                    options.xhrFields = {
-                      withCredentials: true
-                    };
-                  });
+                      console.log(id);
+                      var opt_val = data.data[id],
+                          opt = '<option value='+ id +'>' + opt_val + '</option>';
+          
+                      $(".multiple_select").append(opt);
+                      $(".multiple_select").val(type['data[Docspeclink]'].split(", "));
+                      $(".multiple_select").trigger('liszt:updated');
 
-                  $.ajax({
-                    type: 'GET',
-                    url: 'http://docawards.com/api/' + servermodel + '/autocomplete.json?search_by_id=' + id,
-                    success: function(data) {
-                      if(data.code == 200) {
-
-                        console.log(id);
-                        var opt_val = data.data[id],
-                            opt = '<option value='+ id +'>' + opt_val + '</option>';
-            
-                        $(".multiple_select").append(opt);
-                        $(".multiple_select").val(type['data[Docspeclink]'].split(", "));
-                        $(".multiple_select").trigger('liszt:updated');
-
-                      }
                     }
-                  });
-
-                  
-                }
-              }
-
-              
-
-
-            } else {
-              var val = [];
-              console.log("TYPE", type);
-              for(var i = 0; i <= type['data[Docspeclink][0][specialty_id]'].length; i++) {
-                val.push(type['data[Docspeclink][0][specialty_id]'][i]);
-              }
-              $(".multiple_select").val(val);
-              $(".multiple_select").trigger('liszt:updated');
-
-            }
-            
-
-          } else {
-
-            var options = [],
-                opt = "";
-
-            
-            for(key in type) {
-              if(key.indexOf('location_id') > -1) {
-                // console.log(key);
-                var id = type[key];
-                options.push(id);
-              }
-            }
-
-            $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-              options.xhrFields = {
-                withCredentials: true
-              };
-            });
-
-            $.ajax({
-              type: 'GET',
-              url: 'http://docawards.com/api/locations/autocomplete.json?search_by_id=' + options.join(","),
-
-              success: function(data) {
-                if(data.code == 200) {
-                  for(key in data.data) {
-                    opt += '<option value='+ key +'>' + data.data[key] + '</option>';  
                   }
-
-                  $(".location_select").append(opt);
-                  $(".location_select").trigger('liszt:updated');
-                  console.log(opt);
-                }
-                
+                });                
               }
-            });
-
-
-            for(key in type) {
-
-
-
-              $this.find("input[name='" + key + "']").val(type[key]);
-              $this.find("select[name='"+key+"']").val(type[key]);
-              $this.find("select[name='"+key+"']").trigger('liszt:updated');
             }
+          } else {
+            var val = [];
+            console.log("TYPE", type);
+            for(var i = 0; i <= type['data[Docspeclink][0][specialty_id]'].length; i++) {
+              val.push(type['data[Docspeclink][0][specialty_id]'][i]);
+            }
+            $(".multiple_select").val(val);
+            $(".multiple_select").trigger('liszt:updated');
+          }
+        } else {
+          var options = [],
+              opt = "";
+          for(key in type) {
+            // Only ajax get select elements that dont already exist
+            if((key.indexOf('location_id') > -1) && 
+              ($('.location_select').find('option[value='+type[key]+']').length == 0)) {
+              // console.log(key);
+              var id = type[key];
+              options.push(id);
+            }
+          }
 
+          window.DocAwards.UtilFunctions.ajax('GET', 'locations/autocomplete.json?search_by_id=' + options.join(","),
+            null, function(data) {
+              if(data.code == 200) {
+                for(key in data.data) {
+                  opt += '<option value='+ key +'>' + data.data[key] + '</option>';  
+                }
 
-          }  
-        }, 100)
+                $(".location_select").append(opt);
+                $(".location_select").trigger('liszt:updated');
+                console.log(opt);
+
+                for(key in type) {
+                  $this.find("select[name='"+key+"']").val(type[key]);
+                  $this.find("select[name='"+key+"']").trigger('liszt:updated');
+                }
+              }
+              
+            }
+          );
+          for(key in type) {
+                  $this.find("input[name='" + key + "']").val(type[key]);
+                  $this.find("select[name='"+key+"']").val(type[key]);
+                  $this.find("select[name='"+key+"']").trigger('liszt:updated');
+          }
+        }  
 
       },
 
