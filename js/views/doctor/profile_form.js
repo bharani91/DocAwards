@@ -184,8 +184,10 @@ define([
           if(type['data[Docspeclink]']) {
             val_to_set = type['data[Docspeclink]'].split(", ");
           } else {
-            for(var i = 0; i <= type['data[Docspeclink][0][specialty_id]'].length; i++) {
-              val_to_set.push(type['data[Docspeclink][0][specialty_id]'][i]);
+            if(type['data[Docspeclink][0][specialty_id]']) {
+              for(var i = 0; i <= type['data[Docspeclink][0][specialty_id]'].length; i++) {
+                val_to_set.push(type['data[Docspeclink][0][specialty_id]'][i]);
+              }
             }
           }
           window.DocAwards.UtilFunctions.setChosenVal($(".multiple_select"), val_to_set);
