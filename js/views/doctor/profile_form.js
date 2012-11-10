@@ -220,8 +220,6 @@ define([
         var form_type = type,
             field = (form_type.charAt(form_type.length - 1) == "s") ? form_type.slice(0, -1) + "_field" : form_type + "_field",
             count = this.collection.field_count[field];
-
-
       },
 
       add_new_entry: function(evt) {
@@ -295,66 +293,6 @@ define([
         $('.tooltip').hide(); // Dont know why it doesnt autohide, so doing manually
         return false;
       },
-
-      // Check if a doctor with the given ID exists
-      check_existing_doctor: function() {
-        var doctor = new Doctor({id: window.DocAwards.current_user.getUser().id});
-            that = this;
-        doctor.fetch({
-          success: function(model) {
-            that.parse_doctor_data(model.toJSON());
-          }
-        });
-
-      },
-
-      // Parse the received JSON into a simple object with appropropriate 'name' field
-      parse_doctor_data: function(model) {
-        var data = {};
-        for(var obj in model) {
-          // Nested Data eg: Consult locations, experiences
-          if(model[obj].constructor == Array) {
-            
-            // Set the initial partial fields counter
-            var field = obj.toLowerCase() + "_field";
-            if(this.collection.field_count[field]) this.collection.field_count[field] = model[obj].length;
-
-            // Fill Consult Locations separately because of difference in names
-            if(obj == 'Docconsultlocation') this.collection.field_count['consultation_field'] = model['Docconsultlocation'].length
-
-
-            // Separate out the DocSpecLinks to use in Multiple-select Chosen
-            if(obj == 'Docspeclink' && model[obj].length) {
-              var temp = ""
-              for(var i = 0; i < model[obj].length; i++) {
-                temp += (model[obj][i]['specialty_id'] + ", ");
-              }
-
-              data["data[Docspeclink]"] = temp;
-
-            } else {
-              for(var i = 0; i < model[obj].length; i++) {
-                for(key in model[obj][i]) {
-                  if(typeof model[obj][i][key] != 'object') {
-                    data[ 'data[' + obj + '][' + i + '][' + key + ']' ] = model[obj][i][key];
-                  }
-                } 
-              }  
-            }
-            
-          } else if(model[obj].constructor == Object) {
-            // Doctor Profile
-            for(key in model[obj]) {
-              data[ 'data[' + obj + '][' + key + ']' ] = model[obj][key];
-            }
-          }
-        }
-      },
-
-
-
-    
-
     });
 
   return ProfileFormView;
