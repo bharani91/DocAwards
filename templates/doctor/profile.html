@@ -44,7 +44,7 @@
           <h5>Experience</h5>
           <% _.each(experiences, function(experience) { %>
             <div class="exp">
-              <%= (new Date(experience["from"])).getFullYear() %> - <%= (new Date(experience["to"])).getFullYear() %> at <span class="has-tip" data-width="200" title="<%= experience["Location"]['name']+' in '+experience["Location"]["neighborhood"]+', '+experience["Location"]['City']['name']+', '+experience["Location"]['Country']['name']%>"<strong><%= experience["Location"]["name"] %></strong><img src="http://docawards.com/images/country_flags/<%= experience['Location']['Country']['iso2'] %>.png"</span>
+              <%= (new Date(experience["from"])).getFullYear() %> - <%= (new Date(experience["to"])).getFullYear() %> at <span class="has-tip" data-width="200" title="<%= experience["Location"]['name']+' in '+experience["Location"]["neighborhood"]+', '+experience["Location"]['City']['name']+', '+experience["Location"]['Country']['name']%>"<strong><%= experience["Location"]["name"] %></strong> <img src="http://docawards.com/images/country_flags/<%= experience['Location']['Country']['iso2'] %>.png" style="width=2px"/></span>
             </div><!--exp-->
           <% }); %>
 
