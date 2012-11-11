@@ -30,20 +30,24 @@ define([
       initialize: function(options) {
         this.el = options.el;
         this.form_type = options.template.split("_template")[0];
+        //HACK! Since Contact Details is a two word think unlike other tabs
+        if (this.form_type == 'contact_details') { this.form_type = 'contact'; }
         this.template = _.template(eval(options.template));
 
-        if(this.collection.models.length == 0) {
+        if(this.collection.models.length == 0 && 
+          window.DocAwards.current_user.isLoggedIn() && 
+          window.DocAwards.current_user.getDoctor()) {
           this.collection.fetch_from_server();
+
+          var that = this;
+          this.collection.bind("fetched_from_server", function(data) {
+            console.log(that.collection)
+            that.render();
+          });
+        } else {
+          this.render();
         }
 
-        var that = this;
-        this.collection.bind("fetched_from_server", function(data) {
-          console.log(that.collection)
-          that.put_into_form(data);
-        });
-
-        this.render();
-        
         var add_location_template = _.template(add_location_modal),
             add_specializations_template = _.template(add_specializations_modal),
             add_degrees_template = _.template(add_degrees_modal),
@@ -70,10 +74,9 @@ define([
         this.form = $(this.el).find(".primary");
         
         // Check if the string ends with s, if not just append _field
-        var form_type = this.form_type.split("_")[0],
+        var form_type = this.form_type,
             field = (form_type.charAt(form_type.length - 1) == "s") ? form_type.slice(0, -1) + "_field" : form_type + "_field",
             count = this.collection.field_count[field];        
-
 
         // If doctor is creating a profile, show only one field otherwise show n-fields
         if(count == -1) {
@@ -83,13 +86,34 @@ define([
             this.add_another_field(field, i);
           }
         }
+               // Datepicker
+        $( ".datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1910:2012",
+            defaultDate: "-10y",
+            dateFormat: 'dd-mm-yy'
+          });
 
-        //this.preload_tab_data(form_type);
+        $( ".timepicker" ).timepicker({
+            showPeriod: true,
+            showLeadingZero: true
+        });
+
+        $(".chosen_simple").chosen();
+        window.DocAwards.UtilFunctions.autocomplete_ajax_chosen();
+
+        $(".open_modal").live("click", function() {
+          var elem = $(this).data("modal")
+          $("#" + elem).reveal();
+          return false;
+        });
+
+
+        this.preload_tab_data(form_type);
       },
 
       prev: function(evt) {
-        console.log("From prev");
-        this.preload_tab_data(evt.target.href.split("#")[1].split("/")[1]);
       },
 
       saveTab: function(evt) {
@@ -105,9 +129,6 @@ define([
 
         //save this model data        
         this.collection.add(model);
-        console.log("MODEL", model);
-        if(this.form_type != "contact_details") this.preload_tab_data(evt.target.href.split("#")[1].split("/")[1]);
-
       },
 
       submit: function() {
@@ -130,13 +151,7 @@ define([
           } else {
             _.extend(data, m)
           }
-
-
         });
-
-        // Replace with current user
-        // data["data[Doctor][user_id]"] = window.DocAwards.current_user.getUser().id;
-        data["data[Doctor][image]"] = "temp.jpg";
 
         for(key in data) {
           if((_.isArray(data[key])) || (_.isObject(data[key]))) {
@@ -158,172 +173,60 @@ define([
       },
 
       put_into_form: function(type, form) {
-        var that = this;
 
         var form_type = (form ? form.split("_")[0] : this.form_type.split("_")[0]),
             field = (form_type.charAt(form_type.length - 1) == "s") ? form_type.slice(0, -1) + "_field" : form_type + "_field",
-            count = this.collection.field_count[field];  
+            $form = $(this.el).parent().find("form.primary");
 
-          // if(count == -1) {
-          //   this.add_another_field(field);
-          // } else {
-          //   for(var i = 0; i <=  count ; i++) {  
-          //     this.add_another_field(field, i);
-          //   }
-          // }
-        
+        if(form_type == "specializations") {
+          var val_to_set = [];
 
-        setTimeout(function() {
-          $this = $(that.el).parent().find("li.active form.primary");
-          if(form_type == "specializations") {
-
-            if(type['data[Docspeclink]']) {
-              
-              var elems = type['data[Docspeclink]'].split(", "),
-                  servermodel = $(".multiple_select").data("servermodel");
-
-              $(".multiple_select").val(type['data[Docspeclink]'].split(", "));
-              $(".multiple_select").trigger('liszt:updated');
-
-              for(var i = 0; i < elems.length - 1; i++) {
-                var id = elems[i];
-                var opt = $(".multiple_select").find("option[value=" + id + "]");
-                if(opt.length == 0) {
-                  console.log(servermodel);
-                  console.log("Could not find", elems[i]);
-                  $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-                    options.xhrFields = {
-                      withCredentials: true
-                    };
-                  });
-
-                  $.ajax({
-                    type: 'GET',
-                    url: 'http://docawards.com/api/' + servermodel + '/autocomplete.json?search_by_id=' + id,
-                    success: function(data) {
-                      if(data.code == 200) {
-
-                        console.log(id);
-                        var opt_val = data.data[id],
-                            opt = '<option value='+ id +'>' + opt_val + '</option>';
-            
-                        $(".multiple_select").append(opt);
-                        $(".multiple_select").val(type['data[Docspeclink]'].split(", "));
-                        $(".multiple_select").trigger('liszt:updated');
-
-                      }
-                    }
-                  });
-
-                  
-                }
-              }
-
-              
-
-
-            } else {
-              var val = [];
-              console.log("TYPE", type);
-              for(var i = 0; i <= type['data[Docspeclink][0][specialty_id]'].length; i++) {
-                val.push(type['data[Docspeclink][0][specialty_id]'][i]);
-              }
-              $(".multiple_select").val(val);
-              $(".multiple_select").trigger('liszt:updated');
-
-            }
-            
-
+          if(type['data[Docspeclink]']) {
+            val_to_set = type['data[Docspeclink]'].split(", ");
           } else {
-
-            var options = [],
-                opt = "";
-
-            
-            for(key in type) {
-              if(key.indexOf('location_id') > -1) {
-                // console.log(key);
-                var id = type[key];
-                options.push(id);
+            if(type['data[Docspeclink][0][specialty_id]']) {
+              for(var i = 0; i <= type['data[Docspeclink][0][specialty_id]'].length; i++) {
+                val_to_set.push(type['data[Docspeclink][0][specialty_id]'][i]);
               }
             }
-
-            $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-              options.xhrFields = {
-                withCredentials: true
-              };
-            });
-
-            $.ajax({
-              type: 'GET',
-              url: 'http://docawards.com/api/locations/autocomplete.json?search_by_id=' + options.join(","),
-
-              success: function(data) {
-                if(data.code == 200) {
-                  for(key in data.data) {
-                    opt += '<option value='+ key +'>' + data.data[key] + '</option>';  
-                  }
-
-                  $(".location_select").append(opt);
-                  $(".location_select").trigger('liszt:updated');
-                  console.log(opt);
-                }
-                
-              }
-            });
-
-
-            for(key in type) {
-
-
-
-              $this.find("input[name='" + key + "']").val(type[key]);
-              $this.find("select[name='"+key+"']").val(type[key]);
-              $this.find("select[name='"+key+"']").trigger('liszt:updated');
+          }
+          window.DocAwards.UtilFunctions.setChosenVal($(".multiple_select"), val_to_set);
+        } else {
+          var options = [],
+              opt = "";
+          for(key in type) {
+            if((key.indexOf('location_id') > -1)) {
+              window.DocAwards.UtilFunctions.setChosenVal($form.find("select[name='" + key + "']"), type[key]);
+            } else {
+              $form.find("input[name='" + key + "']").val(type[key]);
+              $form.find("select[name='"+key+"']").val(type[key]);
+              $form.find("select[name='"+key+"']").trigger('liszt:updated');
             }
-
-
-          }  
-        }, 100)
-
+          }
+        }  
       },
 
       preload_tab_data: function(type) {
         //Preload the form for the next tab if a model exists for it
         //Model would exist if the user has saved something then clicked next
         var form_type = type;
-
         model = this.collection.filter(function(model){
           return model.attributes.form_type == form_type;
         });
-
-
         if (model && model[0]) {
-          console.log("FROM NEXT", model[0].toJSON());
           this.put_into_form(model[0].toJSON(), form_type);
         }
 
         var form_type = type,
             field = (form_type.charAt(form_type.length - 1) == "s") ? form_type.slice(0, -1) + "_field" : form_type + "_field",
             count = this.collection.field_count[field];
-
-
       },
 
       add_new_entry: function(evt) {
         var $form = $(evt.target),
             data = $form.serializeFormJSON();
-        $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-          options.xhrFields = {
-            withCredentials: true
-          };
-        });
-
-        $.ajax({
-          type: 'POST',
-          url: "http://docawards.com/api/"+$form.data('servermodel')+"/ws_add.json",
-          data: data,
-          success: function(data) {
+        window.DocAwards.UtilFunctions.ajax('POST', $form.data('servermodel')+"/ws_add.json",
+          data, function(data) {
             console.log(data);
             if (data.code = '200') {
               $(".alert-box.success").text("Added field successfully").slideDown("slow").delay(2000).slideUp("slow");
@@ -337,7 +240,6 @@ define([
             } else {
               $(".alert-box.alert").text("Failed to add field. Please try again").slideDown("slow").delay(2000).slideUp("slow");
             }
-          }
         });
         return false;
       },
@@ -391,70 +293,6 @@ define([
         $('.tooltip').hide(); // Dont know why it doesnt autohide, so doing manually
         return false;
       },
-
-      // Check if a doctor with the given ID exists
-      check_existing_doctor: function() {
-        var doctor = new Doctor({id: window.DocAwards.current_user.getUser().id});
-            that = this;
-        doctor.fetch({
-          success: function(model) {
-            that.parse_doctor_data(model.toJSON());
-          }
-        });
-
-      },
-
-      // Parse the received JSON into a simple object with appropropriate 'name' field
-      parse_doctor_data: function(model) {
-        var data = {};
-        for(var obj in model) {
-          // Nested Data eg: Consult locations, experiences
-          if(model[obj].constructor == Array) {
-            
-            // Set the initial partial fields counter
-            var field = obj.toLowerCase() + "_field";
-            if(this.collection.field_count[field]) this.collection.field_count[field] = model[obj].length;
-
-            // Fill Consult Locations separately because of difference in names
-            if(obj == 'Docconsultlocation') this.collection.field_count['consultation_field'] = model['Docconsultlocation'].length
-
-
-            // Separate out the DocSpecLinks to use in Multiple-select Chosen
-            if(obj == 'Docspeclink' && model[obj].length) {
-              var temp = ""
-              for(var i = 0; i < model[obj].length; i++) {
-                temp += (model[obj][i]['specialty_id'] + ", ");
-              }
-
-              data["data[Docspeclink]"] = temp;
-
-            } else {
-              for(var i = 0; i < model[obj].length; i++) {
-                for(key in model[obj][i]) {
-                  if(typeof model[obj][i][key] != 'object') {
-                    data[ 'data[' + obj + '][' + i + '][' + key + ']' ] = model[obj][i][key];
-                  }
-                } 
-              }  
-            }
-            
-          } else if(model[obj].constructor == Object) {
-            // Doctor Profile
-            for(key in model[obj]) {
-              data[ 'data[' + obj + '][' + key + ']' ] = model[obj][key];
-            }
-          }
-        }
-
-
-        this.put_into_form(data);
-
-      },
-
-
-
-    
-
     });
 
   return ProfileFormView;
