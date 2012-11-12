@@ -8,6 +8,7 @@ require.config({
     templates: '../templates',
   }, 
   shim: {
+    "foundation/modernizr.foundation": ['jquery'],
     "foundation/jquery.foundation.accordion": ['jquery'],
     "foundation/jquery.foundation.alerts": ['jquery'],
     "foundation/jquery.foundation.buttons": ['jquery'],
@@ -34,6 +35,7 @@ require([
   'app',
   'models/user',
   'libs/utils/docawards_util',
+  "foundation/modernizr.foundation",
   "foundation/jquery.foundation.accordion",
   "foundation/jquery.foundation.alerts",
   "foundation/jquery.foundation.buttons",
