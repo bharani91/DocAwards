@@ -2,6 +2,9 @@
     appDir: "../",
     baseUrl: "js",
     dir: "../../DocAwards-build",
+    optimizeCss: "standard",
+    cssImportIgnore: null,
+
     paths: {
 	    jquery: 'libs/jquery/jquery-min',
 	    underscore: 'libs/underscore/underscore-min',
