@@ -67,7 +67,6 @@ define([
     // Parse the received JSON into a simple object with appropropriate 'name' field
     parse_doctor_data: function(model) {
 
-      var data = {};
       console.log("MODEL", model);
       for(var obj in model) {
         // Nested Data eg: Consult locations, experiences
@@ -89,30 +88,24 @@ define([
             var temp = "";
             var temp_data = {};
             
+            temp_data["data[Docspeclink][0][specialty_id]"] = [];
+
             for(var i = 0; i < model[obj].length; i++) {
-              temp += (model[obj][i]['specialty_id'] + ", ");
+              temp_data["data[Docspeclink][0][specialty_id]"].push( 
+                model[obj][i]['specialty_id']);
             }
 
-            // Complete collection
-            data["data[Docspeclink]"] = temp;
-
-            // Per instance
-            temp_data["data[Docspeclink]"] = temp;
-            
             var m = new FormData(temp_data);
             m.set({ "form_type": this.mappings[obj] });
             
             var field = this.mappings[obj];
             this.add(m)
-
-
           } else {
             var temp_data = {};
 
             for(var i = 0; i < model[obj].length; i++) {
               for(key in model[obj][i]) {
                 if(typeof model[obj][i][key] != 'object') {
-                  data[ 'data[' + obj + '][' + i + '][' + key + ']' ] = model[obj][i][key];
                   temp_data[ 'data[' + obj + '][' + i + '][' + key + ']' ] = model[obj][i][key];
                 }
               } 
@@ -131,7 +124,6 @@ define([
           // Doctor Profile
           var temp_data = {}
           for(key in model[obj]) {
-            data[ 'data[' + obj + '][' + key + ']' ] = model[obj][key];
             temp_data[ 'data[' + obj + '][' + key + ']' ] = model[obj][key];
           }
 
@@ -141,7 +133,7 @@ define([
         }
       }
 
-      this.trigger("fetched_from_server", data);
+      this.trigger("fetched_from_server");
 
 
     },
