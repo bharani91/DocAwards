@@ -31,7 +31,9 @@
             <p class="subheader"><%= qualification["Degree"]["name"] %>, 
               <span class="has-tip tip-right" data-width="200" 
               title="<%= qualification["Location"]['name']+' in '+qualification["Location"]["neighborhood"]+', '+qualification["Location"]['City']['name']+', '+qualification["Location"]['Country']['name']%>">
-              <%= qualification["Location"]["name"] %></span></p>
+                <%= qualification["Location"]["name"] %>
+                <img src="http://docawards.com/images/country_flags/<%= qualification['Location']['Country']['iso2'] %>.png" class="country-flag-image"/>
+              </span></p>
           <% }); %>
 
         </div><!-- End Feed Entry -->
@@ -44,7 +46,11 @@
           <h5>Experience</h5>
           <% _.each(experiences, function(experience) { %>
             <div class="exp">
-              <%= (new Date(experience["from"])).getFullYear() %> - <%= (new Date(experience["to"])).getFullYear() %> at <span class="has-tip" data-width="200" title="<%= experience["Location"]['name']+' in '+experience["Location"]["neighborhood"]+', '+experience["Location"]['City']['name']+', '+experience["Location"]['Country']['name']%>"<strong><%= experience["Location"]["name"] %></strong> <img src="http://docawards.com/images/country_flags/<%= experience['Location']['Country']['iso2'] %>.png" style="width=2px"/></span>
+              <%= (new Date(experience["from"])).getFullYear() %> - <%= (new Date(experience["to"])).getFullYear() %> at 
+              <span class="has-tip" data-width="200" title="<%= experience["Location"]['name']+' in '+experience["Location"]["neighborhood"]+', '+experience["Location"]['City']['name']+', '+experience["Location"]['Country']['name']%>"
+                <strong><%= experience["Location"]["name"] %></strong> 
+                <img src="http://docawards.com/images/country_flags/<%= experience['Location']['Country']['iso2'] %>.png" class="country-flag-image"/>
+              </span>
             </div><!--exp-->
           <% }); %>
 

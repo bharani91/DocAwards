@@ -40,7 +40,7 @@ define([
           this.collection.fetch_from_server();
 
           var that = this;
-          this.collection.bind("fetched_from_server", function(data) {
+          this.collection.bind("fetched_from_server", function() {
             console.log(that.collection)
             that.render();
           });
@@ -181,15 +181,12 @@ define([
         if(form_type == "specializations") {
           var val_to_set = [];
 
-          if(type['data[Docspeclink]']) {
-            val_to_set = type['data[Docspeclink]'].split(", ");
-          } else {
-            if(type['data[Docspeclink][0][specialty_id]']) {
-              for(var i = 0; i <= type['data[Docspeclink][0][specialty_id]'].length; i++) {
-                val_to_set.push(type['data[Docspeclink][0][specialty_id]'][i]);
-              }
+          if(type['data[Docspeclink][0][specialty_id]']) {
+            for(var i = 0; i <= type['data[Docspeclink][0][specialty_id]'].length; i++) {
+              val_to_set.push(type['data[Docspeclink][0][specialty_id]'][i]);
             }
           }
+        
           window.DocAwards.UtilFunctions.setChosenVal($(".multiple_select"), val_to_set);
         } else {
           var options = [],

@@ -89,10 +89,6 @@ define([
 
         window.datas = new DataCollection();
 
-        // Fetch from server only once and prepopulate the fields
-        //window.datas.fetch_from_server();
-
-
         var form_view = new ProfileFormView({ collection: window.datas, url: "personal_details", el: "li#personal_detailsTab", template: "personal_details_template"});
         //Datepicker
         $( ".datepicker" ).datepicker({

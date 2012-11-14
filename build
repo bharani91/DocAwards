@@ -1,0 +1,4 @@
+mv api ../
+node r.js -o js/app.build.js
+mv ../api .
+cp -R api ../DocAwards-build/api

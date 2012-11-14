@@ -690,3 +690,8 @@ label small {
   height: 150px;
   border: none;
 }
+
+/* line 736, ../sass/base.scss */
+.country-flag-image {
+  width: 12px;
+}
