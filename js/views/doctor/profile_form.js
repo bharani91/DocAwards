@@ -106,6 +106,8 @@ define([
         $(".open_modal").live("click", function() {
           var elem = $(this).data("modal")
           $("#" + elem).reveal();
+          $(".chosen_simple").chosen();
+          window.DocAwards.UtilFunctions.autocomplete_ajax_chosen();
           return false;
         });
 
