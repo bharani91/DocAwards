@@ -48,11 +48,24 @@ define([
           animation: "horizontal-push",
           animationSpeed: 1000,
           timer: true,
-          directionalNav: false,
-          pauseOnHover: false, 
+          directionalNav: true,
+          pauseOnHover: true,
           captions: false, 
           fluid: true
-        });
+        })
+		
+		
+		$(".goto_ask").live("click", function(e) {
+			e.preventDefault();
+			$(".slider-nav .right").trigger("click");
+		});
+		
+		$(".goto_find").live("click", function(e) {
+			e.preventDefault();
+			$(".slider-nav .left").trigger("click");
+		});
+		
+		
       });
 
       $(".wrapper, .footer_wrapper").fadeIn("slow", function() {

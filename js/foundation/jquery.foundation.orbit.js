@@ -230,6 +230,8 @@
           //brings in all other slides IF css declares a display: none
           self.$slides.css({"display":"block"})
       });
+	  
+	  $("#landing-page-slider").find(".orbit-slide:eq(1) .ask_container").hide();
     },
 
     startClock: function () {
@@ -455,6 +457,7 @@
     },
 
     shift: function (direction) {
+	  $("#landing-page-slider").find(".orbit-slide:eq(1) .ask_container").show();
       var slideDirection = direction;
 
       //remember previous activeSlide

@@ -467,26 +467,57 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 .landing_page header#top .login {
   display: block;
 }
-/* line 537, ../sass/base.scss */
-.landing_page .main #landing-page-slider, .landing_page .main div.orbit-wrapper {
-  position: absolute;
-  min-height: 400px;
-  z-index: -1;
-}
-/* line 541, ../sass/base.scss */
-.landing_page .main #landing-page-slider div.orbit .orbit-slide, .landing_page .main div.orbit-wrapper div.orbit .orbit-slide {
+/* line 536, ../sass/base.scss */
+.landing_page #featuredContent div {
   width: 100%;
+  background: red;
+  padding: 0px;
 }
-/* line 545, ../sass/base.scss */
-.landing_page .main .ask_container {
-  padding-top: 25%;
+/* line 540, ../sass/base.scss */
+.landing_page #featuredContent div img {
+  width: 100%;
+  z-index: 100;
 }
 /* line 547, ../sass/base.scss */
+.landing_page .main #landing-page-slider div.first {
+  width: 100%;
+  padding: 0px;
+}
+/* line 550, ../sass/base.scss */
+.landing_page .main #landing-page-slider div.first img {
+  width: 100%;
+  z-index: 100;
+}
+/* line 556, ../sass/base.scss */
+.landing_page .main .slider-nav {
+  display: none;
+}
+/* line 559, ../sass/base.scss */
+.landing_page .main .ask_container {
+  position: relative;
+  bottom: 250px;
+  z-index: 110;
+}
+/* line 563, ../sass/base.scss */
 .landing_page .main .ask_container .container_inner {
   background: rgba(255, 255, 255, 0.4);
   padding-bottom: 20px;
 }
-/* line 552, ../sass/base.scss */
+/* line 569, ../sass/base.scss */
+.landing_page .main .nav_links a {
+  color: #024d92;
+  font-weight: bold;
+  padding: 3px 10px;
+  float: left;
+  margin-top: 3px;
+  margin-bottom: -10px;
+}
+/* line 576, ../sass/base.scss */
+.landing_page .main .nav_links a:hover {
+  color: #fff;
+  background: #0382f7;
+}
+/* line 581, ../sass/base.scss */
 .landing_page .main .slogan {
   margin-top: 0px !important;
   color: #000;
@@ -494,32 +525,32 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   font-weight: bold;
   padding-top: 15px;
 }
-/* line 559, ../sass/base.scss */
+/* line 588, ../sass/base.scss */
 .landing_page .main input, .landing_page .main .select_input {
   padding: 20px 10px;
   border-color: #025AAB;
 }
-/* line 564, ../sass/base.scss */
+/* line 593, ../sass/base.scss */
 .landing_page .main .select_input {
   padding: 10px !important;
   padding-bottom: 8px !important;
   background: #f9f9f9 !important;
   outline: none;
 }
-/* line 569, ../sass/base.scss */
+/* line 598, ../sass/base.scss */
 .landing_page .main .select_input:focus {
   background: #fff !important;
 }
-/* line 574, ../sass/base.scss */
+/* line 603, ../sass/base.scss */
 .landing_page .main a.button.postfix {
   padding-top: 12px !important;
   padding-bottom: 28px;
 }
-/* line 580, ../sass/base.scss */
+/* line 609, ../sass/base.scss */
 .landing_page .es-carousel-wrapper {
   margin-top: 8%;
 }
-/* line 582, ../sass/base.scss */
+/* line 611, ../sass/base.scss */
 .landing_page .es-carousel-wrapper h1 {
   color: #8e8e8f;
   font-size: 18px;
@@ -529,24 +560,24 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   padding: 10px 0;
 }
 
-/* line 594, ../sass/base.scss */
+/* line 623, ../sass/base.scss */
 .ui-state-error {
   min-width: 390px;
 }
 
-/* line 598, ../sass/base.scss */
+/* line 627, ../sass/base.scss */
 .ui-autocomplete.ui-menu.ui-widget {
   width: 390px !important;
   height: 200px;
   overflow-y: auto;
 }
 
-/* line 604, ../sass/base.scss */
+/* line 633, ../sass/base.scss */
 .button.dropdown {
   cursor: default;
 }
 
-/* line 608, ../sass/base.scss */
+/* line 637, ../sass/base.scss */
 .button.dropdown > ul li {
   display: block;
   color: #555;
@@ -557,141 +588,141 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   cursor: default !important;
 }
 
-/* line 618, ../sass/base.scss */
+/* line 647, ../sass/base.scss */
 .chzn-container-single .chzn-single {
   height: 42px;
   line-height: 42px;
   font-size: 19px;
 }
-/* line 622, ../sass/base.scss */
+/* line 651, ../sass/base.scss */
 .chzn-container-single .chzn-single span {
   color: #8e8e8f;
 }
 
-/* line 631, ../sass/base.scss */
+/* line 660, ../sass/base.scss */
 label small {
   font-size: 12px;
 }
 
-/* line 635, ../sass/base.scss */
+/* line 664, ../sass/base.scss */
 .days_checkboxes .two, .row .two {
   width: 13.66667%;
 }
 
-/* line 639, ../sass/base.scss */
+/* line 668, ../sass/base.scss */
 .add_another {
   margin-left: 5px;
 }
 
-/* line 643, ../sass/base.scss */
+/* line 672, ../sass/base.scss */
 .primary .chzn-container {
   width: 216px !important;
 }
-/* line 645, ../sass/base.scss */
+/* line 674, ../sass/base.scss */
 .primary .chzn-container .chzn-drop {
   width: 216px !important;
 }
-/* line 647, ../sass/base.scss */
+/* line 676, ../sass/base.scss */
 .primary .chzn-container .chzn-drop input {
   width: 190px !important;
 }
 
-/* line 654, ../sass/base.scss */
+/* line 683, ../sass/base.scss */
 .primary .small + .chzn-container {
   width: 90px !important;
 }
-/* line 656, ../sass/base.scss */
+/* line 685, ../sass/base.scss */
 .primary .small + .chzn-container .chzn-drop {
   width: 90px !important;
 }
-/* line 658, ../sass/base.scss */
+/* line 687, ../sass/base.scss */
 .primary .small + .chzn-container .chzn-drop input {
   width: 60px !important;
 }
 
-/* line 664, ../sass/base.scss */
+/* line 693, ../sass/base.scss */
 .primary .multiple_select + .chzn-container {
   width: 96% !important;
 }
-/* line 666, ../sass/base.scss */
+/* line 695, ../sass/base.scss */
 .primary .multiple_select + .chzn-container .chzn-drop {
   width: 100% !important;
 }
 
-/* line 672, ../sass/base.scss */
+/* line 701, ../sass/base.scss */
 .create_profile {
   margin-top: 80px !important;
 }
-/* line 674, ../sass/base.scss */
+/* line 703, ../sass/base.scss */
 .create_profile textarea {
   height: 120px;
 }
-/* line 677, ../sass/base.scss */
+/* line 706, ../sass/base.scss */
 .create_profile .row.select_row {
   margin-left: 0;
 }
 
-/* line 682, ../sass/base.scss */
+/* line 711, ../sass/base.scss */
 .field {
   margin-top: 20px;
 }
 
-/* line 686, ../sass/base.scss */
+/* line 715, ../sass/base.scss */
 .field:first-child {
   margin-top: 0;
 }
 
-/* line 690, ../sass/base.scss */
+/* line 719, ../sass/base.scss */
 .button_list {
   margin-top: 20px;
 }
 
-/* line 694, ../sass/base.scss */
+/* line 723, ../sass/base.scss */
 .new_speciality {
   margin-top: 40px;
 }
 
-/* line 698, ../sass/base.scss */
+/* line 727, ../sass/base.scss */
 .location_modal_link {
   margin-top: 30px;
 }
 
-/* line 703, ../sass/base.scss */
+/* line 732, ../sass/base.scss */
 .reveal-modal .chzn-container-single, .reveal-modal .chzn-drop, .reveal-modal .chzn-results {
   width: 100% !important;
 }
 
-/* line 707, ../sass/base.scss */
+/* line 736, ../sass/base.scss */
 .reveal-modal .chzn-search input {
   width: 94% !important;
   height: 30px;
 }
 
-/* line 713, ../sass/base.scss */
+/* line 742, ../sass/base.scss */
 .multiple_select {
   height: 100px !important;
 }
 
-/* line 717, ../sass/base.scss */
+/* line 746, ../sass/base.scss */
 .chzn-container-multi .chzn-choices li.search-field, .chzn-container-multi .chzn-choices li.search-field input {
   height: 30px !important;
 }
 
-/* line 721, ../sass/base.scss */
+/* line 750, ../sass/base.scss */
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
   font-size: 12px;
   padding-left: 3px;
   padding-right: 19px;
 }
 
-/* line 733, ../sass/base.scss */
+/* line 762, ../sass/base.scss */
 #upload_iframe {
   width: 100%;
   height: 150px;
   border: none;
 }
 
-/* line 736, ../sass/base.scss */
+/* line 768, ../sass/base.scss */
 .country-flag-image {
   width: 12px;
 }

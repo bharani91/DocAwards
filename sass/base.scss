@@ -533,22 +533,51 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 	}
   }
 
+  #featuredContent div {
+	  width: 100%;
+	  background: red;
+	  padding: 0px;
+	  img {
+		  width: 100%;
+	  	  z-index: 100;
+	  }
+  }
+  
   .main {
-    #landing-page-slider, div.orbit-wrapper {
-      position: absolute;
-      min-height: 400px;
-      z-index: -1;
-      div.orbit .orbit-slide {
-        width: 100%;
-      }
+    #landing-page-slider div.first {
+  	  width: 100%;
+  	  padding: 0px;
+  	  img {
+  		  width: 100%;
+  	  	  z-index: 100;
+  	  }
     }
+	
+	.slider-nav {
+		display: none;
+	}
     .ask_container {
-      padding-top: 25%;
+		position: relative;
+		bottom: 250px;
+		z-index: 110;
       .container_inner {
         background: rgba(white, 0.40);
         padding-bottom: 20px;
       }
     }
+	
+	.nav_links a {
+		color: darken($dark_blue, 20%);
+		font-weight: bold;
+		padding: 3px 10px;
+		float: left;
+		margin-top: 3px;
+		margin-bottom: -10px;
+		&:hover {
+			color: #fff;
+			background: $dark_blue;
+		};
+	}
     .slogan {
       margin-top: 0px !important;
       color: #000;
