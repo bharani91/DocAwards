@@ -495,12 +495,12 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 /* line 559, ../sass/base.scss */
 .landing_page .main .ask_container {
   position: relative;
-  bottom: 250px;
+  bottom: 200px;
   z-index: 110;
 }
 /* line 563, ../sass/base.scss */
 .landing_page .main .ask_container .container_inner {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
   padding-bottom: 20px;
 }
 /* line 569, ../sass/base.scss */
@@ -521,7 +521,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 .landing_page .main .slogan {
   margin-top: 0px !important;
   color: #000;
-  text-align: center;
+  text-align: left;
   font-weight: bold;
   padding-top: 15px;
 }

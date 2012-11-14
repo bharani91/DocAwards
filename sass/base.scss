@@ -553,35 +553,35 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   	  }
     }
 	
-	.slider-nav {
-		display: none;
-	}
+  	.slider-nav {
+  		display: none;
+  	}
     .ask_container {
 		position: relative;
-		bottom: 250px;
+		bottom: 200px;
 		z-index: 110;
       .container_inner {
-        background: rgba(white, 0.40);
+        background: rgba(white, 0.50);
         padding-bottom: 20px;
       }
     }
 	
-	.nav_links a {
-		color: darken($dark_blue, 20%);
-		font-weight: bold;
-		padding: 3px 10px;
-		float: left;
-		margin-top: 3px;
-		margin-bottom: -10px;
-		&:hover {
-			color: #fff;
-			background: $dark_blue;
-		};
-	}
-    .slogan {
+  	.nav_links a {
+  		color: darken($dark_blue, 20%);
+  		font-weight: bold;
+  		padding: 3px 10px;
+  		float: left;
+  		margin-top: 3px;
+  		margin-bottom: -10px;
+  		&:hover {
+  			color: #fff;
+  			background: $dark_blue;
+  		};
+  	}
+   .slogan {
       margin-top: 0px !important;
       color: #000;
-      text-align: center;
+      text-align: left;
       font-weight: bold;
       padding-top: 15px;
     }
