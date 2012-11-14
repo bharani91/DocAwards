@@ -549,7 +549,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
   	  padding: 0px;
   	  img {
   		  width: 100%;
-  	  	  z-index: 100;
+  	  	  z-index: 9;
   	  }
     }
 	
@@ -559,7 +559,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
     .ask_container {
 		position: relative;
 		bottom: 200px;
-		z-index: 110;
+		z-index: 10;
       .container_inner {
         background: rgba(white, 0.50);
         padding-bottom: 20px;
@@ -584,6 +584,10 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
       text-align: left;
       font-weight: bold;
       padding-top: 15px;
+	  
+	  &.small {
+		  font-size: 16px;
+	  }
     }
     input, .select_input {
       padding: 20px 10px;
@@ -670,6 +674,7 @@ label small {
 }
 
 .primary .chzn-container {
+	z-index: 100;
   width: 216px !important; 
   .chzn-drop {
     width: 216px !important;
