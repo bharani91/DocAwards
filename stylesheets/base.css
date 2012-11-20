@@ -552,7 +552,7 @@ input[type="text"], input[type="password"], input[type="date"], input[type="date
 }
 /* line 613, ../sass/base.scss */
 .landing_page .es-carousel-wrapper {
-  margin-top: 8%;
+  margin-top: 0px;
 }
 /* line 615, ../sass/base.scss */
 .landing_page .es-carousel-wrapper h1 {
